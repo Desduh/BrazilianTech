@@ -1,0 +1,49 @@
+body{
+        background-color: rgba(36, 33, 33, 0.905);
+        font-family: sans-serif;
+    }  
+.fundo_janela{
+    width: 450px;
+    margin: auto;
+    padding-top: 40px;
+}
+.janela{
+    box-shadow: 1px 1px 5px rgb(194, 190, 190);
+    background-color: white;
+    padding: 35px;
+    border-radius: 5px;
+}
+.img_logo{
+    text-align: center;
+}
+.card-group{
+    margin-bottom: 10px;
+}
+.card-group >label{
+    width: 100%;
+    color: black;
+    display: block;
+}
+.card-group >input{
+    border-radius: 5px;
+    outline: 0;
+    width: 100%;
+    height: 25px;
+    padding: 5px;
+
+}
+.card-group >button{
+    background-color: darkred;
+    width: 100%;
+    border-radius: 30px;
+    padding: 15px;
+    color: white;
+    border: 0px;
+    outline: 0;
+}
+.imglogin{
+    width: 145px;
+}
+.title{
+    color: darkred;
+}

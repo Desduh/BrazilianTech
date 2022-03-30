@@ -1,4 +1,4 @@
-body{
+.cor_fundo{
         background-color: rgba(36, 33, 33, 0.905);
         font-family: sans-serif;
     }  
@@ -14,7 +14,10 @@ body{
     border-radius: 5px;
 }
 .img_logo{
-    text-align: center;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 180px;
 }
 .card-group{
     margin-bottom: 10px;
@@ -30,7 +33,6 @@ body{
     width: 100%;
     height: 25px;
     padding: 5px;
-
 }
 .card-group >button{
     background-color: darkred;
@@ -41,9 +43,7 @@ body{
     border: 0px;
     outline: 0;
 }
-.imglogin{
-    width: 145px;
-}
 .title{
     color: darkred;
+    text-align: center;
 }

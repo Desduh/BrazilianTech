@@ -1,7 +1,44 @@
+body {
+    display: block;
+    margin: 0;
+}
+header{
+    background-color: rgba(112, 128, 194, 0.905);
+    font-family: sans-serif;
+    border-bottom: 5px solid rgb(82, 79, 94);
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+}
+.img_cabeçario{
+    width: 150px;
+    padding-left: 20px;
+}
+#bloc_cabeçario{
+    text-align: right;
+}
+.texto_cabeçario{
+    display: inline-block;
+    font-size: 20px;
+    color: white;
+    text-decoration: none;
+    margin-right: 30px;
+    margin-top: 10px;
+    font-weight: 550;
+    background-color: rgb(82, 79, 94);
+    height: 50px;
+    line-height: 50px; 
+    padding-left: 20px;
+    padding-right: 20px;
+    border-radius: 5px;
+    box-shadow: 3px 3px 3px rgb(78, 78, 126);
+}
+
+
+
 .cor_fundo{
-        background-color: rgba(36, 33, 33, 0.905);
-        font-family: sans-serif;
-    }  
+    background-color:  rgb(82, 79, 94);
+}  
 .fundo_janela{
     width: 450px;
     margin: auto;

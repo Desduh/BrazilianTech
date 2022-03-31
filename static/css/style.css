@@ -14,19 +14,20 @@ section {
 }
 main {
     flex-grow: 1;
+    background-color: #efefef;
 }
 header{
-    background-color: rgba(112, 128, 194, 0.905);
+    background-color: #a9a9a9;
     font-family: sans-serif;
-    border-bottom: 5px solid rgb(82, 79, 94);
+    border-bottom: 4px solid rgb(82, 79, 94);
     padding: 10px 20px;
     display: flex;
     justify-content: space-between;
 }
 footer {
-	background-color: rgba(112, 128, 194, 0.905);
+	background-color: #a9a9a9;
     font-family: sans-serif;
-    border-bottom: 5px solid rgb(82, 79, 94);
+    border-top: 4px solid rgb(82, 79, 94);
     padding: 10px 20px;
     display: flex;
     justify-content: space-between;
@@ -49,19 +50,19 @@ header, main, footer {
     margin-right: 30px;
     margin-top: 10px;
     font-weight: 550;
-    background-color: rgb(82, 79, 94);
+    background-color: rgb(86, 85, 94);
     height: 50px;
     line-height: 50px; 
     padding-left: 20px;
     padding-right: 20px;
-    border-radius: 5px;
+    border-radius: 2px;
     box-shadow: 3px 3px 3px rgb(78, 78, 126);
 }
 
 
 
 .cor_fundo{
-    background-color:  rgb(82, 79, 94);
+    background-color:  #a9a9a9;
 }  
 .fundo_janela{
     width: 450px;
@@ -69,8 +70,9 @@ header, main, footer {
     padding-top: 40px;
 }
 .janela{
-    box-shadow: 1px 1px 5px rgb(194, 190, 190);
-    background-color: white;
+    box-shadow: 1px 1px 5px black;
+    background-color: #efefef;
+    margin-top: 60px;
     padding: 35px;
     border-radius: 5px;
 }
@@ -96,15 +98,15 @@ header, main, footer {
     padding: 5px;
 }
 .card-group >button{
-    background-color: darkred;
+    background-color: rgb(177,10,4);
     width: 100%;
-    border-radius: 30px;
+    border-radius: 5px;
     padding: 15px;
     color: white;
     border: 0px;
     outline: 0;
 }
 .title{
-    color: darkred;
+    color: rgb(177,10,4);
     text-align: center;
 }

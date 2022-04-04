@@ -1,16 +1,23 @@
+body, html {
+    display: flex;
+    height: 100%; 
+    width: 100%;
+}
 .cor_fundo {
     background-color: #a9a9a9;
+    align-items: center;
+    margin: 0;
 }
 .fundo_janela {
     width: 450px;
     margin: auto;
-    padding-top: 40px;
+    padding-bottom: 5%;
+    vertical-align: middle;
 }
 .janela {
     box-shadow: 1px 1px 5px black;
     background-color: #efefef;
-    margin-top: 60px;
-    padding: 35px;
+    padding: 10px;
     border-radius: 5px;
 }
 .img_logo {
@@ -29,7 +36,7 @@
 }
 .card-group > input {
     border-radius: 5px;
-    width: 100%;
+    width: 423px;
     height: 25px;
     padding-bottom: 5px;
 }

@@ -15,7 +15,7 @@ section {
 }
 main {
     flex-grow: 1;
-    background-color: #efefef;
+    background-color: white;
 }
 header {
     background-color: #a9a9a9;
@@ -62,18 +62,26 @@ header {
     box-shadow: 3px 3px 3px rgb(78, 78, 126);
 }
 .grid-container {
-    margin: 20vh 10px;
-
-    background-color: #a9a9a9;
+    margin-top: 100px;
     display: grid;
     grid-template-columns: 1fr 1fr;
+    font-family: 'Noto Sans', sans-serif;
 }
-.text-padding {
+.bloc1 {
+    font-size: 20px;
     padding: 1em;
+    background: #efefef;
+    margin: 0 50px;
+    text-align: justify;
+    border-radius: 5px;
+}
+.bloc2 {
+    margin: 20px 60px 0 50px;
 }
 .slogan {
-    font-size: 30px;
-    color: rgb(177, 10, 4);
+    text-align: center;
+    font-size: 40px;
+    color: #c21d16;
 }
 .center{
     text-align: center;

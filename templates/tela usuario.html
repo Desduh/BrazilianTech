@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,inital-scarle=1.0">
     <meta http-equiv="X-UA-compatible" content="ie=edge">
-    <title>Solicitações</title>
+    <title>Página do cliente</title>
     <link rel="stylesheet" href="../static/css/style_tela-principal.css">
 </head>
 
@@ -14,26 +14,31 @@
         <header>
             <nav>
                 <div id="perfil">
-                    <img id="img"src="https://cdn-icons-png.flaticon.com/512/64/64572.png?w=740&t=st=1649205811~exp=1649206411~hmac=2b5ab8271b0f5e8fad6bbbfaf3aebb98fc508fa02302d598d79b31bb4239cf53">
+                    <img id="img"
+                        src="https://cdn-icons-png.flaticon.com/512/64/64572.png?w=740&t=st=1649205811~exp=1649206411~hmac=2b5ab8271b0f5e8fad6bbbfaf3aebb98fc508fa02302d598d79b31bb4239cf53">
                     <div id="texto">
                         Meu perfil
                     </div>
                 </div>
+                <hr>
                 <div id="solicitacao">
                     <img class="icone" src="https://cdn-icons-png.flaticon.com/512/37/37770.png?w=360">
                     <div>
                         Nova solicitação
-                    </div> 
+                    </div>
                 </div>
                 <div>
                     <p class="corpo">Minhas solicitações</p>
-                    <p class="corpo">Em espera - executor</p>
-                    <p class="corpo">Concluidas</p>
-                    <p class="corpo">Rejeitadas</p>
                 </div>
             </nav>
         </header>
         <main>
+            <div class="tela_solicitacao">
+                    <textarea id="criacao" placeholder="Descreva a solicitação..."></textarea>
+                <div id="botom">
+                    Enviar
+                </div>
+            </div>
         </main>
     </section>
 </body>

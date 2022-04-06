@@ -57,14 +57,32 @@ header {
     background-color: #a9a9a9;
     text-align: center;
     border: 3px solid rgb(146, 146, 146);
+    display: flex;
+}
+#perfil,
+#solicitacao{
+    padding: 10px 0;
+}
+#solicitacao,
+.corpo{
+    text-decoration: none;
+    color: black;
+    border-radius: 0px 30px 30px 0;
 }
 #perfil{
-    padding: 10px 0;
     margin-left: 10px;
     border-radius: 3px;
-    display: flex;
     align-items: center;
     justify-content: flex-start;
+}
+#solicitacao{
+    margin: 70px 0 50px 0;
+    justify-content: center;
+}
+.corpo{
+    height: 32px;
+    justify-content: space-around;
+    align-items: center;
 }
 #img{
     width: 32px;
@@ -77,20 +95,6 @@ header {
     text-align: center;
     margin-right: 20px;
     width: 100%;
-}
-#solicitacao{
-    padding: 10px 0;
-    margin: 70px 0 50px 0;
-    border-radius: 0px 30px 30px 0;
-    display: flex;
-    justify-content: center;
-}
-.corpo{
-    display: flex;
-    height: 32px;
-    border-radius: 0px 30px 30px 0;
-    justify-content: space-around;
-    align-items: center;
 }
 .icone{
     width: 20px;

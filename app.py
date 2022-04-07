@@ -16,3 +16,12 @@ def login():
 @app.route('/cadastro.html')
 def cadastro():
     return render_template('cadastro.html')
+
+@app.route("/tela executor.html")
+def tela_executor():
+    nome_da_variavel = "sou foda"
+    return render_template('tela executor.html', variavel=nome_da_variavel)
+
+
+if __name__ == "__main__":
+    app.run()

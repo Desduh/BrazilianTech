@@ -8,20 +8,20 @@
         <link rel="stylesheet" href="..\static\css\style_login_cadastro.css">
     </head>
     <body class="cor_fundo">
-        <form class="fundo_janela" action="#">
+        <form class="fundo_janela" action="{{url_for('login')}}" method="post">
             <div class="janela">
                 <div>
                     <img class="img_logo" src="..\static\imagens\logo_nome.png">
                     <h2 class="title"> Login </h2>
                 </div>
                 <div class="card-group">
-                    <form name="login" method="get" action="">
+                    <form name="login" method="post" action="{{url_for('login')}}">
                         <label>Email:</label>
                         <input type="email" name="email" placeholder=" Digite seu email" required>
                         <br>
                         <br>
                         <label>Senha:</label>
-                        <input type="password" name="Senha" placeholder=" Digite sua senha"required>
+                        <input type="password" name="senha" placeholder=" Digite sua senha"required>
                         <br>
                         <br>
                         <button type="submit">Login</button>

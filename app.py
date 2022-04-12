@@ -103,4 +103,4 @@ def telausuarioact():
     cur.execute(add_solicitacao, [solicitacao, email])
     feedback = cur.fetchall()
     con.commit()
-    return redirect ('/cadastro.html')
+    return redirect ('/telausuario.html')

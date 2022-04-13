@@ -8,13 +8,10 @@ create table usuarios
 
 select * from usuarios;
 
-
-
 create table chamado
 (	codigo_solicitacao int primary key AUTO_INCREMENT,
 	solicitacao varchar(300),
-	email_usuario varchar(40) NOT NULL,
-    data_inicio DATE not null );
-ALTER TABLE solicitacao ADD CONSTRAINT email_usuario FOREIGN KEY ( email_usuario ) REFERENCES usuarios ( email_usuario ) ;
+	email_usuario varchar(40),
+    data_inicio datetime );
 
 select * from chamado;

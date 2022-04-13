@@ -10,7 +10,7 @@ select * from usuarios;
 
 create table chamado
 (	codigo_solicitacao int primary key AUTO_INCREMENT,
-	solicitacao varchar(300),
+	solicitacao varchar(1000),
 	email_usuario varchar(40),
     data_inicio datetime );
 

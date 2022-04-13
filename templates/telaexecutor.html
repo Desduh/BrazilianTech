@@ -28,24 +28,22 @@
             </nav>
         </header>
         <main>
-            <table id="users" class="display">
+            <table>
                 <thead>
-                    <tr>
-                        <th>Solicitação</th>
-                        <th>Email</th>
-                        <th>Data</th>
+                    <tr class="text_table">
+                        <td class="aj">Solicitação</td>
+                        <td class="aj">Email</td>
+                        <td class="aj">Data da solicitação</td>
                     </tr>
                 </thead>
                 {% for user in userDetails %}  
-                <tbody>
                     <tr>
-                        <td>{{user[1]}}</td>
-                        <td>{{user[2]}}</td>
-                        <td>{{user[3]}}</td>
+                        <td class="aj">{{user[1]}}</td>
+                        <td class="aj">{{user[2]}}</td>
+                        <td class="aj">{{user[3]}}</td>
                     </tr>
-                </tbody>
+                {% endfor %}
             </table>
-            {% endfor %}
         </main>
     </section>
 </body>

@@ -28,7 +28,24 @@
             </nav>
         </header>
         <main>
-            
+            <table id="users" class="display">
+                <thead>
+                    <tr>
+                        <th>Solicitação</th>
+                        <th>Email</th>
+                        <th>Data</th>
+                    </tr>
+                </thead>
+                {% for user in userDetails %}  
+                <tbody>
+                    <tr>
+                        <td>{{user[1]}}</td>
+                        <td>{{user[2]}}</td>
+                        <td>{{user[3]}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            {% endfor %}
         </main>
     </section>
 </body>

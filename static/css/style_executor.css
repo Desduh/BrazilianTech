@@ -12,6 +12,12 @@ section {
     display: flex;
     flex-direction: row;
 }
+section.abas main {
+    display: flex;
+}
+section.abas main:target{
+    display: block;
+}
 main {
     flex-grow: 1;
     background-color: white;

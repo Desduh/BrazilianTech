@@ -17,7 +17,7 @@ mysql = MySQL(app)
 check_user = ("SELECT * FROM usuarios WHERE email_usuario=%s")
 check_password = ("SELECT * FROM usuarios WHERE senha_usuario=%s AND email_usuario=%s")
 add_user = ('INSERT into usuarios (email_usuario,senha_usuario) VALUES (%s, %s)')
-add_solicitacao = ('INSERT into chamado (solicitacao,email_usuário,data_inicio) VALUES (%s,%s, now())')
+add_solicitacao = ('INSERT into chamado (solicitacao,email_usuario,data_inicio) VALUES (%s,%s, now())')
 logado = False
 
 
@@ -35,9 +35,9 @@ def cadastro():
 def telausuario():
     if logado:
         if email== 'executor@exec': #esse será o e-mail do executor
-            return render_template('tela_executor.html')
+            return render_template('telaexecutor.html')
         else: 
-            return render_template('tela_usuario.html')
+            return render_template('telausuario.html')
     else:
         return redirect('/cadastro.html')
 

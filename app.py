@@ -35,7 +35,10 @@ def cadastro():
 def telausuario():
     if logado:
         if email== 'executor@exec': #esse será o e-mail do executor
-            return render_template('telaexecutor.html')
+                cur = mysql.connection.cursor()
+                users = cur.execute("select * from chamado")
+                userDetails = cur.fetchall()
+                return render_template("telaexecutor.html", userDetails=userDetails)
         else: 
             return render_template('telausuario.html')
     else:

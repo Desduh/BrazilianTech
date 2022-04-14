@@ -23,7 +23,7 @@
 
 
 
-<h3> Sobre o site </h3>
+<h2> Sobre o site </h2>
 
 Assim que estiver pronto, nossa página irá facilitar os problemas descritos pelos usuários, tendo como objetivo a melhoria da comunicação entre cliente e executor, nossa página conecta as pessoas que necessitam de suporte, seja ele: software ou hardware a um profissional da área de TI, atravez de um chate, onde a mesma pode solicitar um pedido ou ver seus pedidos anteriores, tais pedidos são disponibilizados aos profissionais, que solucionarão o problema.
 
@@ -80,8 +80,7 @@ Assim que estiver pronto, nossa página irá facilitar os problemas descritos pe
 | 3      | Criação do READ.ME - 3ºsprint                                | ❌      |
 | 3      | Vídeo - 3º sprint                                            | ❌      |
 
-
-<h1> Tecnologias</h1>
+<h1> Tecnologias:</h1>
 
 
 <div align='center'>
@@ -126,4 +125,4 @@ Assim que estiver pronto, nossa página irá facilitar os problemas descritos pe
 
 <h2> Vídeo </h2>
 
-<p>assista nosso vídeo</p>
+<p>assista nosso vídeo...</p>

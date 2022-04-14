@@ -152,21 +152,32 @@
 
 <h1> Tecnologias</h1>
 
-<h3>Linguagem Folha de Estilo:</h3>
-<ol><h4>Css3</h4></ol>
+<div>
+    <div align='center'>
+        <h3>Linguagem Folha de Estilo:</h3>
+		<ol><h4>Css3</h4></ol>
+   		<img src="src\static\imagens\CSS3.png" alt="CSS3" width="300px" >
+    </div>
+</div>
 
-<img align='left' src="static\imagens\CSS3.png" alt="CSS3" width="300px" >
+<div>
+    <div align='center'>
+        <h3>Linguagem de marcação:</h3>
+		<ol><h4>Html5</h4></ol>
+        <img src="src\static\imagens\HTML5.png" alt="HTML5" width="300px" >
+    </div>
+</div>
 
-<br>
 
-<h3>Linguagem de marcação:</h3>
-<ol><h4>Html5</h4></ol>
 
-<img src="static\imagens\HTML5.png" alt="HTML5" width="300px" > 
+ 
 
-<h3>Linguagens de Programação:</h3>
-<ol><h4>Python JavaScript</h4></ol>
-<img src="static\imagens\linguagens.png" alt="HTML5"> 
+<div align='center'>
+    <h3>Linguagens de Programação:</h3>
+	<ol><h4>Python JavaScript</h4></ol>
+</div>
+
+<img src="src\static\imagens\linguagens.png" alt="HTML5"> 
 
 
 

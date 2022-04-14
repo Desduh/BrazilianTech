@@ -1,6 +1,6 @@
 <h1 align='center'> FATEC SJC - Profº Jessen Vidal- 1º DSM</h1>
 
-<img src="static\imagens\logo_nome.png" style="zoom:70%;" />
+<img align='center' src="static\imagens\logo_nome.png" style="zoom:70%;" />
 
 <h2 align> Grupo 5 - BrazilianTech💻</h2>
 
@@ -33,8 +33,6 @@
 <h3> Descrição do Projeto </h3>
 
 <p> Este projeto tem por objetivo desenvolvimento de uma plataforma de central de serviços para que o cliente possa receber, atender e recusar serviços</p> <br> <p>
-
-</p>
 
 
 
@@ -158,6 +156,8 @@
 <ol><h4>Css3</h4></ol>
 
 <img align='left' src="static\imagens\CSS3.png" alt="CSS3" width="300px" >
+
+<br>
 
 <h3>Linguagem de marcação:</h3>
 <ol><h4>Html5</h4></ol>

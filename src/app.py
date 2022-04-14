@@ -1,4 +1,4 @@
-import dataclasses
+﻿import dataclasses
 from flask import Flask, render_template, request, url_for, redirect
 from flask_mysqldb import MySQL
 import MySQLdb
@@ -11,7 +11,7 @@ app.config['MYSQL_USER'] = 'root' #adicione o nome do seu usuário do MySQL
 app.config['MYSQL_PASSWORD'] = 'Fatec.5009' #adicione a senha do seu usuário do MySQL
 app.config['MYSQL_DB'] = 'usuarios_solicitacoes' 
 
-#conecção com o Banco e fórmulas que serão utilizadas futuramente 
+#conexão com o Banco e fórmulas que serão utilizadas futuramente 
 con = MySQLdb.connect( user="root", password="Fatec.5009", db="usuarios_solicitacoes")#adicione o nome e a senha do seu usuário do MySQL
 mysql = MySQL(app)
 check_user = ("SELECT * FROM usuarios WHERE email_usuario=%s")

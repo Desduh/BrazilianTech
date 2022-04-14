@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,inital-scarle=1.0">
+        <meta http-equiv="X-UA-compatible" content="ie=edge">
+        <title>Cadastro Fatec</title>
+        <link rel="stylesheet" href="..\static\css\style_login_cadastro.css">
+    </head>
+    <body class="cor_fundo">
+        <form class="fundo_janela" action="{{url_for('cadastro')}}" method="post">
+            <div class="janela">
+                <div>
+                    <img class="img_logo" src="..\static\imagens\logo_nome.png">
+                    <h2 class="title"> Cadastro </h2>
+                </div>
+                <div class="card-group">
+                    <form name="cadastro" method="post" action="{{url_for('cadastro')}}">
+                        <label>Email:</label>
+                        <input type="email" name="email" placeholder=" Digite seu email" required>
+                        <br>
+                        <br>
+                        <label>Senha:</label>
+                        <input type="password" name="senha" placeholder=" Digite sua senha"required>
+                        <br>
+                        <br>
+                        <label>Confirme sua senha</label>
+                        <input type="password" name="confirmacao_senha" placeholder=" Confirme sua senha"required>
+                        <br>
+                        <br>
+                        <label>
+                            <input type="checkbox" value="yes" name="ciencia" >Estou ciente e concordo com o armazenamento de meus dados pessoais
+                        </label>
+                        <br>
+                        <button type="submit">Cadastar-se</button>
+                    </form>
+                <a href="login.html">Fazer login</a>
+                </div>
+            </div>
+        </form>
+</body>
+</html>

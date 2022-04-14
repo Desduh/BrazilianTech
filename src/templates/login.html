@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,inital-scarle=1.0">
+        <meta http-equiv="X-UA-compatible" content="ie=edge">
+        <title>Login Fatec</title>
+        <link rel="stylesheet" href="..\static\css\style_login_cadastro.css">
+    </head>
+    <body class="cor_fundo">
+        <form class="fundo_janela" action="{{url_for('login')}}" method="post">
+            <div class="janela">
+                <div>
+                    <img class="img_logo" src="..\static\imagens\logo_nome.png">
+                    <h2 class="title"> Login </h2>
+                </div>
+                <div class="card-group">
+                    <form name="login" method="post" action="{{url_for('login')}}">
+                        <label>Email:</label>
+                        <input type="email" name="email" placeholder=" Digite seu email" required>
+                        <br>
+                        <br>
+                        <label>Senha:</label>
+                        <input type="password" name="senha" placeholder=" Digite sua senha"required>
+                        <br>
+                        <br>
+                        <button type="submit">Login</button>
+                    </form>
+                    <a href="cadastro.html">Fazer cadastro</a>
+                </div>
+            </div>
+        </form>
+    </body>
+</html>

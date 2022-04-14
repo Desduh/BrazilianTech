@@ -1,0 +1,100 @@
+html,
+body {
+    width: 100%;
+    height: 100%;
+}
+body {
+    display: block;
+    margin: 0;
+}
+section {
+    min-height: 100%;
+    display: flex;
+    flex-direction: row;
+}
+section.abas main {
+    display: block;
+}
+section.abas main:target{
+    display: block;
+}
+main {
+    flex-grow: 1;
+    background-color: white;
+    padding: 60px;
+}
+table {
+    border: 4px solid rgb(156, 156, 156);
+    border-radius: 2px;
+    width: 100%;
+    text-align: center;
+    border-spacing: 1px;
+}
+.aj {
+    border: 2px solid #a9a9a9;
+}
+.text_table {
+    font-size: 20px;
+}
+
+
+header {
+    background-color: rgb(219, 219, 219);
+    width: 250px;
+    padding: 15px 10px 15px 0;
+    border-right: 4px solid rgb(146, 146, 146);
+}
+.perfil,
+.solicitacao,
+.corpo{
+    background-color: #a9a9a9;
+    text-align: center;
+    border: 3px solid rgb(146, 146, 146);
+    display: flex;
+}
+.perfil,
+.solicitacao{
+    padding: 10px 0;
+}
+.solicitacao,
+.corpo{
+    text-decoration: none;
+    color: black;
+    border-radius: 0px 30px 30px 0;
+}
+.perfil{
+    margin-left: 10px;
+    border-radius: 3px;
+    align-items: center;
+    justify-content: flex-start;
+}
+.solicitacao{
+    margin: 70px 0 50px 0;
+    justify-content: center;
+}
+.corpo{
+    height: 32px;
+    justify-content: space-around;
+    align-items: center;
+}
+.img{
+    width: 32px;
+    height: 32ps;
+    margin-left: 15px;
+    border-radius: 50%;
+}
+.texto{
+    font-size: 20px;
+    text-align: center;
+    margin-right: 20px;
+    width: 100%;
+}
+.icone{
+    width: 20px;
+    height: 20px;
+    margin-right: 15px;
+}
+header,
+main{
+    flex-shrink: 0;
+}

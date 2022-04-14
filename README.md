@@ -6,7 +6,7 @@
 
 <h2 align="center"> Grupo 5 - BrazilianTech💻</h2>
 
-<div align='center'> <a href='#Descrição do Projeto'>Descrição do Projeto </a> |  <a href='#Execução'>Execução</a> |<a href='#Requisitos'>Requisitos</a> | <a href='#Backlog'>Backlog</a> | <a href='#Tecnologias'>Tecnologias</a> | <a href='#Equipe'> Equipe </a> | <a href='#Vídeo'>Vídeo</a> </div>
+<div align='center'> <a href='#Descrição do Projeto'>Descrição do Projeto </a> |  <a href='#Execução'>Execução</a> |<a href='#Requisitos'>Requisitos</a> | <a href='#Backlog'>Backlog</a> | <a href='#Tecnologias'>Tecnologias</a> | <a href='#Equipe'> Equipe </a> | <a href='#Vídeo'>Vídeo</a> | <a href='#Sobre o site'>Sobre o site</a></div>
 
 <h3 align="center"> CENTRAL DE SERVIÇOS </h3>
 

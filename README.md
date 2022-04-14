@@ -2,6 +2,8 @@
 
 <img align='center' src="src\static\imagens\logo_nome.png" style="zoom:50%;" />
 
+
+
 <h2 align="center"> Grupo 5 - BrazilianTech💻</h2>
 
 <div align='center'> <a href='#Descrição do Projeto'>Descrição do Projeto </a> |  <a href='#Execução'>Execução</a> |<a href='#Requisitos'>Requisitos</a> | <a href='#Backlog'>Backlog</a> | <a href='#Tecnologias'>Tecnologias</a> | <a href='#Equipe'> Equipe </a> | <a href='#Vídeo'>Vídeo</a> </div>
@@ -13,13 +15,17 @@
 
 <p> Este projeto tem por objetivo desenvolvimento de uma plataforma de central de serviços para que a empresa cliente possa receber, atender e recusar serviços.</p> <br> 
 <p>Organização do repositório:</p>  
-<p> Pasta Src: contendos a pasta Templates, com páginas do site, a pasta Static, com os arquivos estáticos, o arquivo app.py com os códigos de python, o arquivo banco.sql, com as tabelas do Banco de Dados e o arquivo requirements.txt; <p/> <br>
+<p> Pasta Src: contendos a pasta Templates, com páginas do site, a pasta Static, com os arquivos estáticos, o arquivo app.py com os códigos de python, o arquivo banco.sql, com as tabelas do Banco de Dados e o arquivo requirements.txt; </p> <br>
  <p>  README.MD: arquivo com o detalhamento do projeto.</p>
 
 
 <h2> Execução </h2>
 
 
+
+<h3> Sobre o site </h3>
+
+Assim que estiver pronto, nossa página irá facilitar os problemas descritos pelos usuários, tendo como objetivo a melhoria da comunicação entre cliente e executor, nossa página conecta as pessoas que necessitam de suporte, seja ele: software ou hardware a um profissional da área de TI, atravez de um chate, onde a mesma pode solicitar um pedido ou ver seus pedidos anteriores, tais pedidos são disponibilizados aos profissionais, que solucionarão o problema.
 
 
 <h2>Requisitos</h2>
@@ -40,38 +46,6 @@
    		-  uma avaliação atribuída pelo usuário que a originou, após o fechamento (opcional); <br>
    	-O sistema deve prover relátorios sobre o percentual de solicitações abertas e fechadas em um intervalo de tempo, a evolução diária da quantidade de solicitações abertas e fechadas em intervalos de tempo especificados, uma média de cada executor e uma média global do sistema<p>
 
-
-<h3> Descrição do Projeto </h3>
-
-<p> Este projeto tem por objetivo desenvolvimento de uma plataforma de central de serviços para que o cliente possa receber, atender e recusar serviços</p> <br> <p>
-
-
-<h3> Sobre o site </h3>
-
-Assim que estiver pronto, nossa página irá facilitar os problemas descritos pelos usuários, tendo como objetivo a melhoria da comunicação entre cliente e executor, nossa página conecta as pessoas que necessitam de suporte, seja ele: software ou hardware a um profissional da área de TI, atravez de um chate, onde a mesma pode solicitar um pedido ou ver seus pedidos anteriores, tais pedidos são disponibilizados aos profissionais, que solucionarão o problema.
-
-
-<h3> Execução </h3>
-
-
-<h3>Requisitos</h3>
-
-<p> - O sistema só deverá ser acessado por pessoas devidamente cadastradas; <br>
-    - Apenas o administrador do sistema deve possuir acesso total às funcionalidades do sistema; <br>
-   	- Ao ser criada, um chamado deve ser atrelada seu criador e atribuída um executor; <br>
-   	- Atribuíção do executor deve seguir um esquema de distribuição cíclica; <br>
-   	- O executor deve ser capaz de atender e recusar chamados(caso recuse é necessário que  possa justificar); <br>
-   	- Um usuário comum deve ser capaz de abrir uma solicitação, visualizar o estado de todas as suas solicitações, da mais recente à mais antiga e atribuir uma nota (de 0 a 10)  pelo serviço após realizado; <br>
-   	- Requisitos da solicitação:<br>
-   		- data/hora de criação(obrigatório); <br>
-   		- data/hora de fechamento(obrigatório); <br>
-   		- tipo de problema ou Esclarecimento/Informação; <br>
-   		-  uma descrição de abertura(obrigatório); <br>
-   		-  uma imagem/arquivo (opcional);<br>
-   		-  uma resposta ou justificativa para o fechamento(obrigatório); <br>
-   		-  uma avaliação atribuída pelo usuário que a originou, após o fechamento (opcional); <br>
-   	-O sistema deve prover relátorios sobre o percentual de solicitações abertas e fechadas em um intervalo de tempo, a evolução diária da quantidade de solicitações abertas e fechadas em intervalos de tempo especificados, uma média de cada executor e uma média global do sistema<p>
-​    
 
 ​    
 <h2>📃 Backlog do produto </h2>
@@ -133,8 +107,6 @@ Assim que estiver pronto, nossa página irá facilitar os problemas descritos pe
 	<ol><h4>Python JavaScript</h4></ol>
 	<img src="src\static\imagens\linguagens.png" alt="Linguagens"> 
 </div>
-
-
 
 
 <h2> Equipe </h2>

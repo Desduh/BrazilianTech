@@ -27,6 +27,9 @@
 
 Assim que estiver pronto, nossa página irá facilitar os problemas descritos pelos usuários, tendo como objetivo a melhoria da comunicação entre cliente e executor, nossa página conecta as pessoas que necessitam de suporte, seja ele: software ou hardware a um profissional da área de TI, atravez de um chate, onde a mesma pode solicitar um pedido ou ver seus pedidos anteriores, tais pedidos são disponibilizados aos profissionais, que solucionarão o problema.
 
+<img align='center' src=src\static\imagens\usuario.gif />
+
+<img align='center' src=src\static\imagens\executor.gif />
 
 <h2>Requisitos</h2>
 

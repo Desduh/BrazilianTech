@@ -1,11 +1,12 @@
 <div align='center'>
 <h1> FATEC SJC - Profº Jessen Vidal- 1º DSM</h1>
-<img src="src\static\imagens\logo_nome.png" style="zoom:50%;" />
+<img src="src\static\imagens\logo_nome.png" style="zoom:40%;" />
 </div>
 
 
+
 <h2 align="center"> Grupo 5 - BrazilianTech💻</h2>
-<div align='center'> <a href='#Descrição do Projeto'>Descrição do Projeto </a> |  <a href='#Execução'>Execução</a> | <a href='#Sobre o site'>Sobre o site</a> |<a href='#Requisitos'>Requisitos</a> | <a href='#Backlog'>Backlog</a> | <a href='#Tecnologias'>Tecnologias</a> | <a href='#Equipe'> Equipe </a> | <a href='#Vídeo'>Vídeo</a> </div>
+<div align='center'> <a href='#-descrição-do-projeto-'>Descrição do Projeto </a> |  <a href='#-execução-'>Execução</a> | <a href='#-sobre-o-site-'>Sobre o site</a> |<a href='#requisitos'>Requisitos</a> | <a href='-backlog-do-produto-'>Backlog</a> | <a href='#-tecnologias'>Tecnologias</a> | <a href='#-equipe-#Equipe'> Equipe </a> | <a href='#-vídeo-'>Vídeo</a> </div>
 <h3 align="center"> CENTRAL DE SERVIÇOS </h3>
 
 <br>

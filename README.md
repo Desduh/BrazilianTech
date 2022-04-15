@@ -19,34 +19,47 @@
 <br>
 
 <h2> Execução </h2>
+
 -Criar uma pasta
+
 -Clonar o git dentro dessa pasta com:
+
 ```console 
 	git clone https://github.com/Desduh/BrazilianTech.git
 ```
+
 -Baixar o python, o Visual Code Studio e o MySQL
+
 -Abrir a pasta no Visual code, entrar no prompt de comando pelo terminal e digitar 
+
 ```console 
 	cd BrazilianTech
 ```
+
 ```console 
 	cd src
 ```
+
 ```console 
 	python -m venv venv
 ```
+
 ```console 
 	.\venv\scripts\activate
 ```
+
 ```console 
 	cd ..
 ```
+
 ```console 
 	cd ..
 ```
+
 ```console 
 	pip install -r  requirements.txt
 ```
+
 <br>
 -Ir no MySQL Workbench > open script > Banco.sql > executar linhas
 <img src="src\static\imagens\print_db.png" />
@@ -91,6 +104,7 @@ Assim que estiver pronto, nossa página irá facilitar os problemas descritos pe
 <br>
 ​    
 <h2>📃 Backlog do produto </h2>
+
 | Sprint | Etapas                                                       | Status |
 | ------ | ------------------------------------------------------------ | ------ |
 | 1      | Wireframe                                                    | ✅      |

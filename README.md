@@ -5,7 +5,7 @@
 
 
 <h2 align="center"> Grupo 5 - BrazilianTech💻</h2>
-<div align='center'> <a href='#Descrição do Projeto'>Descrição do Projeto </a> |  <a href='#Execução'>Execução</a> |<a href='#Requisitos'>Requisitos</a> | <a href='#Backlog'>Backlog</a> | <a href='#Tecnologias'>Tecnologias</a> | <a href='#Equipe'> Equipe </a> | <a href='#Vídeo'>Vídeo</a> | <a href='#Sobre o site'>Sobre o site</a></div>
+<div align='center'> <a href='#Descrição do Projeto'>Descrição do Projeto </a> |  <a href='#Execução'>Execução</a> | <a href='#Sobre o site'>Sobre o site</a> |<a href='#Requisitos'>Requisitos</a> | <a href='#Backlog'>Backlog</a> | <a href='#Tecnologias'>Tecnologias</a> | <a href='#Equipe'> Equipe </a> | <a href='#Vídeo'>Vídeo</a> </div>
 <h3 align="center"> CENTRAL DE SERVIÇOS </h3>
 
 <br>
@@ -49,15 +49,7 @@
 ```
 
 ```console 
-	cd ..
-```
-
-```console 
-	cd ..
-```
-
-```console 
-	pip install -r  requirements.txt
+	pip install -r requirements.txt
 ```
 
 <br>
@@ -77,13 +69,17 @@
 <br>
 
 <h2> Sobre o site </h2>
-Assim que estiver pronto, nossa página irá facilitar os problemas descritos pelos usuários, tendo como objetivo a melhoria da comunicação entre cliente e executor, nossa página conecta as pessoas que necessitam de suporte, seja ele: software ou hardware a um profissional da área de TI, atravez de um chate, onde a mesma pode solicitar um pedido ou ver seus pedidos anteriores, tais pedidos são disponibilizados aos profissionais, que solucionarão o problema.
-<br>
-<img align='center' src=src\static\imagens\usuario.gif />
-<br>
-<img align='center' src=src\static\imagens\executor.gif />
+Nossa site  irá facilitar a comunicação entre cliente e executor, pois conecta as pessoas que necessitam de suporte, seja ele: software ou hardware a um profissional da área de TI, onde as mesmas podem solicitar um pedido ou ver seus pedidos anteriores e tais pedidos são disponibilizados aos profissionais, que solucionarão o problema.
 
-<br>
+Na parte de cadastro, o executor deve criar uma conta com o e-mail "executor@exec" e criar uma senha para ter acesso ao sistema de chamados, já o usuário comum poderá criar uma conta com um e-mail e senha de sua preferência.
+
+Página de cadastro: cadastrando um usuário comum
+
+<img align='center' src=src\static\imagens\usuario.gif />
+
+Página de login: acessando a página do executor (após cadastrar a conta do executor)
+
+<img align='center' src=src\static\imagens\executor.gif />
 
 <h2>Requisitos</h2>
 <p> - O sistema só deverá ser acessado por pessoas devidamente cadastradas; <br>
@@ -91,19 +87,20 @@ Assim que estiver pronto, nossa página irá facilitar os problemas descritos pe
    	- Ao ser criada, um chamado deve ser atrelada seu criador e atribuída um executor; <br>
    	- Atribuíção do executor deve seguir um esquema de distribuição cíclica; <br>
    	- O executor deve ser capaz de atender e recusar chamados(caso recuse é necessário que  possa justificar); <br>
-   	- Um usuário comum deve ser capaz de abrir uma solicitação, visualizar o estado de todas as suas solicitações, da mais recente à mais antiga e atribuir uma nota (de 0 a 10)  pelo serviço após realizado; <br>
+    - Um usuário comum deve ser capaz de abrir uma solicitação, visualizar o estado de todas as suas solicitações, da mais recente à mais antiga e atribuir uma nota (de 0 a 10)  pelo serviço após realizado; <br><br>
    	- Requisitos da solicitação:<br>
-   			- data/hora de criação(obrigatório); <br>
-   		- data/hora de fechamento(obrigatório); <br>
-   		- tipo de problema ou Esclarecimento/Informação; <br>
-   		-  uma descrição de abertura(obrigatório); <br>
-   		-  uma imagem/arquivo (opcional);<br>
-   		-  uma resposta ou justificativa para o fechamento(obrigatório); <br>
-   		-  uma avaliação atribuída pelo usuário que a originou, após o fechamento (opcional); <br>
+   		-- data/hora de criação(obrigatório); <br>
+   		-- data/hora de fechamento(obrigatório); <br>
+   		-- tipo de problema ou Esclarecimento/Informação; <br>
+   		-- uma descrição de abertura(obrigatório); <br>
+   		-- uma imagem/arquivo (opcional);<br>
+   		-- uma resposta ou justificativa para o fechamento(obrigatório); <br>
+   		-- uma avaliação atribuída pelo usuário que a originou, após o fechamento (opcional); <br><br>
    	-O sistema deve prover relátorios sobre o percentual de solicitações abertas e fechadas em um intervalo de tempo, a evolução diária da quantidade de solicitações abertas e fechadas em intervalos de tempo especificados, uma média de cada executor e uma média global do sistema<p>
 
 <br>
-​    
+    
+
 <h2>📃 Backlog do produto </h2>
 
 | Sprint | Etapas                                                       | Status |
@@ -182,4 +179,4 @@ Assim que estiver pronto, nossa página irá facilitar os problemas descritos pe
 
 <h2> Vídeo </h2>
 
-<p>assista nosso vídeo...</p>
+<p>Clique <a href='https://youtu.be/A1cXFDZgTSA'>aqui</a> e assista nosso video, ele contém a explicação mais detalhada</p>

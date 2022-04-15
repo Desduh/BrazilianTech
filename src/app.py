@@ -6,7 +6,7 @@ import MySQLdb
 
 app = Flask('__name__') 
 #configurações do Banco de Dados
-app.config['MYSQL_HOST'] = 'localhost'
+app.config['MYSQL_HOST'] = 'localhost' #adicione o hostname
 app.config['MYSQL_USER'] = 'root' #adicione o nome do seu usuário do MySQL
 app.config['MYSQL_PASSWORD'] = 'Fatec.5009' #adicione a senha do seu usuário do MySQL
 app.config['MYSQL_DB'] = 'usuarios_solicitacoes' 

@@ -68,6 +68,7 @@
 <img src="src\static\imagens\print_html.png" />
 <br>
 -Retornar ao prompt de comando do terminal e digite:
+
 ```console 
 	flask run
 ```

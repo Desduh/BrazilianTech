@@ -8,11 +8,11 @@ app = Flask('__name__')
 #configurações do Banco de Dados
 app.config['MYSQL_HOST'] = 'localhost' #adicione o hostname
 app.config['MYSQL_USER'] = 'root' #adicione o nome do seu usuário do MySQL
-app.config['MYSQL_PASSWORD'] = 'Fatec.5009' #adicione a senha do seu usuário do MySQL
+app.config['MYSQL_PASSWORD'] = 'fatec' #adicione a senha do seu usuário do MySQL
 app.config['MYSQL_DB'] = 'usuarios_solicitacoes' 
 
 #conexão com o Banco e fórmulas que serão utilizadas futuramente 
-con = MySQLdb.connect( user="root", password="Fatec.5009", db="usuarios_solicitacoes")#adicione o nome e a senha do seu usuário do MySQL
+con = MySQLdb.connect( user="root", password="fatec", db="usuarios_solicitacoes")#adicione o nome e a senha do seu usuário do MySQL
 mysql = MySQL(app)
 check_user = ("SELECT * FROM usuarios WHERE email_usuario=%s")
 check_password = ("SELECT * FROM usuarios WHERE senha_usuario=%s AND email_usuario=%s")
@@ -36,7 +36,7 @@ def telausuario():
     if logado:
         if email== 'executor@exec': #esse será o e-mail do executor
                 cur = mysql.connection.cursor()
-                users = cur.execute("select * from chamado")
+                users = cur.execute("select codigo_solicitacao,solicitacao,email_usuario,data_inicio FROM chamado ORDER BY data_inicio DESC;")
                 userDetails = cur.fetchall()
                 return render_template("telaexecutor.html", userDetails=userDetails)
         else: 

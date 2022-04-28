@@ -15,3 +15,6 @@ create table chamado
     data_inicio datetime );
 
 select * from chamado;
+select codigo_solicitacao,solicitacao,email_usuario,data_inicio FROM chamado ORDER BY data_inicio DESC;
+
+

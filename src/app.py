@@ -8,16 +8,17 @@ app = Flask('__name__')
 #configurações do Banco de Dados
 app.config['MYSQL_HOST'] = 'localhost' #adicione o hostname
 app.config['MYSQL_USER'] = 'root' #adicione o nome do seu usuário do MySQL
-app.config['MYSQL_PASSWORD'] = 'fatec' #adicione a senha do seu usuário do MySQL
+app.config['MYSQL_PASSWORD'] = 'Fatec.5009' #adicione a senha do seu usuário do MySQL
 app.config['MYSQL_DB'] = 'usuarios_solicitacoes' 
 
 #conexão com o Banco e fórmulas que serão utilizadas futuramente 
-con = MySQLdb.connect( user="root", password="fatec", db="usuarios_solicitacoes")#adicione o nome e a senha do seu usuário do MySQL
+con = MySQLdb.connect( user="root", password="Fatec.5009", db="usuarios_solicitacoes")#adicione o nome e a senha do seu usuário do MySQL
 mysql = MySQL(app)
 check_user = ("SELECT * FROM usuarios WHERE email_usuario=%s")
 check_password = ("SELECT * FROM usuarios WHERE senha_usuario=%s AND email_usuario=%s")
 add_user = ('INSERT into usuarios (email_usuario,senha_usuario) VALUES (%s, %s)')
 add_solicitacao = ('INSERT into chamado (solicitacao,email_usuario,data_inicio) VALUES (%s,%s, now())')
+add_mensagem_aceito = ('INSERT into chamado (aceito) VALUES (%s now())')
 logado = False
 
 
@@ -104,5 +105,13 @@ def telausuarioact():
     cur.execute(add_solicitacao, [solicitacao, email])
     feedback = cur.fetchall
     con.commit()
-    
     return redirect ('/telausuario.html')
+
+@app.route('/aceitar.html')
+def aceitar():
+    aceito = request.form['solicitacao']
+    cur = con.cursor()
+    cur.execute(add_mensagem_aceito, [aceito])
+    feedback = cur.fetchall
+    con.commit()
+    return redirect("telaexecutor.html")

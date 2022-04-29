@@ -111,3 +111,15 @@ header,
 main{
     flex-shrink: 0;
 }
+
+.logout{
+    padding: 15px;
+}
+
+.logout img:hover{
+    border-radius: 5px;
+    padding: 15px;
+    background-color: #a9a9a9;
+    transition:  0.4s  ;
+    
+}

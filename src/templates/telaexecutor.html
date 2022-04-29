@@ -37,6 +37,7 @@
                         <td class="aj">Solicitação</td>
                         <td class="aj">Email</td>
                         <td class="aj">Data da solicitação</td>
+                        <td class="aj">Resposta</td>
                     </tr>
                 </thead>
                 {% for user in userDetails %}  
@@ -44,9 +45,24 @@
                         <td class="aj">{{user[1]}}</td>
                         <td class="aj">{{user[2]}}</td>
                         <td class="aj">{{user[3]}}</td>
+                        <td class="aj">
+                            <a class="botao_aceitar" href="#ace">Aceitar</a>
+                            <a class="botao_recusar" href="#soli">Recusar</a>
+                        </td>
                     </tr>
                 {% endfor %}
             </table>
+        </main>
+        <main id="ace">
+            <div>
+                <div>
+                    <p><h3>Descrição de como foi solucionado</h3>
+                </div>
+                <form name="aceito" method="post" action="{{url_for('aceitar')}}">
+                    <textarea type ='text' name="aceito" placeholder="Como foi solucionado" request></textarea>
+                    <button type="submit">Enviar</button>
+                </form>
+            </div>
         </main>
     </section>
 </body>

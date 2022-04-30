@@ -41,15 +41,17 @@
                     </tr>
                 </thead>
                 {% for user in Details %}
-                    <tr>
-                        <td class="aj">{{user[1]}}</td>
-                        <td class="aj">{{user[2]}}</td>
-                        <td class="aj">{{user[3]}}</td>
-                        <td class="aj">
-                            <a class="botao_aceitar" href="#ace">Aceitar</a>
-                            <a class="botao_recusar" href="#rec">Recusar</a>
-                        </td>
-                    </tr>
+                    {% if user[4] == 'Aberto' %}
+                        <tr>
+                            <td class="aj">{{user[1]}}</td>
+                            <td class="aj">{{user[2]}}</td>
+                            <td class="aj">{{user[3]}}</td>
+                            <td class="aj">
+                                <a class="botao_aceitar" href="#ace">Aceitar</a>
+                                <a class="botao_recusar" href="#rec">Recusar</a>
+                            </td>
+                        </tr>
+                    {% endif %}
                 {% endfor %}  
             </table>
         </main>

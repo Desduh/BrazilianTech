@@ -18,7 +18,7 @@ check_user = ("SELECT * FROM usuarios WHERE email_usuario=%s")
 check_password = ("SELECT * FROM usuarios WHERE senha_usuario=%s AND email_usuario=%s")
 add_user = ('INSERT into usuarios (email_usuario,senha_usuario) VALUES (%s, %s)')
 add_solicitacao = ('INSERT into chamado (solicitacao,email_usuario,_status,data_inicio) VALUES (%s,%s,%s, now())')
-add_mensagem_aceito = ("UPDATE chamado SET resposta=%s, email_executor=%s, _status=%s WHERE codigo_solicitacao = %s")
+add_resposta = ("UPDATE chamado SET resposta=%s, email_executor=%s, _status=%s WHERE codigo_solicitacao = %s")
 
 logado = False
 
@@ -118,13 +118,24 @@ def telausuarioact():
     con.commit()
     return redirect ('/telausuario.html')
 
-@app.route('/telaexecutor/<id>', methods= ['POST']) 
+@app.route('/aceitando/<id>', methods= ['POST']) 
 def aceitar(id):
     #isso possibilita o executor responder a solicitacao
     resposta = request.form['aceito']
-    aceito = 'Aceito'
+    status = 'Aceito'
     cur = con.cursor()
-    cur.execute(add_mensagem_aceito, [resposta,email,aceito,id])
+    cur.execute(add_resposta, [resposta,email,status,id])
+    feedback = cur.fetchall
+    con.commit()
+    return redirect ("/telaexecutor#ch")
+
+@app.route('/recusando/<id>', methods= ['POST']) 
+def recusar(id):
+    #isso possibilita o executor responder a solicitacao
+    resposta = request.form['recusado']
+    status = 'Negado'
+    cur = con.cursor()
+    cur.execute(add_resposta, [resposta,email,status,id])
     feedback = cur.fetchall
     con.commit()
     return redirect ("/telaexecutor#ch")

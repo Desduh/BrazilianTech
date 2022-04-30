@@ -127,4 +127,4 @@ def aceitar(id):
     cur.execute(add_mensagem_aceito, [resposta,email,aceito,id])
     feedback = cur.fetchall
     con.commit()
-    return redirect ("/telausuario.html#ch")
+    return redirect ("/telaexecutor#ch")

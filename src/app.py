@@ -18,7 +18,8 @@ check_user = ("SELECT * FROM usuarios WHERE email_usuario=%s")
 check_password = ("SELECT * FROM usuarios WHERE senha_usuario=%s AND email_usuario=%s")
 add_user = ('INSERT into usuarios (email_usuario,senha_usuario) VALUES (%s, %s)')
 add_solicitacao = ('INSERT into chamado (solicitacao,email_usuario,data_inicio) VALUES (%s,%s, now())')
-add_mensagem_aceito = ('INSERT into chamado (aceito) VALUES (%s now())')
+add_mensagem_aceito = ("UPDATE chamado SET aceito=%s, email_executor=%s WHERE codigo_solicitacao = %s")
+
 logado = False
 
 
@@ -36,14 +37,20 @@ def cadastro():
 def telausuario():
     if logado:
         if email== 'executor@exec': #esse será o e-mail do executor
-                cur = mysql.connection.cursor()
-                users = cur.execute("select codigo_solicitacao,solicitacao,email_usuario,data_inicio FROM chamado ORDER BY data_inicio DESC;")
-                userDetails = cur.fetchall()
-                return render_template("telaexecutor.html", userDetails=userDetails)
+                return redirect('telaexecutor')
         else: 
             return render_template('telausuario.html')
     else:
         return redirect('/cadastro.html')
+
+@app.route('/telaexecutor')
+def telaexecutor():
+    cur = mysql.connection.cursor()
+    users = cur.execute("select codigo_solicitacao,solicitacao,email_usuario,data_inicio FROM chamado ORDER BY data_inicio DESC;")
+    Details = cur.fetchall()
+    return render_template("telaexecutor.html", Details=Details)
+
+
 
 @app.route('/cadastro.html', methods= ['POST'])
 def cadastroact():
@@ -73,6 +80,7 @@ def cadastroact():
         return redirect('/cadastro.html')
         
 
+
 @app.route('/login.html', methods= ['POST'])
 def loginact():
     global email
@@ -98,8 +106,10 @@ def loginact():
             return redirect('/login.html')
 
 
-@app.route('/telausuario.html', methods= ['POST'])
+
+@app.route('/telausuario.html', methods= ['POST']) 
 def telausuarioact():
+    #isso possibilita o usuario fazer a solicitacao
     solicitacao = request.form['solicitacao']
     cur = con.cursor()
     cur.execute(add_solicitacao, [solicitacao, email])
@@ -107,11 +117,12 @@ def telausuarioact():
     con.commit()
     return redirect ('/telausuario.html')
 
-@app.route('/aceitar.html')
-def aceitar():
-    aceito = request.form['solicitacao']
+@app.route('/telaexecutor/<id>', methods= ['POST']) 
+def aceitar(id):
+    #isso possibilita o executor responder a solicitacao
+    aceito = request.form['aceito']
     cur = con.cursor()
-    cur.execute(add_mensagem_aceito, [aceito])
+    cur.execute(add_mensagem_aceito, [aceito,email,id])
     feedback = cur.fetchall
     con.commit()
-    return redirect("telaexecutor.html")
+    return redirect ("/telausuario.html#ch")

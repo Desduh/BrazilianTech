@@ -18,7 +18,7 @@ check_user = ("SELECT * FROM usuarios WHERE email_usuario=%s")
 check_password = ("SELECT * FROM usuarios WHERE senha_usuario=%s AND email_usuario=%s")
 add_user = ('INSERT into usuarios (email_usuario,senha_usuario) VALUES (%s, %s)')
 add_solicitacao = ('INSERT into chamado (solicitacao,email_usuario,data_inicio) VALUES (%s,%s, now())')
-add_mensagem_aceito = ("UPDATE chamado SET aceito=%s, email_executor=%s WHERE codigo_solicitacao = %s")
+add_mensagem_aceito = ("UPDATE chamado SET resposta=%s, email_executor=%s WHERE codigo_solicitacao = %s")
 
 logado = False
 
@@ -120,9 +120,9 @@ def telausuarioact():
 @app.route('/telaexecutor/<id>', methods= ['POST']) 
 def aceitar(id):
     #isso possibilita o executor responder a solicitacao
-    aceito = request.form['aceito']
+    resposta = request.form['aceito']
     cur = con.cursor()
-    cur.execute(add_mensagem_aceito, [aceito,email,id])
+    cur.execute(add_mensagem_aceito, [resposta,email,id])
     feedback = cur.fetchall
     con.commit()
     return redirect ("/telausuario.html#ch")

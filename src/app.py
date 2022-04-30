@@ -127,7 +127,7 @@ def aceitar(id):
     cur.execute(add_resposta, [resposta,email,status,id])
     feedback = cur.fetchall
     con.commit()
-    return redirect ("/telaexecutor#ch")
+    return redirect ("/telaexecutor#ab")
 
 @app.route('/recusando/<id>', methods= ['POST']) 
 def recusar(id):
@@ -138,4 +138,4 @@ def recusar(id):
     cur.execute(add_resposta, [resposta,email,status,id])
     feedback = cur.fetchall
     con.commit()
-    return redirect ("/telaexecutor#ch")
+    return redirect ("/telaexecutor#ab")

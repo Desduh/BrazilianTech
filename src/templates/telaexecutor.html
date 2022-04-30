@@ -23,14 +23,25 @@
                     </div>
                 </div>
                 <hr>
-                <a href="#ch" class="solicitacao">
+                <h3>Chamdos:</h3>
+                <a href="#ab" class="solicitacao">
                     <div>
-                        Chamados
+                        Em aberto
+                    </div> 
+                </a>
+                <a href="#ac" class="solicitacao">
+                    <div>
+                        Aceito
+                    </div> 
+                </a>
+                <a href="#ne" class="solicitacao">
+                    <div>
+                        Negado
                     </div> 
                 </a>
             </nav>
         </header>
-        <main id="ch">
+        <main id="ac">
             <table>
                 <thead>
                     <tr class="text_table">
@@ -42,6 +53,56 @@
                 </thead>
                 {% for user in Details %}
                     {% if user[4] == 'Aberto' %}
+                        <tr>
+                            <td class="aj">{{user[1]}}</td>
+                            <td class="aj">{{user[2]}}</td>
+                            <td class="aj">{{user[3]}}</td>
+                            <td class="aj">
+                                <a class="botao_aceitar" href="#ace">Aceitar</a>
+                                <a class="botao_recusar" href="#rec">Recusar</a>
+                            </td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}  
+            </table>
+        </main>
+        <main id="ne">
+            <table>
+                <thead>
+                    <tr class="text_table">
+                        <td class="aj">Solicitação</td>
+                        <td class="aj">Email</td>
+                        <td class="aj">Data da solicitação</td>
+                        <td class="aj">Resposta</td>
+                    </tr>
+                </thead>
+                {% for user in Details %}
+                    {% if user[4] == 'Negado' %}
+                        <tr>
+                            <td class="aj">{{user[1]}}</td>
+                            <td class="aj">{{user[2]}}</td>
+                            <td class="aj">{{user[3]}}</td>
+                            <td class="aj">
+                                <a class="botao_aceitar" href="#ace">Aceitar</a>
+                                <a class="botao_recusar" href="#rec">Recusar</a>
+                            </td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}  
+            </table>
+        </main>
+        <main id="ab">
+            <table>
+                <thead>
+                    <tr class="text_table">
+                        <td class="aj">Solicitação</td>
+                        <td class="aj">Email</td>
+                        <td class="aj">Data da solicitação</td>
+                        <td class="aj">Resposta</td>
+                    </tr>
+                </thead>
+                {% for user in Details %}
+                    {% if user[4] == 'Negado' %}
                         <tr>
                             <td class="aj">{{user[1]}}</td>
                             <td class="aj">{{user[2]}}</td>

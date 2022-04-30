@@ -17,8 +17,8 @@ mysql = MySQL(app)
 check_user = ("SELECT * FROM usuarios WHERE email_usuario=%s")
 check_password = ("SELECT * FROM usuarios WHERE senha_usuario=%s AND email_usuario=%s")
 add_user = ('INSERT into usuarios (email_usuario,senha_usuario) VALUES (%s, %s)')
-add_solicitacao = ('INSERT into chamado (solicitacao,email_usuario,data_inicio) VALUES (%s,%s, now())')
-add_mensagem_aceito = ("UPDATE chamado SET resposta=%s, email_executor=%s WHERE codigo_solicitacao = %s")
+add_solicitacao = ('INSERT into chamado (solicitacao,email_usuario,_status,data_inicio) VALUES (%s,%s,%s, now())')
+add_mensagem_aceito = ("UPDATE chamado SET resposta=%s, email_executor=%s, _status=%s WHERE codigo_solicitacao = %s")
 
 logado = False
 
@@ -111,8 +111,9 @@ def loginact():
 def telausuarioact():
     #isso possibilita o usuario fazer a solicitacao
     solicitacao = request.form['solicitacao']
+    aberto = 'Aberto'
     cur = con.cursor()
-    cur.execute(add_solicitacao, [solicitacao, email])
+    cur.execute(add_solicitacao, [solicitacao,email,aberto])
     feedback = cur.fetchall
     con.commit()
     return redirect ('/telausuario.html')
@@ -121,8 +122,9 @@ def telausuarioact():
 def aceitar(id):
     #isso possibilita o executor responder a solicitacao
     resposta = request.form['aceito']
+    aceito = 'Aceito'
     cur = con.cursor()
-    cur.execute(add_mensagem_aceito, [resposta,email,id])
+    cur.execute(add_mensagem_aceito, [resposta,email,aceito,id])
     feedback = cur.fetchall
     con.commit()
     return redirect ("/telausuario.html#ch")

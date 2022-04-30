@@ -40,7 +40,7 @@
                         <td class="aj">Resposta</td>
                     </tr>
                 </thead>
-                {% for user in userDetails %}  
+                {% for user in Details %}
                     <tr>
                         <td class="aj">{{user[1]}}</td>
                         <td class="aj">{{user[2]}}</td>
@@ -50,18 +50,20 @@
                             <a class="botao_recusar" href="#soli">Recusar</a>
                         </td>
                     </tr>
-                {% endfor %}
+                {% endfor %}  
             </table>
         </main>
         <main id="ace">
             <div>
+                {% for user in Details %}
                 <div>
                     <p><h3>Descrição de como foi solucionado</h3>
                 </div>
-                <form name="aceito" method="post" action="{{url_for('aceitar')}}">
+                <form method="POST" action="/telaexecutor/{{user.0}}">
                     <textarea type ='text' name="aceito" placeholder="Como foi solucionado" request></textarea>
                     <button type="submit">Enviar</button>
                 </form>
+                {% endfor %}
             </div>
         </main>
     </section>

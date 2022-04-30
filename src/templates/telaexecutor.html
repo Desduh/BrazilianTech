@@ -51,7 +51,7 @@
                     </tr>
                 </thead>
                 {% for user in Details %}
-                    {% if user[4] == 'Aberto' %}
+                    {% if user[4] == 'Aceito' %}
                         <tr>
                             <td class="aj">{{user[1]}}</td>
                             <td class="aj">{{user[2]}}</td>
@@ -92,7 +92,7 @@
                     </tr>
                 </thead>
                 {% for user in Details %}
-                    {% if user[4] == 'Negado' %}
+                    {% if user[4] == 'Aberto' %}
                         <tr>
                             <td class="aj">{{user[1]}}</td>
                             <td class="aj">{{user[2]}}</td>
@@ -109,26 +109,30 @@
         <main id="ace">
             <div>
                 {% for user in Details %}
-                <div>
-                    <p><h3>Descrição de como foi solucionado</h3>
-                </div>
-                <form method="POST" action="/aceitando/{{user.0}}">
-                    <textarea type ='text' name="aceito" placeholder="Como foi solucionado" request></textarea>
-                    <button type="submit">Enviar</button>
-                </form>
+                    {% if user[4] == 'Aberto' %}
+                        <div>
+                            <p><h3>Descrição de como foi solucionado</h3>
+                        </div>
+                        <form method="POST" action="/aceitando/{{user.0}}">
+                            <textarea type ='text' name="aceito" placeholder="Como foi solucionado" request></textarea>
+                            <button type="submit">Enviar</button>
+                        </form>
+                    {% endif %}
                 {% endfor %}
             </div>
         </main>
         <main id="rec">
             <div>
                 {% for user in Details %}
-                <div>
-                    <p><h3>Motivo da recusa</h3>
-                </div>
-                <form method="POST" action="/recusando/{{user.0}}">
-                    <textarea type ='text' name="recusado" placeholder="Motivo..." request></textarea>
-                    <button type="submit">Enviar</button>
-                </form>
+                    {% if user[4] == 'Aberto' %}
+                        <div>
+                            <p><h3>Motivo da recusa</h3>
+                        </div>
+                        <form method="POST" action="/recusando/{{user.0}}">
+                            <textarea type ='text' name="recusado" placeholder="Motivo..." request></textarea>
+                            <button type="submit">Enviar</button>
+                        </form>
+                    {% endif %}
                 {% endfor %}
             </div>
         </main>

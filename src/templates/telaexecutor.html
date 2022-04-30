@@ -47,7 +47,7 @@
                         <td class="aj">{{user[3]}}</td>
                         <td class="aj">
                             <a class="botao_aceitar" href="#ace">Aceitar</a>
-                            <a class="botao_recusar" href="#soli">Recusar</a>
+                            <a class="botao_recusar" href="#rec">Recusar</a>
                         </td>
                     </tr>
                 {% endfor %}  
@@ -59,8 +59,21 @@
                 <div>
                     <p><h3>Descrição de como foi solucionado</h3>
                 </div>
-                <form method="POST" action="/telaexecutor/{{user.0}}">
+                <form method="POST" action="/aceitando/{{user.0}}">
                     <textarea type ='text' name="aceito" placeholder="Como foi solucionado" request></textarea>
+                    <button type="submit">Enviar</button>
+                </form>
+                {% endfor %}
+            </div>
+        </main>
+        <main id="rec">
+            <div>
+                {% for user in Details %}
+                <div>
+                    <p><h3>Motivo da recusa</h3>
+                </div>
+                <form method="POST" action="/recusando/{{user.0}}">
+                    <textarea type ='text' name="recusado" placeholder="Motivo..." request></textarea>
                     <button type="submit">Enviar</button>
                 </form>
                 {% endfor %}

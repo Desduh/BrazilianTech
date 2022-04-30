@@ -13,4 +13,7 @@ create table chamado
 	solicitacao varchar(1000),
 	email_usuario varchar(40),
     data_inicio datetime,
-	aceito varchar(1000));
+    email_executor varchar(40),
+    _status varchar(30),
+    constraint ck_status check(_status in('Aceito','Negado','Aberto')),
+	resposta varchar(1000));

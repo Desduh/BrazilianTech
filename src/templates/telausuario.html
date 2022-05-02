@@ -30,7 +30,7 @@
                         Nova solicitação
                     </div>
                 </a>
-                <a href="#master" class="corpo">
+                <a href="#historico" class="solicitacao">
                     <p>Minhas solicitações</p>
                 </a>
             </nav>
@@ -47,6 +47,24 @@
                     <button class="botao" type="submit">Enviar</button>
                 </form>
             </div>
+        </main>
+        <main id="historico">
+            <table>
+                <thead>
+                    <tr class="text_table">
+                        <td class="aj">Solicitação</td>
+                        <td class="aj">Email</td>
+                        <td class="aj">Data da solicitação</td>
+                    </tr>
+                </thead>
+                {% for user in Details %}
+                    <tr>
+                        <td class="aj">{{user[1]}}</td>
+                        <td class="aj">{{user[2]}}</td>
+                        <td class="aj">{{user[3]}}</td>
+                    </tr>
+                {% endfor %}  
+            </table>
         </main>
     </section>
 </body>

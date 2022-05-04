@@ -16,7 +16,7 @@ section.abas main {
     display: none;
 }
 section.abas main:target{
-    display: flex;
+    display: block;
 }
 main {
     flex-grow: 1;
@@ -122,4 +122,21 @@ main{
     background-color: #a9a9a9;
     transition:  0.4s  ;
     
+}
+
+table {
+    border: 4px solid rgb(156, 156, 156);
+    border-radius: 2px;
+    width: 100%;
+    text-align: center;
+    border-spacing: 1px;
+}
+.aj {
+    border: 2px solid #a9a9a9;
+}
+.text_table {
+    font-size: 17px;
+}
+thead {
+    background-color: #a9a9a9;
 }

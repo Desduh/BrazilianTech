@@ -20,6 +20,7 @@ add_user = ('INSERT into usuarios (email_usuario,senha_usuario,funcao) VALUES (%
 add_solicitacao = ('INSERT into chamado (solicitacao,email_usuario,_status,data_inicio) VALUES (%s,%s,%s, now())')
 add_resposta = ("UPDATE chamado SET resposta=%s, email_executor=%s, _status=%s WHERE codigo_solicitacao = %s")
 historico = ("SELECT * FROM chamado WHERE email_usuario=%s ORDER BY data_inicio DESC;")
+verifica_funcao = ("SELECT funcao FROM usuarios WHERE email_usuario =%s")
 
 logado = False
 
@@ -59,7 +60,7 @@ def cadastroact():
             con.commit()
             global logado
             logado = True
-            return redirect('/telausuario.html')
+            return redirect('/validacao')
     else:
         return redirect('/cadastro.html')
         
@@ -83,22 +84,27 @@ def loginact():
         if feedback:
             global logado
             logado = True
-            return redirect('/telausuario.html')
+            return redirect('/validacao')
         else:
             #aqui ele mandaria uma mensagem caso o e-mail e/ou senha estiverem incorretos mas por enquanto ele só redireciona pra si mesmo
             return redirect('/login.html')
 
 
 
-@app.route('/telausuario.html')
-def telausuario():
-    if logado:
-        if email== 'executor@exec': #esse será o e-mail do executor
+@app.route('/validacao')
+def validacao():
+    cur = mysql.connection.cursor()
+    cur.execute(verifica_funcao, [email])
+    funcao = cur.fetchall()
+
+    for f in funcao:  
+        if logado:
+            if f[0] == 2: #validacao para ver se é o executor 
                 return redirect('telaexecutor')
-        else: 
-           return redirect('telausuario')
-    else:
-        return redirect('/cadastro.html')
+            else: 
+                return redirect('telausuario')
+        else:
+            return redirect('/cadastro.html')
 
 
 @app.route('/telaexecutor')
@@ -119,7 +125,7 @@ def telausuarioact():
     cur.execute(add_solicitacao, [solicitacao,email,aberto])
     feedback = cur.fetchall
     con.commit()
-    return redirect ('/telausuario.html')
+    return redirect ('/telausuario')
 
 @app.route('/telausuario')
 def hist():
@@ -128,7 +134,7 @@ def hist():
     users = cur.execute(historico, [email])
     Details = cur.fetchall()
     return render_template("telausuario.html", Details=Details)
-    
+
 
 @app.route('/aceitando/<id>', methods= ['POST']) 
 def aceitar(id):

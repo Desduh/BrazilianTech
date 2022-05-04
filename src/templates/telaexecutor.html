@@ -84,38 +84,48 @@
             </table>
         </main>
         <main id="ab">
-            <table>
-                <thead>
-                    <tr class="text_table">
-                        <td class="aj">Solicitação</td>
-                        <td class="aj">Email</td>
-                        <td class="aj">Data da solicitação</td>
-                        <td class="aj">Aceitar</td>
-                        <td class="aj">Recusar</td>
-                    </tr>
-                </thead>
-                {% for user in Details %}
-                    {% if user[4] == 'Aberto' %}
+            {% for user in Details %}
+            {% if user[4] == 'Aberto' %}
+            <details>
+                <summary>
+                    <table>
+                        <thead>
+                            <tr class="text_table">
+                                <td>Usuário: {{user[2]}}</td>
+                                <td>Data da solicitação: {{user[3]}}</td>
+                            </tr>
+                        </thead>
+                    </table>
+                </summary>
+                <table>
+                    <thead>
                         <tr>
-                            <td class="aj">{{user[1]}}</td>
-                            <td class="aj">{{user[2]}}</td>
-                            <td class="aj">{{user[3]}}</td>
-                            <td class="aj">
-                                <form method="POST" action="/aceitando/{{user.0}}">
-                                    <textarea type ='text' name="aceito" placeholder="Como foi solucionado" request></textarea>
-                                    <button type="submit">Enviar</button>
-                                </form>
-                            </td>
-                            <td>
-                                <form method="POST" action="/recusando/{{user.0}}">
-                                    <textarea type ='text' name="recusado" placeholder="Motivo..." request></textarea>
-                                    <button type="submit">Enviar</button>
-                                </form>
-                            </td>
+                            <td>Tipo de problema:</td>
+                            <td>Descrição:</td>
+                            <td>Aceitar:</td>
+                            <td>Recusar:</td>
                         </tr>
-                    {% endif %}
-                {% endfor %}  
-            </table>
+                    </thead>
+                    <tr>
+                        <td></td>
+                        <td>{{user[1]}}</td>
+                        <td>
+                            <form method="POST" action="/aceitando/{{user.0}}">
+                                <textarea type ='text' name="aceito" placeholder="Como foi solucionado..." request></textarea>
+                                <button type="submit">Enviar</button>
+                            </form>
+                        </td>
+                        <td>
+                            <form method="POST" action="/recusando/{{user.0}}">
+                                <textarea type ='text' name="recusado" placeholder="Motivo..." request></textarea>
+                                <button type="submit">Enviar</button>
+                            </form>
+                        </td>
+                    </tr>
+                </table>
+            </details>
+            {% endif %}
+            {% endfor %}
         </main>
     </section>
 </body>

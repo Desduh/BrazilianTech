@@ -110,7 +110,7 @@ def validacao():
 @app.route('/telaexecutor')
 def telaexecutor():
     cur = mysql.connection.cursor()
-    users = cur.execute("select codigo_solicitacao,solicitacao,email_usuario,data_inicio,_status,resposta FROM chamado ORDER BY data_inicio DESC;")
+    users = cur.execute("select codigo_solicitacao,solicitacao,email_usuario,data_inicio,email_executor,_status,resposta FROM chamado ORDER BY data_inicio DESC;")
     Details = cur.fetchall()
     return render_template("telaexecutor.html", Details=Details)
 

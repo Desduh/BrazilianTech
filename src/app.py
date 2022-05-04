@@ -16,7 +16,7 @@ con = MySQLdb.connect( user="root", password="fatec", db="usuarios_solicitacoes"
 mysql = MySQL(app)
 check_user = ("SELECT * FROM usuarios WHERE email_usuario=%s")
 check_password = ("SELECT * FROM usuarios WHERE senha_usuario=%s AND email_usuario=%s")
-add_user = ('INSERT into usuarios (email_usuario,senha_usuario) VALUES (%s, %s)')
+add_user = ('INSERT into usuarios (email_usuario,senha_usuario,funcao) VALUES (%s,%s,%s)')
 add_solicitacao = ('INSERT into chamado (solicitacao,email_usuario,_status,data_inicio) VALUES (%s,%s,%s, now())')
 add_resposta = ("UPDATE chamado SET resposta=%s, email_executor=%s, _status=%s WHERE codigo_solicitacao = %s")
 historico = ("SELECT * FROM chamado WHERE email_usuario=%s ORDER BY data_inicio DESC;")
@@ -72,7 +72,7 @@ def cadastroact():
             #aqui ele mandaria uma mensagem de erro para o html mas por enquanto ele só redireciona pra si mesmo
             return redirect('/cadastro.html')
         else:
-            cur.execute(add_user, [email, senha])
+            cur.execute(add_user, [email, senha, 1])
             con.commit()
             global logado
             logado = True

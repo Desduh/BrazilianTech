@@ -34,23 +34,6 @@ def login():
 def cadastro():
     return render_template('cadastro.html')
 
-@app.route('/telausuario.html')
-def telausuario():
-    if logado:
-        if email== 'executor@exec': #esse será o e-mail do executor
-                return redirect('telaexecutor')
-        else: 
-           return redirect('telausuario')
-    else:
-        return redirect('/cadastro.html')
-
-@app.route('/telaexecutor')
-def telaexecutor():
-    cur = mysql.connection.cursor()
-    users = cur.execute("select codigo_solicitacao,solicitacao,email_usuario,data_inicio,_status,resposta FROM chamado ORDER BY data_inicio DESC;")
-    Details = cur.fetchall()
-    return render_template("telaexecutor.html", Details=Details)
-
 
 
 @app.route('/cadastro.html', methods= ['POST'])
@@ -81,7 +64,6 @@ def cadastroact():
         return redirect('/cadastro.html')
         
 
-
 @app.route('/login.html', methods= ['POST'])
 def loginact():
     global email
@@ -108,6 +90,26 @@ def loginact():
 
 
 
+@app.route('/telausuario.html')
+def telausuario():
+    if logado:
+        if email== 'executor@exec': #esse será o e-mail do executor
+                return redirect('telaexecutor')
+        else: 
+           return redirect('telausuario')
+    else:
+        return redirect('/cadastro.html')
+
+
+@app.route('/telaexecutor')
+def telaexecutor():
+    cur = mysql.connection.cursor()
+    users = cur.execute("select codigo_solicitacao,solicitacao,email_usuario,data_inicio,_status,resposta FROM chamado ORDER BY data_inicio DESC;")
+    Details = cur.fetchall()
+    return render_template("telaexecutor.html", Details=Details)
+
+
+
 @app.route('/telausuario.html', methods= ['POST']) 
 def telausuarioact():
     #isso possibilita o usuario fazer a solicitacao
@@ -126,6 +128,7 @@ def hist():
     users = cur.execute(historico, [email])
     Details = cur.fetchall()
     return render_template("telausuario.html", Details=Details)
+    
 
 @app.route('/aceitando/<id>', methods= ['POST']) 
 def aceitar(id):

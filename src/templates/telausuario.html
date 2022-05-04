@@ -56,6 +56,7 @@
                         <td class="aj">Data da solicitação</td>
                         <td class="aj">Executor</td>
                         <td class="aj">Resposta</td>
+                        <td class="aj">Status</td>
                     </tr>
                 </thead>
                 {% for user in Details %}
@@ -64,6 +65,7 @@
                         <td class="aj">{{user[3]}}</td>
                         <td class="aj">{{user[4]}}</td>
                         <td class="aj">{{user[6]}}</td>
+                        <td class="aj">{{user[5]}}</td>
                     </tr>
                 {% endfor %}  
             </table>

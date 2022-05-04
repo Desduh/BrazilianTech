@@ -19,7 +19,7 @@ check_password = ("SELECT * FROM usuarios WHERE senha_usuario=%s AND email_usuar
 add_user = ('INSERT into usuarios (email_usuario,senha_usuario) VALUES (%s, %s)')
 add_solicitacao = ('INSERT into chamado (solicitacao,email_usuario,_status,data_inicio) VALUES (%s,%s,%s, now())')
 add_resposta = ("UPDATE chamado SET resposta=%s, email_executor=%s, _status=%s WHERE codigo_solicitacao = %s")
-historico = ("SELECT * FROM chamado WHERE email_usuario=%s")
+historico = ("SELECT * FROM chamado WHERE email_usuario=%s ORDER BY data_inicio DESC;")
 
 logado = False
 
@@ -120,7 +120,7 @@ def telausuarioact():
     return redirect ('/telausuario.html')
 
 @app.route('/telausuario')
-def historico():
+def hist():
     cur = mysql.connection.cursor()  
     global email
     users = cur.execute(historico, [email])

@@ -27,4 +27,5 @@ create table chamado
     email_executor varchar(40),
     _status varchar(30),
     constraint ck_status check(_status in('Aceito','Negado','Aberto')),
-	resposta varchar(1000));
+	resposta varchar(1000),
+    data_fechamento datetime);

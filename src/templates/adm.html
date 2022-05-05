@@ -35,6 +35,11 @@
                     </div>
                 </a>
                 <h3>Chamados:</h3>
+                <a href="#historico" class="solicitacao">
+                    <div>
+                        Minhas solicitações
+                    </div>
+                </a>
                 <a href="#ab" class="solicitacao">
                     <div>
                         Em aberto
@@ -71,6 +76,32 @@
             </div>
         </main>
         <main id="graficos">
+        </main>
+        <main id="historico">
+            <table>
+                <thead>
+                    <tr class="text_table">
+                        <td class="aj">Solicitação</td>
+                        <td class="aj">Problema</td>
+                        <td class="aj">Data da solicitação</td>
+                        <td class="aj">Executor</td>
+                        <td class="aj">Resposta</td>
+                        <td class="aj">Data da resposta</td>
+                        <td class="aj">Status</td>
+                    </tr>
+                </thead>
+                {% for user in lista %}
+                    <tr>
+                        <td class="aj">{{user[1]}}</td>
+                        <td class="aj">{{user[8]}}</td>
+                        <td class="aj">{{user[3]}}</td>
+                        <td class="aj">{{user[4]}}</td>
+                        <td class="aj">{{user[6]}}</td>
+                        <td class="aj">{{user[7]}}</td>
+                        <td class="aj">{{user[5]}}</td>
+                    </tr>
+                {% endfor %}  
+            </table>
         </main>
         <main id="ac">
             <table>

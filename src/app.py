@@ -99,13 +99,22 @@ def validacao():
 
     for f in funcao:  
         if logado:
-            if f[0] == 2: #validacao para ver se é o executor 
+            if f[0] == 3: #validacao para ver se é o executor 
+                return redirect('telaadm')
+            elif f[0] == 2:
                 return redirect('telaexecutor')
             else: 
                 return redirect('telausuario')
         else:
             return redirect('/cadastro.html')
 
+
+@app.route('/telaadm')
+def telaadm():
+    cur = mysql.connection.cursor()
+    users = cur.execute("select * FROM chamado ORDER BY data_inicio DESC;")
+    Details = cur.fetchall()
+    return render_template("adm.html", Details=Details)
 
 @app.route('/telaexecutor')
 def telaexecutor():
@@ -116,8 +125,8 @@ def telaexecutor():
 
 
 
-@app.route('/telausuario.html', methods= ['POST']) 
-def telausuarioact():
+@app.route('/solicitacao', methods= ['POST']) 
+def solicitacao():
     #isso possibilita o usuario fazer a solicitacao
     solicitacao = request.form['solicitacao']
     problema = request.form['tipo']
@@ -126,7 +135,16 @@ def telausuarioact():
     cur.execute(add_solicitacao, [solicitacao,email,aberto,problema])
     feedback = cur.fetchall
     con.commit()
-    return redirect ('/telausuario')
+
+    cur = mysql.connection.cursor()
+    cur.execute(verifica_funcao, [email])
+    funcao = cur.fetchall()
+
+    for f in funcao: 
+        if f[0] == 3:
+            return redirect ('/telaadm')
+        else:
+            return redirect ('/telausuario')
 
 @app.route('/telausuario')
 def hist():

@@ -109,12 +109,17 @@ def validacao():
             return redirect('/cadastro.html')
 
 
+
 @app.route('/telaadm')
 def telaadm():
     cur = mysql.connection.cursor()
     users = cur.execute("select * FROM chamado ORDER BY data_inicio DESC;")
     Details = cur.fetchall()
-    return render_template("adm.html", Details=Details)
+    cur = mysql.connection.cursor()  
+    global email
+    users = cur.execute(historico, [email])
+    lista = cur.fetchall()
+    return render_template("adm.html", Details=Details, lista=lista)
 
 @app.route('/telaexecutor')
 def telaexecutor():
@@ -122,6 +127,14 @@ def telaexecutor():
     users = cur.execute("select * FROM chamado ORDER BY data_inicio DESC;")
     Details = cur.fetchall()
     return render_template("telaexecutor.html", Details=Details)
+
+@app.route('/telausuario')
+def hist():
+    cur = mysql.connection.cursor()  
+    global email
+    users = cur.execute(historico, [email])
+    lista = cur.fetchall()
+    return render_template("telausuario.html", lista=lista)
 
 
 
@@ -145,15 +158,6 @@ def solicitacao():
             return redirect ('/telaadm')
         else:
             return redirect ('/telausuario')
-
-@app.route('/telausuario')
-def hist():
-    cur = mysql.connection.cursor()  
-    global email
-    users = cur.execute(historico, [email])
-    Details = cur.fetchall()
-    return render_template("telausuario.html", Details=Details)
-
 
 @app.route('/aceitando/<id>', methods= ['POST']) 
 def aceitar(id):

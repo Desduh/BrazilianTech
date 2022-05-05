@@ -31,7 +31,9 @@
                     </div>
                 </a>
                 <a href="#historico" class="solicitacao">
-                    <p>Minhas solicitações</p>
+                    <div>
+                        Minhas solicitações
+                    </div>
                 </a>
             </nav>
         </header>
@@ -66,7 +68,7 @@
                         <td class="aj">Status</td>
                     </tr>
                 </thead>
-                {% for user in Details %}
+                {% for user in lista %}
                     <tr>
                         <td class="aj">{{user[1]}}</td>
                         <td class="aj">{{user[8]}}</td>

@@ -18,7 +18,7 @@ check_user = ("SELECT * FROM usuarios WHERE email_usuario=%s")
 check_password = ("SELECT * FROM usuarios WHERE senha_usuario=%s AND email_usuario=%s")
 add_user = ('INSERT into usuarios (email_usuario,senha_usuario,funcao) VALUES (%s,%s,%s)')
 add_solicitacao = ('INSERT into chamado (solicitacao,email_usuario,_status,data_inicio) VALUES (%s,%s,%s, now())')
-add_resposta = ("UPDATE chamado SET resposta=%s, email_executor=%s, _status=%s WHERE codigo_solicitacao = %s")
+add_resposta = ("UPDATE chamado SET resposta=%s, email_executor=%s, _status=%s, data_fechamento=now() WHERE codigo_solicitacao = %s")
 historico = ("SELECT * FROM chamado WHERE email_usuario=%s ORDER BY data_inicio DESC;")
 verifica_funcao = ("SELECT funcao FROM usuarios WHERE email_usuario =%s")
 
@@ -110,7 +110,7 @@ def validacao():
 @app.route('/telaexecutor')
 def telaexecutor():
     cur = mysql.connection.cursor()
-    users = cur.execute("select codigo_solicitacao,solicitacao,email_usuario,data_inicio,email_executor,_status,resposta FROM chamado ORDER BY data_inicio DESC;")
+    users = cur.execute("select * FROM chamado ORDER BY data_inicio DESC;")
     Details = cur.fetchall()
     return render_template("telaexecutor.html", Details=Details)
 

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,inital-scarle=1.0">
+    <meta http-equiv="X-UA-compatible" content="ie=edge">
+    <title>Página do Administrador</title>
+    <link rel="stylesheet" href="../static/css/style_adm.css">
+</head>
+
+<body>
+    <section class="abas">
+        <header>
+            <div class="logout">
+                <a href="./login.html"><img src="..\static\Imagens\logout.png" alt="Logout"></a>
+            </div>
+            <nav>
+                <div class="perfil">
+                    <img class="img"src="https://cdn-icons-png.flaticon.com/512/64/64572.png?w=740&t=st=1649205811~exp=1649206411~hmac=2b5ab8271b0f5e8fad6bbbfaf3aebb98fc508fa02302d598d79b31bb4239cf53">
+                    <div class="texto">
+                       Administrador
+                    </div>
+                </div>
+                <hr>
+                <h3>Chamados:</h3>
+                <a href="grafico" class="solicitacao">
+                    <div>
+                        graficos
+                    </div>
+                </a>
+                <a href="#ab" class="solicitacao">
+                    <div>
+                        Em aberto
+                    </div> 
+                </a>
+                <a href="#ac" class="solicitacao">
+                    <div>
+                        Aceito
+                    </div> 
+                </a>
+                <a href="#ne" class="solicitacao">
+                    <div>
+                        Recusado
+                    </div> 
+                </a>
+            </nav>
+        </header>
+
+        <main id="grafico">
+
+        </main>
+
+        <main id="ac">
+            <table>
+                <thead>
+                    <tr class="text_table">
+                        <td class="aj">Solicitação</td>
+                        <td class="aj">Cliente</td>
+                        <td class="aj">Data da solicitação</td>
+                        <td class="aj">Resposta</td>
+                        <td class="aj">Data da resposta</td>
+                    </tr>
+                </thead>
+                {% for user in Details %}
+                    {% if user[5] == 'Aceito' %}
+                        <tr>
+                            <td class="aj">{{user[1]}}</td>
+                            <td class="aj">{{user[2]}}</td>
+                            <td class="aj">{{user[3]}}</td>
+                            <td class="aj">{{user[6]}}</td>
+                            <td class="aj">{{user[7]}}</td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}  
+            </table>
+        </main>
+        <main id="ne">
+            <table>
+                <thead>
+                    <tr class="text_table">
+                        <td class="aj">Solicitação</td>
+                        <td class="aj">Cliente</td>
+                        <td class="aj">Data da solicitação</td>
+                        <td class="aj">Resposta</td>
+                        <td class="aj">Data da resposta</td>
+                    </tr>
+                </thead>
+                {% for user in Details %}
+                    {% if user[5] == 'Negado' %}
+                        <tr>
+                            <td class="aj">{{user[1]}}</td>
+                            <td class="aj">{{user[2]}}</td>
+                            <td class="aj">{{user[3]}}</td>
+                            <td class="aj">{{user[6]}}</td>
+                            <td class="aj">{{user[7]}}</td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}  
+            </table>
+        </main>
+        <main id="ab">
+            {% for user in Details %}
+            {% if user[5] == 'Aberto' %}
+            <details>
+                <summary>
+                    <table>
+                        <thead>
+                            <tr class="text_table">
+                                <td>Usuário: {{user[2]}}</td>
+                                <td>Data da solicitação: {{user[3]}}</td>
+                            </tr>
+                        </thead>
+                    </table>
+                </summary>
+                <table>
+                    <thead>
+                        <tr>
+                            <td>Tipo de problema:</td>
+                            <td>Descrição:</td>
+                            <td>Aceitar:</td>
+                            <td>Recusar:</td>
+                        </tr>
+                    </thead>
+                    <tr>
+                        <td>{{user[8]}}</td>
+                        <td>{{user[1]}}</td>
+                        <td>
+                            <form method="POST" action="/aceitando/{{user.0}}">
+                                <textarea type ='text' name="aceito" placeholder="Como foi solucionado..." request></textarea>
+                                <button type="submit">Enviar</button>
+                            </form>
+                        </td>
+                        <td>
+                            <form method="POST" action="/recusando/{{user.0}}">
+                                <textarea type ='text' name="recusado" placeholder="Motivo..." request></textarea>
+                                <button type="submit">Enviar</button>
+                            </form>
+                        </td>
+                    </tr>
+                </table>
+            </details>
+            {% endif %}
+            {% endfor %}
+        </main>
+    </section>
+</body>
+
+</html>

@@ -47,17 +47,19 @@
                     <tr class="text_table">
                         <td class="aj">Solicitação</td>
                         <td class="aj">Cliente</td>
-                        <td class="aj">Resposta</td>
                         <td class="aj">Data da solicitação</td>
+                        <td class="aj">Resposta</td>
+                        <td class="aj">Data da resposta</td>
                     </tr>
                 </thead>
                 {% for user in Details %}
-                    {% if user[4] == 'Aceito' %}
+                    {% if user[5] == 'Aceito' %}
                         <tr>
                             <td class="aj">{{user[1]}}</td>
                             <td class="aj">{{user[2]}}</td>
-                            <td class="aj">{{user[2]}}</td>
                             <td class="aj">{{user[3]}}</td>
+                            <td class="aj">{{user[6]}}</td>
+                            <td class="aj">{{user[7]}}</td>
                         </tr>
                     {% endif %}
                 {% endfor %}  
@@ -68,18 +70,20 @@
                 <thead>
                     <tr class="text_table">
                         <td class="aj">Solicitação</td>
-                        <td class="aj">Usuário</td>
-                        <td class="aj">Resposta</td>
+                        <td class="aj">Cliente</td>
                         <td class="aj">Data da solicitação</td>
+                        <td class="aj">Resposta</td>
+                        <td class="aj">Data da resposta</td>
                     </tr>
                 </thead>
                 {% for user in Details %}
-                    {% if user[4] == 'Negado' %}
+                    {% if user[5] == 'Negado' %}
                         <tr>
                             <td class="aj">{{user[1]}}</td>
                             <td class="aj">{{user[2]}}</td>
-                            <td class="aj">{{user[5]}}</td>
                             <td class="aj">{{user[3]}}</td>
+                            <td class="aj">{{user[6]}}</td>
+                            <td class="aj">{{user[7]}}</td>
                         </tr>
                     {% endif %}
                 {% endfor %}  
@@ -87,7 +91,7 @@
         </main>
         <main id="ab">
             {% for user in Details %}
-            {% if user[4] == 'Aberto' %}
+            {% if user[5] == 'Aberto' %}
             <details>
                 <summary>
                     <table>

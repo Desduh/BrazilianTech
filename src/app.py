@@ -17,7 +17,7 @@ mysql = MySQL(app)
 check_user = ("SELECT * FROM usuarios WHERE email_usuario=%s")
 check_password = ("SELECT * FROM usuarios WHERE senha_usuario=%s AND email_usuario=%s")
 add_user = ('INSERT into usuarios (email_usuario,senha_usuario,funcao) VALUES (%s,%s,%s)')
-add_solicitacao = ('INSERT into chamado (solicitacao,email_usuario,_status,data_inicio) VALUES (%s,%s,%s, now())')
+add_solicitacao = ('INSERT into chamado (solicitacao,email_usuario,_status,problema,data_inicio) VALUES (%s,%s,%s,%s, now())')
 add_resposta = ("UPDATE chamado SET resposta=%s, email_executor=%s, _status=%s, data_fechamento=now() WHERE codigo_solicitacao = %s")
 historico = ("SELECT * FROM chamado WHERE email_usuario=%s ORDER BY data_inicio DESC;")
 verifica_funcao = ("SELECT funcao FROM usuarios WHERE email_usuario =%s")
@@ -120,9 +120,10 @@ def telaexecutor():
 def telausuarioact():
     #isso possibilita o usuario fazer a solicitacao
     solicitacao = request.form['solicitacao']
+    problema = request.form['tipo']
     aberto = 'Aberto'
     cur = con.cursor()
-    cur.execute(add_solicitacao, [solicitacao,email,aberto])
+    cur.execute(add_solicitacao, [solicitacao,email,aberto,problema])
     feedback = cur.fetchall
     con.commit()
     return redirect ('/telausuario')

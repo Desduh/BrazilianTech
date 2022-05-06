@@ -18,6 +18,8 @@ create table usuarios
     funcao int,
     foreign key(funcao) REFERENCES funcoes (cod_func));
     
+insert into usuarios(email_usuario,senha_usuario,funcao) values("administrador@adm",123,3);
+    
 
 create table chamado
 (	codigo_solicitacao int primary key AUTO_INCREMENT,
@@ -29,4 +31,4 @@ create table chamado
     constraint ck_status check(_status in('Aceito','Negado','Aberto')),
 	resposta varchar(1000),
     data_fechamento datetime,
-    problema varchar(40));
+    problema varchar(40));    

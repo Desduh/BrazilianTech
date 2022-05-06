@@ -21,6 +21,7 @@ add_solicitacao = ('INSERT into chamado (solicitacao,email_usuario,_status,probl
 add_resposta = ("UPDATE chamado SET resposta=%s, email_executor=%s, _status=%s, data_fechamento=now() WHERE codigo_solicitacao = %s")
 historico = ("SELECT * FROM chamado WHERE email_usuario=%s ORDER BY data_inicio DESC;")
 verifica_funcao = ("SELECT funcao FROM usuarios WHERE email_usuario =%s")
+tornar_exe = ("UPDATE usuarios SET funcao=%s WHERE codigo_usuario = %s")
 
 logado = False
 
@@ -113,13 +114,16 @@ def validacao():
 @app.route('/telaadm')
 def telaadm():
     cur = mysql.connection.cursor()
+    users = cur.execute("select * FROM usuarios;")
+    usuarios = cur.fetchall()
+    cur = mysql.connection.cursor()
     users = cur.execute("select * FROM chamado ORDER BY data_inicio DESC;")
     Details = cur.fetchall()
     cur = mysql.connection.cursor()  
     global email
     users = cur.execute(historico, [email])
     lista = cur.fetchall()
-    return render_template("adm.html", Details=Details, lista=lista)
+    return render_template("adm.html", usuarios=usuarios, Details=Details, lista=lista)
 
 @app.route('/telaexecutor')
 def telaexecutor():
@@ -168,7 +172,16 @@ def aceitar(id):
     cur.execute(add_resposta, [resposta,email,status,id])
     feedback = cur.fetchall
     con.commit()
-    return redirect ("/telaexecutor#ab")
+
+    cur = mysql.connection.cursor()
+    cur.execute(verifica_funcao, [email])
+    funcao = cur.fetchall()
+
+    for f in funcao: 
+        if f[0] == 3:
+            return redirect ('/telaadm#ab')
+        else:
+            return redirect ('//telaexecutor#ab')
 
 @app.route('/recusando/<id>', methods= ['POST']) 
 def recusar(id):
@@ -179,4 +192,23 @@ def recusar(id):
     cur.execute(add_resposta, [resposta,email,status,id])
     feedback = cur.fetchall
     con.commit()
-    return redirect ("/telaexecutor#ab")
+
+    cur = mysql.connection.cursor()
+    cur.execute(verifica_funcao, [email])
+    funcao = cur.fetchall()
+
+    for f in funcao: 
+        if f[0] == 3:
+            return redirect ('/telaadm#ab')
+        else:
+            return redirect ('/telaexecutor#ab')
+
+@app.route('/tornarexe/<id>', methods= ['POST']) 
+def usuarios(id):
+    #isso possibilita o adm tornar um usuario em executor
+    print(id)
+    cur = con.cursor()
+    cur.execute(tornar_exe, [2,id])
+    feedback = cur.fetchall
+    con.commit()
+    return redirect ("/telaadm#usuarios")

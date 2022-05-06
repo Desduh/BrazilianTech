@@ -34,6 +34,11 @@
                         Graficos
                     </div>
                 </a>
+                <a href="#usuarios" class="solicitacao">
+                    <div>
+                        Usuários
+                    </div>
+                </a>
                 <h3>Chamados:</h3>
                 <a href="#historico" class="solicitacao">
                     <div>
@@ -76,6 +81,40 @@
             </div>
         </main>
         <main id="graficos">
+        </main>
+        <main id="usuarios">
+            <div>
+                <table>
+                    <thead>
+                        <tr class="text_table">
+                            <td>Usuários</td>
+                            <td>Função</td>
+                            <td>Tornar executor</td>
+                        </tr>
+                    </thead>
+                    {% for user in usuarios %}
+                        {% if user[3] == 3 %}
+                        {% else %}
+                    <tr>
+                        <td class="aj">{{user[1]}}</td>
+                        {% if user[3] == 1 %}
+                        <td class="aj">Usuário</td>
+                        {% elif user[3] == 2 %}
+                        <td class="aj">Executor</td>
+                        {% endif %}
+                        {% if user[3] == 1 %}
+                        <td class="aj">
+                            <form method="POST" action="/tornarexe/{{user.0}}">
+                                <button type="submit">Promover</button>
+                            </form>
+                        </td>
+                        {% else %}
+                        {% endif %}
+                    </tr>
+                        {% endif %}
+                    {% endfor %}
+                </table>
+            </div>
         </main>
         <main id="historico">
             <table>

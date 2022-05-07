@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-compatible" content="ie=edge">
     <title>Página do Administrador</title>
     <link rel="stylesheet" href="../static/css/style_adm.css">
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 </head>
 
 <body>
@@ -81,6 +82,26 @@
             </div>
         </main>
         <main id="graficos">
+            <script type="text/javascript">
+              google.charts.load("current", {packages:["corechart"]});
+              google.charts.setOnLoadCallback(drawChart);
+              function drawChart() {
+                var data = google.visualization.arrayToDataTable([
+                  ['Status',  'Quantidade'],
+                  ['Fechados', {{per_cham[1]}}],
+                  ['Abertos', {{per_cham[0]}}],
+                ]);
+        
+                var options = {
+                  title: 'Percentual de chamados abertos e fechados',
+                  pieHole: 0.4,
+                };
+        
+                var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
+                chart.draw(data, options);
+              }
+            </script>
+               <div id="donutchart" style="width: 100%; height: 75%;"></div>
         </main>
         <main id="usuarios">
             <div>

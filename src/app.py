@@ -116,14 +116,30 @@ def telaadm():
     cur = mysql.connection.cursor()
     users = cur.execute("select * FROM usuarios;")
     usuarios = cur.fetchall()
+
     cur = mysql.connection.cursor()
     users = cur.execute("select * FROM chamado ORDER BY data_inicio DESC;")
     Details = cur.fetchall()
+    
     cur = mysql.connection.cursor()  
     global email
     users = cur.execute(historico, [email])
     lista = cur.fetchall()
-    return render_template("adm.html", usuarios=usuarios, Details=Details, lista=lista)
+
+    cur = mysql.connection.cursor()
+    users = cur.execute("select _status FROM chamado ORDER BY data_inicio DESC;")
+    x = cur.fetchall()
+    aberto = 0
+    fechado = 0
+    for k in x:
+        list(k)
+        if k[0] == 'Aberto':
+            aberto = aberto + 1
+        else:
+            fechado = fechado + 1
+    per_cham = [aberto,fechado]
+
+    return render_template("adm.html", usuarios=usuarios, Details=Details, lista=lista, per_cham=per_cham)
 
 @app.route('/telaexecutor')
 def telaexecutor():

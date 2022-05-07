@@ -181,7 +181,7 @@ def aceitar(id):
         if f[0] == 3:
             return redirect ('/telaadm#ab')
         else:
-            return redirect ('//telaexecutor#ab')
+            return redirect ('/telaexecutor#ab')
 
 @app.route('/recusando/<id>', methods= ['POST']) 
 def recusar(id):

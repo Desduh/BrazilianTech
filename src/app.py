@@ -17,11 +17,13 @@ mysql = MySQL(app)
 check_user = ("SELECT * FROM usuarios WHERE email_usuario=%s")
 check_password = ("SELECT * FROM usuarios WHERE senha_usuario=%s AND email_usuario=%s")
 add_user = ('INSERT into usuarios (email_usuario,senha_usuario,funcao) VALUES (%s,%s,%s)')
-add_solicitacao = ('INSERT into chamado (solicitacao,email_usuario,_status,problema,data_inicio) VALUES (%s,%s,%s,%s, now())')
+add_solicitacao = ('INSERT into chamado (solicitacao,email_usuario,_status,problema,contador,data_inicio) VALUES (%s,%s,%s,%s,%s, now())')
 add_resposta = ("UPDATE chamado SET resposta=%s, email_executor=%s, _status=%s, data_fechamento=now() WHERE codigo_solicitacao = %s")
 historico = ("SELECT * FROM chamado WHERE email_usuario=%s ORDER BY data_inicio DESC;")
 verifica_funcao = ("SELECT funcao FROM usuarios WHERE email_usuario =%s")
 tornar_exe = ("UPDATE usuarios SET funcao=%s WHERE codigo_usuario = %s")
+quantia_exe = ("SELECT COUNT(*) FROM usuarios WHERE funcao = 2;")
+quantia_chamado = ("SELECT COUNT(*) FROM chamado;")
 
 logado = False
 
@@ -62,6 +64,7 @@ def check_id_adm(view):
             return view(**kwargs)
         return redirect("/login.html")
     return wrapped_view
+
 
 
 @app.route('/')
@@ -205,11 +208,34 @@ def hist():
 @app.route('/solicitacao', methods= ['POST']) 
 def solicitacao():
     #isso possibilita o usuario fazer a solicitacao
+    cur = mysql.connection.cursor()  
+    a = cur.execute(quantia_exe)
+    qta_exe = str(cur.fetchall())
+    qta_exe = qta_exe.replace('(', '')
+    qta_exe = qta_exe.replace(')', '')
+    qta_exe = qta_exe.replace(',', '')
+    qta_exe = int(qta_exe)
+
+    cur = mysql.connection.cursor()  
+    cur.execute(quantia_chamado)
+    qta_cha = str(cur.fetchall())
+    qta_cha = qta_cha.replace('(', '')
+    qta_cha = qta_cha.replace(')', '')
+    qta_cha = qta_cha.replace(',', '')
+    qta_cha = int(qta_cha) + 1
+
+    if qta_exe == 0:
+        qta_exe = 1
+    else:
+        qta_exe = qta_exe
+
+    cont = qta_cha % qta_exe
+
     solicitacao = request.form['solicitacao']
     problema = request.form['tipo']
     aberto = 'Aberto'
     cur = con.cursor()
-    cur.execute(add_solicitacao, [solicitacao,email,aberto,problema])
+    cur.execute(add_solicitacao, [solicitacao,email,aberto,problema,cont])
     feedback = cur.fetchall
     con.commit()
 

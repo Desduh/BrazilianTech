@@ -31,4 +31,5 @@ create table chamado
     constraint ck_status check(_status in('Aceito','Negado','Aberto')),
 	resposta varchar(1000),
     data_fechamento datetime,
-    problema varchar(40));    
+    problema varchar(40),
+    contador int);    

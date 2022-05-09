@@ -101,7 +101,7 @@
                 chart.draw(data, options);
               }
             </script>
-               <div id="donutchart" style="width: 100%; height: 75%;"></div>
+               <div id="donutchart" style="width: 100%; height: 100%;"></div>
         </main>
         <main id="usuarios">
             <div>
@@ -130,6 +130,11 @@
                             </form>
                         </td>
                         {% else %}
+                        <td class="aj">
+                            <form method="POST" action="/tornaruser/{{user.0}}">
+                                <button type="submit">Rebaixar</button>
+                            </form>
+                        </td>
                         {% endif %}
                     </tr>
                         {% endif %}

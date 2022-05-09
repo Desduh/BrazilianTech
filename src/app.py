@@ -266,9 +266,17 @@ def recusar(id):
 @app.route('/tornarexe/<id>', methods= ['POST']) 
 def usuarios(id):
     #isso possibilita o adm tornar um usuario em executor
-    print(id)
     cur = con.cursor()
     cur.execute(tornar_exe, [2,id])
+    feedback = cur.fetchall
+    con.commit()
+    return redirect ("/telaadm#usuarios")
+
+@app.route('/tornaruser/<id>', methods= ['POST']) 
+def executor(id):
+    #isso possibilita o adm tornar um executor em usuario
+    cur = con.cursor()
+    cur.execute(tornar_exe, [1,id])
     feedback = cur.fetchall
     con.commit()
     return redirect ("/telaadm#usuarios")

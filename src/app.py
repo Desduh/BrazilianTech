@@ -1,8 +1,8 @@
 ﻿import dataclasses
-from flask import Flask, render_template, request, url_for, redirect
+from flask import Flask, render_template, request, url_for, redirect, session
 from flask_mysqldb import MySQL
 import MySQLdb
-
+import functools
 
 app = Flask('__name__') 
 #configurações do Banco de Dados
@@ -24,6 +24,44 @@ verifica_funcao = ("SELECT funcao FROM usuarios WHERE email_usuario =%s")
 tornar_exe = ("UPDATE usuarios SET funcao=%s WHERE codigo_usuario = %s")
 
 logado = False
+
+app.secret_key = "fatec"
+
+def check_id(id):
+    if id in session['id']:
+        return True
+    else:
+        return False
+
+def check_id_user(view):
+    @functools.wraps(view)
+    def wrapped_view(**kwargs):        
+        if not 'id' in session.keys():
+            return redirect("/")
+        elif check_id('1'):
+            return view(**kwargs)
+        return redirect("/")
+    return wrapped_view
+
+def check_id_exec(view):
+    @functools.wraps(view)
+    def wrapped_view(**kwargs):        
+        if not 'id' in session.keys():
+            return redirect("/login.html")
+        elif check_id('2'):
+            return view(**kwargs)
+        return redirect("/login.html")
+    return wrapped_view
+
+def check_id_adm(view):
+    @functools.wraps(view)
+    def wrapped_view(**kwargs):        
+        if not 'id' in session.keys():
+            return redirect("/login.html")
+        elif check_id('3'):
+            return view(**kwargs)
+        return redirect("/login.html")
+    return wrapped_view
 
 
 @app.route('/')
@@ -101,10 +139,13 @@ def validacao():
     for f in funcao:  
         if logado:
             if f[0] == 3: #validacao para ver se é o executor 
+                session['id'] = str(f[0])
                 return redirect('telaadm')
             elif f[0] == 2:
+                session['id'] = str(f[0])
                 return redirect('telaexecutor')
             else: 
+                session['id'] = str(f[0])
                 return redirect('telausuario')
         else:
             return redirect('/cadastro.html')
@@ -112,6 +153,7 @@ def validacao():
 
 
 @app.route('/telaadm')
+@check_id_adm
 def telaadm():
     cur = mysql.connection.cursor()
     users = cur.execute("select * FROM usuarios;")
@@ -142,6 +184,7 @@ def telaadm():
     return render_template("adm.html", usuarios=usuarios, Details=Details, lista=lista, per_cham=per_cham)
 
 @app.route('/telaexecutor')
+@check_id_exec
 def telaexecutor():
     cur = mysql.connection.cursor()
     users = cur.execute("select * FROM chamado ORDER BY data_inicio DESC;")
@@ -149,6 +192,7 @@ def telaexecutor():
     return render_template("telaexecutor.html", Details=Details)
 
 @app.route('/telausuario')
+@check_id_user
 def hist():
     cur = mysql.connection.cursor()  
     global email
@@ -228,3 +272,8 @@ def usuarios(id):
     feedback = cur.fetchall
     con.commit()
     return redirect ("/telaadm#usuarios")
+
+@app.route('/logout')
+def logout():
+    session.clear()
+    return redirect("/login.html")

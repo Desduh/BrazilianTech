@@ -7,7 +7,6 @@
     <meta http-equiv="X-UA-compatible" content="ie=edge">
     <title>Página do executor</title>
     <link rel="stylesheet" href="../static/css/style_executor.css">
-    <link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -106,7 +105,7 @@
                 </summary>
                 <table>
                     <thead>
-                        <tr class="desc_problema">
+                        <tr>
                             <td>Tipo de problema:</td>
                             <td>Descrição:</td>
                             <td>Aceitar:</td>
@@ -118,14 +117,14 @@
                         <td>{{user[1]}}</td>
                         <td>
                             <form method="POST" action="/aceitando/{{user.0}}">
-                                <textarea type ='text' name="aceito" class="Boxtext_motivo" placeholder="Como foi solucionado..." request></textarea>
-                                <button class="btn_enviar" type="submit">Enviar</button>
+                                <textarea type ='text' name="aceito" placeholder="Como foi solucionado..." request></textarea>
+                                <button type="submit">Enviar</button>
                             </form>
                         </td>
                         <td>
                             <form method="POST" action="/recusando/{{user.0}}">
-                                <textarea type ='text' name="recusado" class="Boxtext_motivo" placeholder="Motivo..." request></textarea>
-                                <button class="btn_enviar" type="submit">Enviar</button>
+                                <textarea type ='text' name="recusado" placeholder="Motivo..." request></textarea>
+                                <button type="submit">Enviar</button>
                             </form>
                         </td>
                     </tr>

@@ -25,7 +25,7 @@ verifica_funcao = ("SELECT funcao FROM usuarios WHERE email_usuario =%s")
 tornar_exe = ("UPDATE usuarios SET funcao=%s WHERE codigo_usuario = %s")
 quantia_exe = ("SELECT COUNT(*) FROM usuarios WHERE funcao = 2;")
 quantia_chamado = ("SELECT COUNT(*) FROM chamado;")
-exe_cont = ('INSERT into destribuicao (executor,contador) VALUES (%s,%s)')
+exe_cont = ('INSERT into distribuicao (executor,contador) VALUES (%s,%s)')
 
 logado = False
 

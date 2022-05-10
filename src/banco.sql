@@ -2,26 +2,17 @@ create database usuarios_solicitacoes;
 
 use usuarios_solicitacoes;
 
-create table funcoes
-(	cod_func int primary key,
-	descricao varchar(50) NOT NULL);
-    
-insert into funcoes values(1,"Possibilita fazer chamados");
-insert into funcoes values(2,"Possibilita responder chamados");
-insert into funcoes values(3,"Ambas atividades anteriores e ver relatórios");
-
 
 create table usuarios
 (	codigo_usuario int primary key AUTO_INCREMENT,
 	email_usuario varchar(40) NOT NULL UNIQUE KEY,
     senha_usuario varchar(30) NOT NULL,
-    funcao int,
-    foreign key(funcao) REFERENCES funcoes (cod_func));
+    funcao int);
     
-insert into usuarios(email_usuario,senha_usuario,funcao) values("administrador@adm",123,3);
+insert into usuarios(email_usuario,senha_usuario,funcao) values("administrador@adm",fatec,3);
 
 
-create table destribuicao
+create table distribuicao
 (   executor int primary key,
     foreign key(executor) REFERENCES usuarios (codigo_usuario),
     contador int);

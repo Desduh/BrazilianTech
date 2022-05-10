@@ -278,6 +278,10 @@ def resposta(id):
     resposta = request.form['resposta']
     status = request.form['status']
 
+    cur = mysql.connection.cursor()
+    cur.execute(verifica_funcao, [email])
+    funcao = cur.fetchall()
+
     if resposta == '':
         for f in funcao: 
             if f[0] == 3:
@@ -289,10 +293,6 @@ def resposta(id):
     cur.execute(add_resposta, [resposta,status,id])
     feedback = cur.fetchall
     con.commit()
-
-    cur = mysql.connection.cursor()
-    cur.execute(verifica_funcao, [email])
-    funcao = cur.fetchall()
 
     for f in funcao: 
         if f[0] == 3:

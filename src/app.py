@@ -1,4 +1,5 @@
-﻿import dataclasses
+﻿from concurrent.futures import Executor
+import dataclasses
 from flask import Flask, render_template, request, url_for, redirect, session
 from flask_mysqldb import MySQL
 import MySQLdb
@@ -17,17 +18,21 @@ mysql = MySQL(app)
 check_user = ("SELECT * FROM usuarios WHERE email_usuario=%s")
 check_password = ("SELECT * FROM usuarios WHERE senha_usuario=%s AND email_usuario=%s")
 add_user = ('INSERT into usuarios (email_usuario,senha_usuario,funcao) VALUES (%s,%s,%s)')
-add_solicitacao = ('INSERT into chamado (solicitacao,email_usuario,_status,problema,contador,data_inicio) VALUES (%s,%s,%s,%s,%s, now())')
+add_solicitacao = ('INSERT into chamado (solicitacao,email_usuario,executor,_status,problema,data_inicio) VALUES (%s,%s,%s,%s,%s, now())')
 add_resposta = ("UPDATE chamado SET resposta=%s, email_executor=%s, _status=%s, data_fechamento=now() WHERE codigo_solicitacao = %s")
 historico = ("SELECT * FROM chamado WHERE email_usuario=%s ORDER BY data_inicio DESC;")
 verifica_funcao = ("SELECT funcao FROM usuarios WHERE email_usuario =%s")
 tornar_exe = ("UPDATE usuarios SET funcao=%s WHERE codigo_usuario = %s")
 quantia_exe = ("SELECT COUNT(*) FROM usuarios WHERE funcao = 2;")
 quantia_chamado = ("SELECT COUNT(*) FROM chamado;")
+exe_cont = ('INSERT into destribuicao (executor,contador) VALUES (%s,%s)')
 
 logado = False
 
 app.secret_key = "fatec"
+
+
+
 
 def check_id(id):
     if id in session['id']:
@@ -67,6 +72,7 @@ def check_id_adm(view):
 
 
 
+
 @app.route('/')
 
 @app.route('/login.html')
@@ -76,7 +82,6 @@ def login():
 @app.route('/cadastro.html')
 def cadastro():
     return render_template('cadastro.html')
-
 
 
 @app.route('/cadastro.html', methods= ['POST'])
@@ -105,7 +110,7 @@ def cadastroact():
             return redirect('/validacao')
     else:
         return redirect('/cadastro.html')
-        
+
 
 @app.route('/login.html', methods= ['POST'])
 def loginact():
@@ -132,7 +137,6 @@ def loginact():
             return redirect('/login.html')
 
 
-
 @app.route('/validacao')
 def validacao():
     cur = mysql.connection.cursor()
@@ -152,6 +156,7 @@ def validacao():
                 return redirect('telausuario')
         else:
             return redirect('/cadastro.html')
+
 
 
 
@@ -186,6 +191,7 @@ def telaadm():
 
     return render_template("adm.html", usuarios=usuarios, Details=Details, lista=lista, per_cham=per_cham)
 
+
 @app.route('/telaexecutor')
 @check_id_exec
 def telaexecutor():
@@ -202,6 +208,7 @@ def hist():
     users = cur.execute(historico, [email])
     lista = cur.fetchall()
     return render_template("telausuario.html", lista=lista)
+
 
 
 
@@ -228,14 +235,21 @@ def solicitacao():
         qta_exe = 1
     else:
         qta_exe = qta_exe
-
     cont = qta_cha % qta_exe
+
+    cur = mysql.connection.cursor()  
+    cur.execute("SELECT executor FROM destribuicao WHERE contador=%s;", [cont])
+    executor = str(cur.fetchall())
+    executor = executor.replace('(', '')
+    executor = executor.replace(')', '')
+    executor = executor.replace(',', '')
+    executor = int(executor)
 
     solicitacao = request.form['solicitacao']
     problema = request.form['tipo']
     aberto = 'Aberto'
     cur = con.cursor()
-    cur.execute(add_solicitacao, [solicitacao,email,aberto,problema,cont])
+    cur.execute(add_solicitacao, [solicitacao,email,executor,aberto,problema])
     feedback = cur.fetchall
     con.commit()
 
@@ -248,6 +262,7 @@ def solicitacao():
             return redirect ('/telaadm')
         else:
             return redirect ('/telausuario')
+
 
 @app.route('/aceitando/<id>', methods= ['POST']) 
 def aceitar(id):
@@ -269,6 +284,7 @@ def aceitar(id):
         else:
             return redirect ('/telaexecutor#ab')
 
+
 @app.route('/recusando/<id>', methods= ['POST']) 
 def recusar(id):
     #isso possibilita o executor responder a solicitacao
@@ -289,6 +305,7 @@ def recusar(id):
         else:
             return redirect ('/telaexecutor#ab')
 
+
 @app.route('/tornarexe/<id>', methods= ['POST']) 
 def usuarios(id):
     #isso possibilita o adm tornar um usuario em executor
@@ -296,7 +313,22 @@ def usuarios(id):
     cur.execute(tornar_exe, [2,id])
     feedback = cur.fetchall
     con.commit()
+
+
+    cur = mysql.connection.cursor()  
+    a = cur.execute(quantia_exe)
+    qta_exe = str(cur.fetchall())
+    qta_exe = qta_exe.replace('(', '')
+    qta_exe = qta_exe.replace(')', '')
+    qta_exe = qta_exe.replace(',', '')
+    qta_exe = int(qta_exe) - 1 
+    
+    cur = con.cursor()
+    cur.execute(exe_cont, [id,qta_exe])
+    feedback = cur.fetchall
+    con.commit()
     return redirect ("/telaadm#usuarios")
+
 
 @app.route('/tornaruser/<id>', methods= ['POST']) 
 def executor(id):
@@ -306,6 +338,7 @@ def executor(id):
     feedback = cur.fetchall
     con.commit()
     return redirect ("/telaadm#usuarios")
+
 
 @app.route('/logout')
 def logout():

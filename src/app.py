@@ -168,7 +168,7 @@ def telaadm():
     usuarios = cur.fetchall()
 
     cur = mysql.connection.cursor()
-    users = cur.execute("select * FROM chamado ORDER BY data_inicio DESC;")
+    users = cur.execute("select * FROM chamado ORDER BY data_inicio DESC;") #pegar todas infos dos chamados 
     Details = cur.fetchall()
     
     cur = mysql.connection.cursor()  
@@ -196,7 +196,15 @@ def telaadm():
 @check_id_exec
 def telaexecutor():
     cur = mysql.connection.cursor()
-    users = cur.execute("select * FROM chamado ORDER BY data_inicio DESC;")
+    cur.execute("select codigo_usuario FROM usuarios where email_usuario=%s;", [email])
+    funcao = str(cur.fetchall())
+    funcao = funcao.replace('(', '')
+    funcao = funcao.replace(')', '')
+    funcao = funcao.replace(',', '')
+    funcao = int(funcao)
+
+    cur = mysql.connection.cursor()
+    cur.execute("select * FROM chamado where executor=%s ORDER BY data_inicio DESC;",[funcao])
     Details = cur.fetchall()
     return render_template("telaexecutor.html", Details=Details)
 
@@ -238,7 +246,7 @@ def solicitacao():
     cont = qta_cha % qta_exe
 
     cur = mysql.connection.cursor()  
-    cur.execute("SELECT executor FROM destribuicao WHERE contador=%s;", [cont])
+    cur.execute("SELECT executor FROM distribuicao WHERE contador=%s;", [cont])
     executor = str(cur.fetchall())
     executor = executor.replace('(', '')
     executor = executor.replace(')', '')

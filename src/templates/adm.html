@@ -92,9 +92,12 @@
                   ['Abertos', {{per_cham[0]}}],
                 ]);
         
-                var options = {
-                  title: 'Percentual de chamados abertos e fechados',
-                  pieHole: 0.4,
+                var options ={
+                    title: 'Percentual de chamados abertos e fechados',
+                    pieHole: 0.4,
+                    width: 800,
+                    height: 480,
+                    colors: ['rgb(177, 10, 4)', 'rgb(15, 76, 129)']
                 };
         
                 var chart = new google.visualization.PieChart(document.getElementById('donutchart'));

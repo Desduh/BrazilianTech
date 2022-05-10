@@ -24,9 +24,9 @@ create table chamado
 	email_usuario varchar(40),
     data_inicio datetime,
     executor int,
-    foreign key(executor) REFERENCES destribuicao (executor),
+    foreign key(executor) REFERENCES distribuicao (executor),
     _status varchar(30),
     constraint ck_status check(_status in('Aceito','Negado','Aberto')),
 	resposta varchar(1000),
     data_fechamento datetime,
-    problema varchar(40));    
+    problema varchar(40)); 

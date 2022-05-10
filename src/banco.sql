@@ -9,7 +9,7 @@ create table usuarios
     senha_usuario varchar(30) NOT NULL,
     funcao int);
     
-insert into usuarios(email_usuario,senha_usuario,funcao) values("administrador@adm",fatec,3);
+insert into usuarios(email_usuario,senha_usuario,funcao) values("administrador@adm","fatec",3);
 
 
 create table distribuicao

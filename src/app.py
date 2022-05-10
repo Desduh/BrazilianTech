@@ -272,32 +272,12 @@ def solicitacao():
             return redirect ('/telausuario')
 
 
-@app.route('/aceitando/<id>', methods= ['POST']) 
-def aceitar(id):
-    #isso possibilita o executor responder a solicitacao
-    resposta = request.form['aceito']
-    status = 'Aceito'
-    cur = con.cursor()
-    cur.execute(add_resposta, [resposta,status,id])
-    feedback = cur.fetchall
-    con.commit()
+@app.route('/resposta/<id>', methods= ['POST']) 
+def resposta(id):
+    #isso possibilita o executor ou o adm responder a solicitacao
+    resposta = request.form['resposta']
+    status = request.form['status']
 
-    cur = mysql.connection.cursor()
-    cur.execute(verifica_funcao, [email])
-    funcao = cur.fetchall()
-
-    for f in funcao: 
-        if f[0] == 3:
-            return redirect ('/telaadm#ab')
-        else:
-            return redirect ('/telaexecutor#ab')
-
-
-@app.route('/recusando/<id>', methods= ['POST']) 
-def recusar(id):
-    #isso possibilita o executor responder a solicitacao
-    resposta = request.form['recusado']
-    status = 'Negado'
     cur = con.cursor()
     cur.execute(add_resposta, [resposta,status,id])
     feedback = cur.fetchall
@@ -321,7 +301,6 @@ def usuarios(id):
     cur.execute(tornar_exe, [2,id])
     feedback = cur.fetchall
     con.commit()
-
 
     cur = mysql.connection.cursor()  
     a = cur.execute(quantia_exe)

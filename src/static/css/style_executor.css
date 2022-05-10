@@ -24,24 +24,22 @@ section.abas main:target{
 }
 main {
     flex-grow: 1;
-    background-color: white;
+
     padding: 60px;
 }
 
-
-
 header {
-    background-color: rgb(219, 219, 219);
+    background-color: #a9a9a9;
     width: 250px;
     padding: 15px 10px 15px 0;
-    border-right: 4px solid rgb(146, 146, 146);
+   
 }
 .perfil,
 .solicitacao,
 .corpo{
-    background-color: #a9a9a9;
+    background-color: white;
     text-align: center;
-    border: 3px solid rgb(146, 146, 146);
+    border: 3px  ;
     display: flex;
 }
 .perfil,
@@ -61,7 +59,7 @@ header {
     justify-content: flex-start;
 }
 .solicitacao{
-    margin: 70px 0 50px 0;
+    margin: 40px 0 50px 0;
     justify-content: center;
 }
 .corpo{
@@ -127,12 +125,6 @@ table {
 .text_table td{
     color: whitesmoke;
 }
-.btn_aceitar , .btn_recusar{
-    padding: 7px;
-    text-decoration: none;
-    border-radius: 5px;
-    
-}
 
 .btn_aceitar{
     background-color: rgb(44, 201, 44);
@@ -145,7 +137,9 @@ table {
 .btn_recusar{
     background-color: rgb(201, 44, 44);
     color: rgb(221, 220, 220);
-    
+    padding: 7px;
+    text-decoration: none;
+    border-radius: 5px;
 }
 
 .desc_solucao{
@@ -182,6 +176,7 @@ table {
 }
 
 .Boxtext_motivo{
+
     font-size: 18px;
     width: 200px;
     height: 100px;
@@ -194,11 +189,19 @@ table {
     font-family: unset;
 }
 
-textarea{
-    font-size: 18px;
-}
-
-.Boxtext_motivo, .btn_enviar{
+.btn{
     display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    
 }
 
+.btn button{
+    margin: 7px 5px;
+}
+
+.tituloc{
+    margin-left: 10px;
+    text-align: center;
+}

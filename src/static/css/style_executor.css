@@ -126,22 +126,6 @@ table {
     color: whitesmoke;
 }
 
-.btn_aceitar{
-    background-color: rgb(44, 201, 44);
-    color: rgb(221, 220, 220);
-    padding: 7px;
-    text-decoration: none;
-    border-radius: 5px;
-}
-
-.btn_recusar{
-    background-color: rgb(201, 44, 44);
-    color: rgb(221, 220, 220);
-    padding: 7px;
-    text-decoration: none;
-    border-radius: 5px;
-}
-
 .desc_solucao{
     padding: 10px;
 }
@@ -201,7 +185,29 @@ table {
     margin: 7px 5px;
 }
 
+.btn_{
+    background-color: rgb(177, 10, 4);
+    width: 30%;
+    border-radius: 5px;
+    padding: 15px;
+    color: white;
+    border: 0;
+}
+
+
 .tituloc{
     margin-left: 10px;
     text-align: center;
+}
+
+.formulario{
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    flex-wrap: wrap;
+}
+
+.td {
+    display: flex;
+    justify-content: center;
 }

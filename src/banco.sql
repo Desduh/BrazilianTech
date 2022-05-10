@@ -19,6 +19,12 @@ create table usuarios
     foreign key(funcao) REFERENCES funcoes (cod_func));
     
 insert into usuarios(email_usuario,senha_usuario,funcao) values("administrador@adm",123,3);
+
+
+create table destribuicao
+(   executor int primary key,
+    foreign key(executor) REFERENCES usuarios (codigo_usuario),
+    contador int);
     
 
 create table chamado
@@ -26,10 +32,10 @@ create table chamado
 	solicitacao varchar(1000),
 	email_usuario varchar(40),
     data_inicio datetime,
-    email_executor varchar(40),
+    executor int,
+    foreign key(executor) REFERENCES destribuicao (executor),
     _status varchar(30),
     constraint ck_status check(_status in('Aceito','Negado','Aberto')),
 	resposta varchar(1000),
     data_fechamento datetime,
-    problema varchar(40),
-    contador int);    
+    problema varchar(40));    

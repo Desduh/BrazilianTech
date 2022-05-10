@@ -278,6 +278,13 @@ def resposta(id):
     resposta = request.form['resposta']
     status = request.form['status']
 
+    if resposta == '':
+        for f in funcao: 
+            if f[0] == 3:
+                return redirect ('/telaadm#ab')
+            else:
+                return redirect ('/telaexecutor#ab')
+
     cur = con.cursor()
     cur.execute(add_resposta, [resposta,status,id])
     feedback = cur.fetchall

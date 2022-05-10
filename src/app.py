@@ -19,7 +19,7 @@ check_user = ("SELECT * FROM usuarios WHERE email_usuario=%s")
 check_password = ("SELECT * FROM usuarios WHERE senha_usuario=%s AND email_usuario=%s")
 add_user = ('INSERT into usuarios (email_usuario,senha_usuario,funcao) VALUES (%s,%s,%s)')
 add_solicitacao = ('INSERT into chamado (solicitacao,email_usuario,executor,_status,problema,data_inicio) VALUES (%s,%s,%s,%s,%s, now())')
-add_resposta = ("UPDATE chamado SET resposta=%s, email_executor=%s, _status=%s, data_fechamento=now() WHERE codigo_solicitacao = %s")
+add_resposta = ("UPDATE chamado SET resposta=%s, _status=%s, data_fechamento=now() WHERE codigo_solicitacao = %s")
 historico = ("SELECT * FROM chamado WHERE email_usuario=%s ORDER BY data_inicio DESC;")
 verifica_funcao = ("SELECT funcao FROM usuarios WHERE email_usuario =%s")
 tornar_exe = ("UPDATE usuarios SET funcao=%s WHERE codigo_usuario = %s")
@@ -270,7 +270,7 @@ def aceitar(id):
     resposta = request.form['aceito']
     status = 'Aceito'
     cur = con.cursor()
-    cur.execute(add_resposta, [resposta,email,status,id])
+    cur.execute(add_resposta, [resposta,status,id])
     feedback = cur.fetchall
     con.commit()
 
@@ -291,7 +291,7 @@ def recusar(id):
     resposta = request.form['recusado']
     status = 'Negado'
     cur = con.cursor()
-    cur.execute(add_resposta, [resposta,email,status,id])
+    cur.execute(add_resposta, [resposta,status,id])
     feedback = cur.fetchall
     con.commit()
 

@@ -16,8 +16,8 @@ insert into usuarios(email_usuario,senha_usuario,funcao) values("administrador@a
 create table solicitacao
 (	codigo_solicitacao int primary key AUTO_INCREMENT,
 	descricao varchar(1000),
-	email_usuario varchar(40),
-    foreign key(email_usuario) REFERENCES usuarios (email_usuario),
+	codigo_usuario_cli int,
+    foreign key(codigo_usuario_cli) REFERENCES usuarios (codigo_usuario),
     data_abertura datetime,
     codigo_usuario int,
     foreign key(codigo_usuario) REFERENCES usuarios (codigo_usuario),

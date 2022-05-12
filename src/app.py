@@ -23,17 +23,18 @@ app.secret_key = "fatec"
 #FUNÇÕES SELECT
 check_user = ("SELECT * FROM usuarios WHERE email_usuario=%s")
 check_password = ("SELECT * FROM usuarios WHERE senha_usuario=%s AND email_usuario=%s")
-historico = ("SELECT * FROM solicitacao WHERE email_usuario=%s ORDER BY data_abertura DESC;")
-verifica_funcao = ("SELECT funcao FROM usuarios WHERE email_usuario =%s")
+historico = ("SELECT * FROM solicitacao WHERE codigo_usuario_cli=%s ORDER BY data_abertura DESC;")
+verifica_funcao = ("SELECT funcao FROM usuarios WHERE codigo_usuario =%s")
 quantia_exe = ("SELECT COUNT(*) FROM usuarios WHERE funcao = 2;")
 quantia_chamado = ("SELECT COUNT(*) FROM solicitacao;")
 
 #FUNÇÕES INSERT/UPDATE
 add_user = ('INSERT into usuarios (email_usuario,senha_usuario,funcao) VALUES (%s,%s,%s)')
-add_solicitacao = ('INSERT into solicitacao (descricao,email_usuario,codigo_usuario,_status,tipo_problema,data_abertura) VALUES (%s,%s,%s,%s,%s, now())')
+add_solicitacao = ('INSERT into solicitacao (descricao,codigo_usuario_cli,codigo_usuario,_status,tipo_problema,data_abertura) VALUES (%s,%s,%s,%s,%s, now())')
 add_resposta = ("UPDATE solicitacao SET resposta=%s, _status=%s, data_fechamento=now() WHERE codigo_solicitacao = %s")
 tornar_exe = ("UPDATE usuarios SET funcao=%s WHERE codigo_usuario = %s")
 exe_cont = ("UPDATE usuarios SET contador_solicitacao=%s WHERE codigo_usuario = %s")
+check_cod_usu = ("select codigo_usuario FROM usuarios where email_usuario=%s;")
 
 
 
@@ -93,7 +94,8 @@ def cadastro():
 #FUNÇÕES
 @app.route('/cadastro.html', methods= ['POST'])
 def cadastroact():
-    global email
+    global cod
+
     email= request.form['email']
     senha= request.form['senha']
     confirmacao_senha= request.form['confirmacao_senha']
@@ -101,6 +103,10 @@ def cadastroact():
     cur = con.cursor()
     cur.execute(check_user, [email])
     feedback = cur.fetchall()
+
+    cur = mysql.connection.cursor()
+    cur.execute(check_cod_usu, [email])
+    cod = int(str(cur.fetchall()).strip('(,)'))
     
     if ciencia == 'yes':
         if feedback:
@@ -119,12 +125,17 @@ def cadastroact():
 
 @app.route('/login.html', methods= ['POST'])
 def loginact():
-    global email
+    global cod
+
     email= request.form['email']
     senha= request.form['senha']
     cur = mysql.connection.cursor()
     cur.execute(check_user, [email])
     feedback = cur.fetchall()
+
+    cur = mysql.connection.cursor()
+    cur.execute(check_cod_usu, [email])
+    cod = int(str(cur.fetchall()).strip('(,)'))
     
     if not feedback:
         return redirect('/cadastro.html')
@@ -143,7 +154,7 @@ def loginact():
 @app.route('/validacao')
 def validacao():
     cur = mysql.connection.cursor()
-    cur.execute(verifica_funcao, [email])
+    cur.execute(verifica_funcao, [cod])
     funcao = cur.fetchall()
 
     for f in funcao:  #função no sentido de qual a função do usuario
@@ -179,7 +190,7 @@ def telaadm():
     cur.execute("select * FROM solicitacao ORDER BY data_abertura DESC;") #pegar todas infos dos chamados 
     Details = cur.fetchall()
     
-    cur.execute(historico, [email])
+    cur.execute(historico, [cod])
     lista = cur.fetchall()
 
     cur.execute("select _status FROM solicitacao ORDER BY data_abertura DESC;")
@@ -201,11 +212,11 @@ def telaadm():
 @check_id_exec
 def telaexecutor():
     cur = mysql.connection.cursor()
-    cur.execute("select codigo_usuario FROM usuarios where email_usuario=%s;", [email])
-    funcao = int(str(cur.fetchall()).strip('(,)'))
+    cur.execute("select codigo_usuario FROM usuarios where codigo_usuario=%s;", [cod])
+    x = int(str(cur.fetchall()).strip('(,)'))
 
 
-    cur.execute("select * FROM solicitacao where codigo_usuario=%s ORDER BY data_abertura DESC;",[funcao])
+    cur.execute("select * FROM solicitacao where codigo_usuario=%s ORDER BY data_abertura DESC;",[x])
     Details = cur.fetchall()
     return render_template("telaexecutor.html", Details=Details)
 
@@ -213,7 +224,7 @@ def telaexecutor():
 @check_id_user
 def hist():
     cur = mysql.connection.cursor()  
-    users = cur.execute(historico, [email])
+    users = cur.execute(historico, [cod])
     lista = cur.fetchall()
     return render_template("telausuario.html", lista=lista)
 
@@ -243,12 +254,12 @@ def solicitacao():
     problema = request.form['tipo']
     aberto = 'Aberto'
     cur = con.cursor()
-    cur.execute(add_solicitacao, [solicitacao,email,executor,aberto,problema])
+    cur.execute(add_solicitacao, [solicitacao,cod,executor,aberto,problema])
     feedback = cur.fetchall
     con.commit()
 
     cur = mysql.connection.cursor()
-    cur.execute(verifica_funcao, [email])
+    cur.execute(verifica_funcao, [cod])
     funcao = cur.fetchall()
 
     for f in funcao: 
@@ -265,7 +276,7 @@ def resposta(id):
     status = request.form['status']
 
     cur = mysql.connection.cursor()
-    cur.execute(verifica_funcao, [email])
+    cur.execute(verifica_funcao, [cod])
     funcao = cur.fetchall()
 
     if resposta == '':

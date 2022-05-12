@@ -33,7 +33,7 @@ add_user = ('INSERT into usuarios (email_usuario,senha_usuario,funcao) VALUES (%
 add_solicitacao = ('INSERT into solicitacao (descricao,email_usuario,executor,_status,tipo_problema,data_abertura) VALUES (%s,%s,%s,%s,%s, now())')
 add_resposta = ("UPDATE solicitacao SET resposta=%s, _status=%s, data_fechamento=now() WHERE codigo_solicitacao = %s")
 tornar_exe = ("UPDATE usuarios SET funcao=%s WHERE codigo_usuario = %s")
-exe_cont = ('INSERT into distribuicao (executor,contador) VALUES (%s,%s)')
+exe_cont = ("UPDATE usuarios SET contador_solicitacao=%s WHERE codigo_usuario = %s")
 
 
 
@@ -302,7 +302,7 @@ def usuarios(id):
     qta_exe = int(str(cur.fetchall()).strip('(,)')) -1
     
     cur = con.cursor()
-    cur.execute(exe_cont, [id,qta_exe])
+    cur.execute(exe_cont, [qta_exe,id])
     feedback = cur.fetchall
     con.commit()
     return redirect ("/telaadm#usuarios")

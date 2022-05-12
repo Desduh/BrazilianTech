@@ -18,15 +18,15 @@ create table distribuicao
     contador int);
     
 
-create table chamado
+create table solicitacao
 (	codigo_solicitacao int primary key AUTO_INCREMENT,
-	solicitacao varchar(1000),
+	descricao varchar(1000),
 	email_usuario varchar(40),
-    data_inicio datetime,
+    data_abertura datetime,
     executor int,
     foreign key(executor) REFERENCES distribuicao (executor),
     _status varchar(30),
     constraint ck_status check(_status in('Aceito','Negado','Aberto')),
 	resposta varchar(1000),
     data_fechamento datetime,
-    problema varchar(40)); 
+    tipo_problema varchar(40)); 

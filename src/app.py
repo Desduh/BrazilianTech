@@ -23,15 +23,15 @@ app.secret_key = "fatec"
 #FUNÇÕES SELECT
 check_user = ("SELECT * FROM usuarios WHERE email_usuario=%s")
 check_password = ("SELECT * FROM usuarios WHERE senha_usuario=%s AND email_usuario=%s")
-historico = ("SELECT * FROM chamado WHERE email_usuario=%s ORDER BY data_inicio DESC;")
+historico = ("SELECT * FROM solicitacao WHERE email_usuario=%s ORDER BY data_abertura DESC;")
 verifica_funcao = ("SELECT funcao FROM usuarios WHERE email_usuario =%s")
 quantia_exe = ("SELECT COUNT(*) FROM usuarios WHERE funcao = 2;")
-quantia_chamado = ("SELECT COUNT(*) FROM chamado;")
+quantia_chamado = ("SELECT COUNT(*) FROM solicitacao;")
 
 #FUNÇÕES INSERT/UPDATE
 add_user = ('INSERT into usuarios (email_usuario,senha_usuario,funcao) VALUES (%s,%s,%s)')
-add_solicitacao = ('INSERT into chamado (solicitacao,email_usuario,executor,_status,problema,data_inicio) VALUES (%s,%s,%s,%s,%s, now())')
-add_resposta = ("UPDATE chamado SET resposta=%s, _status=%s, data_fechamento=now() WHERE codigo_solicitacao = %s")
+add_solicitacao = ('INSERT into solicitacao (descricao,email_usuario,executor,_status,tipo_problema,data_abertura) VALUES (%s,%s,%s,%s,%s, now())')
+add_resposta = ("UPDATE solicitacao SET resposta=%s, _status=%s, data_fechamento=now() WHERE codigo_solicitacao = %s")
 tornar_exe = ("UPDATE usuarios SET funcao=%s WHERE codigo_usuario = %s")
 exe_cont = ('INSERT into distribuicao (executor,contador) VALUES (%s,%s)')
 
@@ -176,13 +176,13 @@ def telaadm():
     cur.execute("select * FROM usuarios;")
     usuarios = cur.fetchall()
 
-    cur.execute("select * FROM chamado ORDER BY data_inicio DESC;") #pegar todas infos dos chamados 
+    cur.execute("select * FROM solicitacao ORDER BY data_abertura DESC;") #pegar todas infos dos chamados 
     Details = cur.fetchall()
     
     cur.execute(historico, [email])
     lista = cur.fetchall()
 
-    cur.execute("select _status FROM chamado ORDER BY data_inicio DESC;")
+    cur.execute("select _status FROM solicitacao ORDER BY data_abertura DESC;")
     chamados = cur.fetchall()
     aberto = 0
     fechado = 0
@@ -205,7 +205,7 @@ def telaexecutor():
     funcao = int(str(cur.fetchall()).strip('(,)'))
 
 
-    cur.execute("select * FROM chamado where executor=%s ORDER BY data_inicio DESC;",[funcao])
+    cur.execute("select * FROM solicitacao where executor=%s ORDER BY data_abertura DESC;",[funcao])
     Details = cur.fetchall()
     return render_template("telaexecutor.html", Details=Details)
 

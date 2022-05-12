@@ -30,7 +30,7 @@ quantia_chamado = ("SELECT COUNT(*) FROM solicitacao;")
 
 #FUNÇÕES INSERT/UPDATE
 add_user = ('INSERT into usuarios (email_usuario,senha_usuario,funcao) VALUES (%s,%s,%s)')
-add_solicitacao = ('INSERT into solicitacao (descricao,email_usuario,executor,_status,tipo_problema,data_abertura) VALUES (%s,%s,%s,%s,%s, now())')
+add_solicitacao = ('INSERT into solicitacao (descricao,email_usuario,codigo_usuario,_status,tipo_problema,data_abertura) VALUES (%s,%s,%s,%s,%s, now())')
 add_resposta = ("UPDATE solicitacao SET resposta=%s, _status=%s, data_fechamento=now() WHERE codigo_solicitacao = %s")
 tornar_exe = ("UPDATE usuarios SET funcao=%s WHERE codigo_usuario = %s")
 exe_cont = ("UPDATE usuarios SET contador_solicitacao=%s WHERE codigo_usuario = %s")
@@ -205,7 +205,7 @@ def telaexecutor():
     funcao = int(str(cur.fetchall()).strip('(,)'))
 
 
-    cur.execute("select * FROM solicitacao where executor=%s ORDER BY data_abertura DESC;",[funcao])
+    cur.execute("select * FROM solicitacao where codigo_usuario=%s ORDER BY data_abertura DESC;",[funcao])
     Details = cur.fetchall()
     return render_template("telaexecutor.html", Details=Details)
 
@@ -236,7 +236,7 @@ def solicitacao():
         qta_exe = qta_exe
     cont = qta_cha % qta_exe
 
-    cur.execute("SELECT executor FROM distribuicao WHERE contador=%s;", [cont])
+    cur.execute("SELECT codigo_usuario FROM usuarios WHERE contador_solicitacao=%s;", [cont])
     executor = int(str(cur.fetchall()).strip('(,)'))
 
     solicitacao = request.form['solicitacao']

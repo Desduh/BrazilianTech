@@ -5,37 +5,42 @@ from flask_mysqldb import MySQL
 import MySQLdb
 import functools
 
+
+#CONGFIGURAÇÃO MYSQL/FLASK----------------------------------------------------CONGFIGURAÇÃO MYSQL/FLASK------------------------
 app = Flask('__name__') 
-#configurações do Banco de Dados
 app.config['MYSQL_HOST'] = 'localhost' #adicione o hostname
 app.config['MYSQL_USER'] = 'root' #adicione o nome do seu usuário do MySQL
-app.config['MYSQL_PASSWORD'] = 'fatec' #adicione a senha do seu usuário do MySQL
+app.config['MYSQL_PASSWORD'] = 'franca' #adicione a senha do seu usuário do MySQL
 app.config['MYSQL_DB'] = 'usuarios_solicitacoes' 
-
-#conexão com o Banco e fórmulas que serão utilizadas futuramente 
-con = MySQLdb.connect( user="root", password="fatec", db="usuarios_solicitacoes")#adicione o nome e a senha do seu usuário do MySQL
+con = MySQLdb.connect( user="root", password="franca", db="usuarios_solicitacoes")#adicione o nome e a senha do seu usuário do MySQL
 mysql = MySQL(app)
-check_user = ("SELECT * FROM usuarios WHERE email_usuario=%s")
-check_password = ("SELECT * FROM usuarios WHERE senha_usuario=%s AND email_usuario=%s")
-add_user = ('INSERT into usuarios (email_usuario,senha_usuario,funcao) VALUES (%s,%s,%s)')
-add_solicitacao = ('INSERT into chamado (solicitacao,email_usuario,executor,_status,problema,data_inicio) VALUES (%s,%s,%s,%s,%s, now())')
-add_resposta = ("UPDATE chamado SET resposta=%s, _status=%s, data_fechamento=now() WHERE codigo_solicitacao = %s")
-historico = ("SELECT * FROM chamado WHERE email_usuario=%s ORDER BY data_inicio DESC;")
-verifica_funcao = ("SELECT funcao FROM usuarios WHERE email_usuario =%s")
-tornar_exe = ("UPDATE usuarios SET funcao=%s WHERE codigo_usuario = %s")
-quantia_exe = ("SELECT COUNT(*) FROM usuarios WHERE funcao = 2;")
-quantia_chamado = ("SELECT COUNT(*) FROM chamado;")
-exe_cont = ('INSERT into distribuicao (executor,contador) VALUES (%s,%s)')
-
 logado = False
-
 app.secret_key = "fatec"
 
 
 
+#FUNCÇÕES MYSQL----------------------------------------------------------------FUNCÇÕES MYSQL-------------------------------
+#FUNÇÕES SELECT
+check_user = ("SELECT * FROM usuarios WHERE email_usuario=%s")
+check_password = ("SELECT * FROM usuarios WHERE senha_usuario=%s AND email_usuario=%s")
+historico = ("SELECT * FROM chamado WHERE email_usuario=%s ORDER BY data_inicio DESC;")
+verifica_funcao = ("SELECT funcao FROM usuarios WHERE email_usuario =%s")
+quantia_exe = ("SELECT COUNT(*) FROM usuarios WHERE funcao = 2;")
+quantia_chamado = ("SELECT COUNT(*) FROM chamado;")
 
-def check_id(id):
-    if id in session['id']:
+#FUNÇÕES INSERT/UPDATE
+add_user = ('INSERT into usuarios (email_usuario,senha_usuario,funcao) VALUES (%s,%s,%s)')
+add_solicitacao = ('INSERT into chamado (solicitacao,email_usuario,executor,_status,problema,data_inicio) VALUES (%s,%s,%s,%s,%s, now())')
+add_resposta = ("UPDATE chamado SET resposta=%s, _status=%s, data_fechamento=now() WHERE codigo_solicitacao = %s")
+tornar_exe = ("UPDATE usuarios SET funcao=%s WHERE codigo_usuario = %s")
+exe_cont = ('INSERT into distribuicao (executor,contador) VALUES (%s,%s)')
+
+
+
+
+#FUNÇÕES DE AUTENTICAÇÃO-------------------------------------------------------FUNÇÕES DE AUTENTICAÇÃO-----------------------------
+def check_func(func):
+    if func in session['func']:
         return True
     else:
         return False
@@ -43,9 +48,9 @@ def check_id(id):
 def check_id_user(view):
     @functools.wraps(view)
     def wrapped_view(**kwargs):        
-        if not 'id' in session.keys():
+        if not 'func' in session.keys():
             return redirect("/")
-        elif check_id('1'):
+        elif check_func('1'):
             return view(**kwargs)
         return redirect("/")
     return wrapped_view
@@ -53,9 +58,9 @@ def check_id_user(view):
 def check_id_exec(view):
     @functools.wraps(view)
     def wrapped_view(**kwargs):        
-        if not 'id' in session.keys():
+        if not 'func' in session.keys():
             return redirect("/login.html")
-        elif check_id('2'):
+        elif check_func('2'):
             return view(**kwargs)
         return redirect("/login.html")
     return wrapped_view
@@ -63,9 +68,9 @@ def check_id_exec(view):
 def check_id_adm(view):
     @functools.wraps(view)
     def wrapped_view(**kwargs):        
-        if not 'id' in session.keys():
+        if not 'func' in session.keys():
             return redirect("/login.html")
-        elif check_id('3'):
+        elif check_func('3'):
             return view(**kwargs)
         return redirect("/login.html")
     return wrapped_view
@@ -73,6 +78,8 @@ def check_id_adm(view):
 
 
 
+#LOGIN/CADASTRO----------------------------------------------------------------LOGIN/CADASTRO-------------------------------
+#ROTAS
 @app.route('/')
 
 @app.route('/login.html')
@@ -83,7 +90,7 @@ def login():
 def cadastro():
     return render_template('cadastro.html')
 
-
+#FUNÇÕES
 @app.route('/cadastro.html', methods= ['POST'])
 def cadastroact():
     global email
@@ -97,10 +104,8 @@ def cadastroact():
     
     if ciencia == 'yes':
         if feedback:
-            #aqui ele mandaria uma mensagem para o html avisando que o e-mail inserido já possui uma conta mas por enquanto ele só direciona para a tela de login
             return redirect('/login.html')
         elif senha != confirmacao_senha:
-            #aqui ele mandaria uma mensagem de erro para o html mas por enquanto ele só redireciona pra si mesmo
             return redirect('/cadastro.html')
         else:
             cur.execute(add_user, [email, senha, 1])
@@ -122,7 +127,6 @@ def loginact():
     feedback = cur.fetchall()
     
     if not feedback:
-        #caso não tenha e-mail cadastrado ele direciona para a área de cadastro
         return redirect('/cadastro.html')
     else:
         cur.execute(check_password, [senha, email])
@@ -133,7 +137,6 @@ def loginact():
             logado = True
             return redirect('/validacao')
         else:
-            #aqui ele mandaria uma mensagem caso o e-mail e/ou senha estiverem incorretos mas por enquanto ele só redireciona pra si mesmo
             return redirect('/login.html')
 
 
@@ -143,45 +146,47 @@ def validacao():
     cur.execute(verifica_funcao, [email])
     funcao = cur.fetchall()
 
-    for f in funcao:  
+    for f in funcao:  #função no sentido de qual a função do usuario
         if logado:
             if f[0] == 3: #validacao para ver se é o executor 
-                session['id'] = str(f[0])
+                session['func'] = str(f[0])
                 return redirect('telaadm')
             elif f[0] == 2:
-                session['id'] = str(f[0])
+                session['func'] = str(f[0])
                 return redirect('telaexecutor')
             else: 
-                session['id'] = str(f[0])
+                session['func'] = str(f[0])
                 return redirect('telausuario')
         else:
             return redirect('/cadastro.html')
 
+@app.route('/logout')
+def logout():
+    session.clear()
+    return redirect("/login.html")
 
 
 
+
+#PAGINAS DE USUARIO/EXECUTOR/ADIMINISTRADOR------------------------------------PAGINAS DE USUARIO/EXECUTOR/ADIMINISTRADOR-----------------------------------------------------------
 @app.route('/telaadm')
 @check_id_adm
 def telaadm():
     cur = mysql.connection.cursor()
-    users = cur.execute("select * FROM usuarios;")
+    cur.execute("select * FROM usuarios;")
     usuarios = cur.fetchall()
 
-    cur = mysql.connection.cursor()
-    users = cur.execute("select * FROM chamado ORDER BY data_inicio DESC;") #pegar todas infos dos chamados 
+    cur.execute("select * FROM chamado ORDER BY data_inicio DESC;") #pegar todas infos dos chamados 
     Details = cur.fetchall()
     
-    cur = mysql.connection.cursor()  
-    global email
-    users = cur.execute(historico, [email])
+    cur.execute(historico, [email])
     lista = cur.fetchall()
 
-    cur = mysql.connection.cursor()
-    users = cur.execute("select _status FROM chamado ORDER BY data_inicio DESC;")
-    x = cur.fetchall()
+    cur.execute("select _status FROM chamado ORDER BY data_inicio DESC;")
+    chamados = cur.fetchall()
     aberto = 0
     fechado = 0
-    for k in x:
+    for k in chamados:
         list(k)
         if k[0] == 'Aberto':
             aberto = aberto + 1
@@ -197,13 +202,9 @@ def telaadm():
 def telaexecutor():
     cur = mysql.connection.cursor()
     cur.execute("select codigo_usuario FROM usuarios where email_usuario=%s;", [email])
-    funcao = str(cur.fetchall())
-    funcao = funcao.replace('(', '')
-    funcao = funcao.replace(')', '')
-    funcao = funcao.replace(',', '')
-    funcao = int(funcao)
+    funcao = int(str(cur.fetchall()).strip('(,)'))
 
-    cur = mysql.connection.cursor()
+
     cur.execute("select * FROM chamado where executor=%s ORDER BY data_inicio DESC;",[funcao])
     Details = cur.fetchall()
     return render_template("telaexecutor.html", Details=Details)
@@ -212,32 +213,22 @@ def telaexecutor():
 @check_id_user
 def hist():
     cur = mysql.connection.cursor()  
-    global email
     users = cur.execute(historico, [email])
     lista = cur.fetchall()
     return render_template("telausuario.html", lista=lista)
 
 
 
-
+#FUNÇÕES DE CHAMADO------------------------------------------------------------FUNÇÕES DE CHAMADO-----------------------------------
 @app.route('/solicitacao', methods= ['POST']) 
 def solicitacao():
     #isso possibilita o usuario fazer a solicitacao
     cur = mysql.connection.cursor()  
     a = cur.execute(quantia_exe)
-    qta_exe = str(cur.fetchall())
-    qta_exe = qta_exe.replace('(', '')
-    qta_exe = qta_exe.replace(')', '')
-    qta_exe = qta_exe.replace(',', '')
-    qta_exe = int(qta_exe)
-
-    cur = mysql.connection.cursor()  
+    qta_exe = int(str(cur.fetchall()).strip('(,)'))
+  
     cur.execute(quantia_chamado)
-    qta_cha = str(cur.fetchall())
-    qta_cha = qta_cha.replace('(', '')
-    qta_cha = qta_cha.replace(')', '')
-    qta_cha = qta_cha.replace(',', '')
-    qta_cha = int(qta_cha) + 1
+    qta_cha = int(str(cur.fetchall()).strip('(,)')) +1
 
     if qta_exe == 0:
         qta_exe = 1
@@ -245,13 +236,8 @@ def solicitacao():
         qta_exe = qta_exe
     cont = qta_cha % qta_exe
 
-    cur = mysql.connection.cursor()  
     cur.execute("SELECT executor FROM distribuicao WHERE contador=%s;", [cont])
-    executor = str(cur.fetchall())
-    executor = executor.replace('(', '')
-    executor = executor.replace(')', '')
-    executor = executor.replace(',', '')
-    executor = int(executor)
+    executor = int(str(cur.fetchall()).strip('(,)'))
 
     solicitacao = request.form['solicitacao']
     problema = request.form['tipo']
@@ -301,6 +287,8 @@ def resposta(id):
             return redirect ('/telaexecutor#ab')
 
 
+
+#FUNÇÕES DE ADM PROMOVER/REBAIXAR----------------------------------------------FUNÇÕES DE ADM PROMOVER/REBAIXAR-------------------------------------------------
 @app.route('/tornarexe/<id>', methods= ['POST']) 
 def usuarios(id):
     #isso possibilita o adm tornar um usuario em executor
@@ -311,11 +299,7 @@ def usuarios(id):
 
     cur = mysql.connection.cursor()  
     a = cur.execute(quantia_exe)
-    qta_exe = str(cur.fetchall())
-    qta_exe = qta_exe.replace('(', '')
-    qta_exe = qta_exe.replace(')', '')
-    qta_exe = qta_exe.replace(',', '')
-    qta_exe = int(qta_exe) - 1 
+    qta_exe = int(str(cur.fetchall()).strip('(,)')) -1
     
     cur = con.cursor()
     cur.execute(exe_cont, [id,qta_exe])
@@ -333,8 +317,3 @@ def executor(id):
     con.commit()
     return redirect ("/telaadm#usuarios")
 
-
-@app.route('/logout')
-def logout():
-    session.clear()
-    return redirect("/login.html")

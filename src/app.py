@@ -10,9 +10,9 @@ import functools
 app = Flask('__name__') 
 app.config['MYSQL_HOST'] = 'localhost' #adicione o hostname
 app.config['MYSQL_USER'] = 'root' #adicione o nome do seu usuário do MySQL
-app.config['MYSQL_PASSWORD'] = 'fatec' #adicione a senha do seu usuário do MySQL
+app.config['MYSQL_PASSWORD'] = 'franca' #adicione a senha do seu usuário do MySQL
 app.config['MYSQL_DB'] = 'usuarios_solicitacoes' 
-con = MySQLdb.connect( user="root", password="fatec", db="usuarios_solicitacoes")#adicione o nome e a senha do seu usuário do MySQL
+con = MySQLdb.connect( user="root", password="franca", db="usuarios_solicitacoes")#adicione o nome e a senha do seu usuário do MySQL
 mysql = MySQL(app)
 logado = False
 app.secret_key = "fatec"
@@ -21,20 +21,20 @@ app.secret_key = "fatec"
 
 #FUNCÇÕES MYSQL----------------------------------------------------------------FUNCÇÕES MYSQL-------------------------------
 #FUNÇÕES SELECT
-check_user = ("SELECT * FROM usuarios WHERE email=%s")
-check_password = ("SELECT * FROM usuarios WHERE senha=%s AND email=%s")
+check_user = ("SELECT * FROM usuarios WHERE email_usuario=%s")
+check_password = ("SELECT * FROM usuarios WHERE senha_usuario=%s AND email_usuario=%s")
 historico = ("SELECT * FROM solicitacao WHERE codigo_usuario_cli=%s ORDER BY data_abertura DESC;")
 verifica_funcao = ("SELECT funcao FROM usuarios WHERE codigo_usuario =%s")
 quantia_exe = ("SELECT COUNT(*) FROM usuarios WHERE funcao = 2;")
 quantia_chamado = ("SELECT COUNT(*) FROM solicitacao;")
 
 #FUNÇÕES INSERT/UPDATE
-add_user = ('INSERT into usuarios (email,senha,funcao) VALUES (%s,%s,%s)')
+add_user = ('INSERT into usuarios (email_usuario,senha_usuario,funcao) VALUES (%s,%s,%s)')
 add_solicitacao = ('INSERT into solicitacao (descricao,codigo_usuario_cli,codigo_usuario,_status,tipo_problema,data_abertura) VALUES (%s,%s,%s,%s,%s, now())')
 add_resposta = ("UPDATE solicitacao SET resposta=%s, _status=%s, data_fechamento=now() WHERE codigo_solicitacao = %s")
 tornar_exe = ("UPDATE usuarios SET funcao=%s WHERE codigo_usuario = %s")
 exe_cont = ("UPDATE usuarios SET contador_solicitacao=%s WHERE codigo_usuario = %s")
-check_cod_usu = ("select codigo_usuario FROM usuarios where email=%s;")
+check_cod_usu = ("select codigo_usuario FROM usuarios where email_usuario=%s;")
 
 
 
@@ -104,9 +104,6 @@ def cadastroact():
     cur.execute(check_user, [email])
     feedback = cur.fetchall()
 
-    cur = mysql.connection.cursor()
-    cur.execute(check_cod_usu, [email])
-    cod = int(str(cur.fetchall()).strip('(,)'))
     
     if ciencia == 'yes':
         if feedback:
@@ -116,6 +113,9 @@ def cadastroact():
         else:
             cur.execute(add_user, [email, senha, 1])
             con.commit()
+            cur = mysql.connection.cursor()
+            cur.execute(check_cod_usu, [email])
+            cod = int(str(cur.fetchall()).strip('(,)'))
             global logado
             logado = True
             return redirect('/validacao')

@@ -236,24 +236,26 @@
                         <tr>
                             <td>Tipo de problema:</td>
                             <td>Descrição:</td>
-                            <td>Aceitar:</td>
-                            <td>Recusar:</td>
+                            <td>Resposta:</td>
                         </tr>
                     </thead>
                     <tr>
-                        <td>{{user[8]}}</td>
-                        <td>{{user[1]}}</td>
+                        <td><p class="td">{{user[8]}}</p></td>
+                        <td><p class="td">{{user[1]}}</p></td>
                         <td>
-                            <form method="POST" action="/aceitando/{{user.0}}">
-                                <textarea type ='text' name="aceito" placeholder="Como foi solucionado..." request></textarea>
-                                <button type="submit">Enviar</button>
+                            <form class="formulario" method="POST" action="/resposta/{{user.0}}">
+                                <textarea type='text' name="resposta" class='Boxtext_motivo' placeholder="Motivo..."request></textarea>
+                                <br>
+                                <select name="status">
+                                    <option value="Aceito">Aceitar chamado</option>
+                                    <option value="Negado">Negar chamado</option>
+                                </select>
+                                <div class="btn">
+                                    <button class='btn_' type="submit">Enviar</button>
                             </form>
-                        </td>
-                        <td>
-                            <form method="POST" action="/recusando/{{user.0}}">
-                                <textarea type ='text' name="recusado" placeholder="Motivo..." request></textarea>
-                                <button type="submit">Enviar</button>
-                            </form>
+                            </div>
+
+                            </div>
                         </td>
                     </tr>
                 </table>

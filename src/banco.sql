@@ -5,12 +5,12 @@ use usuarios_solicitacoes;
 
 create table usuarios
 (	codigo_usuario int primary key AUTO_INCREMENT,
-	email_usuario varchar(40) NOT NULL UNIQUE KEY,
-    senha_usuario varchar(30) NOT NULL,
+	email varchar(40) NOT NULL UNIQUE KEY,
+    senha varchar(30) NOT NULL,
     funcao int,
     contador_solicitacao int);
     
-insert into usuarios(email_usuario,senha_usuario,funcao) values("administrador@adm","fatec",3);
+insert into usuarios(email,senha,funcao) values("administrador@adm","fatec",3);
     
 
 create table solicitacao

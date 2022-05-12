@@ -119,9 +119,9 @@ main{
     justify-content: center;
 }
 .logout{
-    padding: 78%;
-    margin-top: 70%;
-    display: block;
+    display: flex;
+    margin-left: 10px;
+    flex-direction: column;
 }
 table{
     background-color: rgb(204, 204, 204);

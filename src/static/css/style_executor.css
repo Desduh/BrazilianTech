@@ -93,9 +93,9 @@ main{
     justify-content: center;
 }
 .logout{
-    padding: 60%;
-    margin-top: 71%;
-    display: block;
+    display: flex;
+    margin-left: 10px;
+    flex-direction: column;
 }
 
 table{

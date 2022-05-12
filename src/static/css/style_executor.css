@@ -24,12 +24,11 @@ section.abas main:target{
 }
 main {
     flex-grow: 1;
-
     padding: 60px;
 }
 
 header {
-    background-color: #a9a9a9;
+    background-color: rgb(179, 175, 175);
     width: 250px;
     padding: 15px 10px 15px 0;
    
@@ -88,8 +87,14 @@ header,
 main{
     flex-shrink: 0;
 }
-.logout{
+.logout1{
     padding: 15px;
+    display: flex;
+    justify-content: center;
+}
+.logout{
+    padding: 60%;
+    margin-top: 71%;
     display: block;
 }
 
@@ -120,7 +125,7 @@ table {
 }
 .text_table {
     font-size: 20px;
-    background-color: rgb(77, 76, 76);
+    background-color: rgb(177, 10 ,4);
 }
 .text_table td{
     color: whitesmoke;
@@ -128,16 +133,6 @@ table {
 
 .desc_solucao{
     padding: 10px;
-}
-
-.TextBoxDesc-Ac{
-    width: 95%;
-    border-radius: 5px;
-    border: 3px solid rgb(146, 146, 146);
-    background-color: rgb(245, 245, 245);
-    font-size: 22px;
-    padding: 15px;
-    text-align: justify;
 }
 
 .botao{
@@ -194,7 +189,9 @@ table {
     border: 0;
 }
 
-
+thead {
+    background-color: #a9a9a9;
+}
 .tituloc{
     margin-left: 10px;
     text-align: center;

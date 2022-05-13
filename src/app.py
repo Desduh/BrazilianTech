@@ -103,10 +103,6 @@ def cadastroact():
     cur = con.cursor()
     cur.execute(check_user, [email])
     feedback = cur.fetchall()
-
-    cur = mysql.connection.cursor()
-    cur.execute(check_cod_usu, [email])
-    cod = int(str(cur.fetchall()).strip('(,)'))
     
     if ciencia == 'yes':
         if feedback:
@@ -116,6 +112,9 @@ def cadastroact():
         else:
             cur.execute(add_user, [email, senha, 1])
             con.commit()
+            cur = mysql.connection.cursor()
+            cur.execute(check_cod_usu, [email])
+            cod = int(str(cur.fetchall()).strip('(,)'))
             global logado
             logado = True
             return redirect('/validacao')

@@ -57,16 +57,20 @@
                     </tr>
                 </thead>
                 {% for user in Details %}
-                {% if user[5] == 'Aceito' %}
-                <tr>
-                    <td class="aj">{{user[1]}}</td>
-                    <td class="aj">{{user[2]}}</td>
-                    <td class="aj">{{user[3]}}</td>
-                    <td class="aj">{{user[6]}}</td>
-                    <td class="aj">{{user[7]}}</td>
-                </tr>
-                {% endif %}
-                {% endfor %}
+                    {% if user[5] == 'Aceito' %}
+                        <tr>
+                            <td class="aj">{{user[1]}}</td>
+                            {% for w in usuarios %}
+                            {% if user[2] == w[0] %}
+                            <td class="aj">{{w[1]}}</td>
+                            {% endif %}
+                            {% endfor %}
+                            <td class="aj">{{user[3]}}</td>
+                            <td class="aj">{{user[6]}}</td>
+                            <td class="aj">{{user[7]}}</td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}  
             </table>
         </main>
         <main id="ne">
@@ -81,16 +85,20 @@
                     </tr>
                 </thead>
                 {% for user in Details %}
-                {% if user[5] == 'Negado' %}
-                <tr>
-                    <td class="aj">{{user[1]}}</td>
-                    <td class="aj">{{user[2]}}</td>
-                    <td class="aj">{{user[3]}}</td>
-                    <td class="aj">{{user[6]}}</td>
-                    <td class="aj">{{user[7]}}</td>
-                </tr>
-                {% endif %}
-                {% endfor %}
+                    {% if user[5] == 'Negado' %}
+                        <tr>
+                            <td class="aj">{{user[1]}}</td>
+                            {% for w in usuarios %}
+                            {% if user[2] == w[0] %}
+                            <td class="aj">{{w[1]}}</td>
+                            {% endif %}
+                            {% endfor %}
+                            <td class="aj">{{user[3]}}</td>
+                            <td class="aj">{{user[6]}}</td>
+                            <td class="aj">{{user[7]}}</td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}  
             </table>
         </main>
         <main id="ab">
@@ -101,7 +109,16 @@
                     <table>
                         <thead>
                             <tr class="text_table">
-                                <td>Usuário: {{user[2]}}</td>
+                                {% for w in usuarios %}
+                                {% if user[2] == w[0] %}
+                                <td>Cliente: {{w[1]}}</td>
+                                {% endif %}
+                                {% endfor %}
+                                {% for w in usuarios %}
+                                {% if user[4] == w[0] %}
+                                <td>Técnico: {{w[1]}}</td>
+                                {% endif %}
+                                {% endfor %}
                                 <td>Data da solicitação: {{user[3]}}</td>
                             </tr>
                         </thead>
@@ -115,7 +132,7 @@
                             <td>Resposta:</td>
                         </tr>
                     </thead>
-                    <tr>
+                      <tr>
                         <td><p class="td">{{user[8]}}</p></td>
                         <td><p class="td">{{user[1]}}</p></td>
                         <td>

@@ -180,6 +180,7 @@
                         <td class="aj">Solicitação</td>
                         <td class="aj">Cliente</td>
                         <td class="aj">Data da solicitação</td>
+                        <td class="aj">Técnico</td>
                         <td class="aj">Resposta</td>
                         <td class="aj">Data da resposta</td>
                     </tr>
@@ -188,8 +189,17 @@
                     {% if user[5] == 'Aceito' %}
                         <tr>
                             <td class="aj">{{user[1]}}</td>
-                            <td class="aj">{{user[2]}}</td>
+                            {% for w in usuarios %}
+                            {% if user[2] == w[0] %}
+                            <td class="aj">{{w[1]}}</td>
+                            {% endif %}
+                            {% endfor %}
                             <td class="aj">{{user[3]}}</td>
+                            {% for w in usuarios %}
+                            {% if user[4] == w[0] %}
+                            <td class="aj">{{w[1]}}</td>
+                            {% endif %}
+                            {% endfor %}
                             <td class="aj">{{user[6]}}</td>
                             <td class="aj">{{user[7]}}</td>
                         </tr>
@@ -204,6 +214,7 @@
                         <td class="aj">Solicitação</td>
                         <td class="aj">Cliente</td>
                         <td class="aj">Data da solicitação</td>
+                        <td class="aj">Técnico</td>
                         <td class="aj">Resposta</td>
                         <td class="aj">Data da resposta</td>
                     </tr>
@@ -212,8 +223,17 @@
                     {% if user[5] == 'Negado' %}
                         <tr>
                             <td class="aj">{{user[1]}}</td>
-                            <td class="aj">{{user[2]}}</td>
+                            {% for w in usuarios %}
+                            {% if user[2] == w[0] %}
+                            <td class="aj">{{w[1]}}</td>
+                            {% endif %}
+                            {% endfor %}
                             <td class="aj">{{user[3]}}</td>
+                            {% for w in usuarios %}
+                            {% if user[4] == w[0] %}
+                            <td class="aj">{{w[1]}}</td>
+                            {% endif %}
+                            {% endfor %}
                             <td class="aj">{{user[6]}}</td>
                             <td class="aj">{{user[7]}}</td>
                         </tr>
@@ -229,7 +249,16 @@
                     <table>
                         <thead>
                             <tr class="text_table">
-                                <td>Usuário: {{user[2]}}</td>
+                                {% for w in usuarios %}
+                                {% if user[2] == w[0] %}
+                                <td>Cliente: {{w[1]}}</td>
+                                {% endif %}
+                                {% endfor %}
+                                {% for w in usuarios %}
+                                {% if user[4] == w[0] %}
+                                <td>Técnico: {{w[1]}}</td>
+                                {% endif %}
+                                {% endfor %}
                                 <td>Data da solicitação: {{user[3]}}</td>
                             </tr>
                         </thead>

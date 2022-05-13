@@ -12,8 +12,8 @@
 <h2> Descrição do Projeto </h2>
 <p> Este projeto tem por objetivo desenvolvimento de uma plataforma de central de serviços para que a empresa cliente possa receber, atender e recusar serviços.</p> 
 <p>Organização do repositório:</p>  
-<p> Pasta Src: contendo a pasta Templates, com páginas do site, a pasta Static, com os arquivos estáticos, o arquivo app.py com os códigos de python, o arquivo banco.sql, com as tabelas do Banco de Dados e o arquivo requirements.txt; </p>
-<p> Pasta doc/BD: contento os modelos do banco de dados(conceitual, lógico e físico)</p>
+<p> Pasta Src: contendo a pasta Templates, com páginas do site, a pasta Static, com os arquivos estáticos, o arquivo app.py com os códigos de python e o arquivo requirements.txt; </p>
+<p> Pasta doc/BD: contento os modelos do banco de dados(conceitual, lógico e script)</p>
 <p>  README.MD: arquivo com o detalhamento do projeto.</p>
 
 <br>
@@ -77,9 +77,15 @@ Vale destacar que o administrador deve promover ao menos um usuário a técnico 
 
 Templates clientes:
 
+<img src="src\static\imagens\usuario.gif" />
+
 Templates técnico:
 
+<img src="src\static\imagens\executor.gif" />
+
 Templates administrador:
+
+<img src="src\static\imagens\administrador.gif" />
 
 <h2>Requisitos</h2>
 

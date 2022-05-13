@@ -213,11 +213,15 @@ def telaexecutor():
     cur = mysql.connection.cursor()
     cur.execute("select codigo_usuario FROM usuarios where codigo_usuario=%s;", [cod])
     x = int(str(cur.fetchall()).strip('(,)'))
-
-
+    
     cur.execute("select * FROM solicitacao where codigo_usuario=%s ORDER BY data_abertura DESC;",[x])
     Details = cur.fetchall()
-    return render_template("telaexecutor.html", Details=Details)
+
+    cur = mysql.connection.cursor()
+    cur.execute("select * FROM usuarios;")
+    usuarios = cur.fetchall()
+
+    return render_template("telaexecutor.html", Details=Details, usuarios=usuarios)
 
 @app.route('/telausuario')
 @check_id_user

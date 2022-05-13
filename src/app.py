@@ -322,7 +322,7 @@ def usuarios(id):
 def executor(id):
     #isso possibilita o adm tornar um executor em usuario
     cur = con.cursor()
-    cur.execute(tornar_exe, [1,id])
+    cur.execute('UPDATE usuarios SET funcao=%s, contador_solicitacao=%s WHERE codigo_usuario = %s', [1,None,id])
     feedback = cur.fetchall
     con.commit()
     return redirect ("/telaadm#usuarios")

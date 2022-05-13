@@ -5,14 +5,15 @@
 
 
 <h2 align="center"> Grupo 5 - BrazilianTech💻</h2>
-<div align='center'> <a href='#-descrição-do-projeto-'>Descrição do Projeto </a> |  <a href='#-execução-'>Execução</a> | <a href='#-sobre-o-site-'>Sobre o site</a> |<a href='#requisitos'>Requisitos</a> | <a href='#-backlog-do-produto-'>Backlog</a> | <a href='#-histórias-de-Usuários-'>Histórias de Usuários</a> | <a href='#-tecnologias'>Tecnologias</a> | <a href='#-equipe-'> Equipe </a> | <a href='#-vídeo-'>Vídeo</a> </div>
+<div align='center'> <a href='#-descrição-do-projeto-'>Descrição do Projeto </a> |  <a href='#-execução-'>Execução</a> | <a href='#-sobre-o-site-'>Sobre o site</a> |<a href='#requisitos'>Requisitos</a> | <a href='#-backlog-do-produto-'>Backlog</a> | <a href='#-histórias-de-usuários-'>Histórias de Usuários</a> | <a href='#-tecnologias'>Tecnologias</a> | <a href='#-equipe-'> Equipe </a> | <a href='#-vídeo-'>Vídeo</a> </div>
 
 <br>
 
 <h2> Descrição do Projeto </h2>
 <p> Este projeto tem por objetivo desenvolvimento de uma plataforma de central de serviços para que a empresa cliente possa receber, atender e recusar serviços.</p> 
 <p>Organização do repositório:</p>  
-<p> Pasta Src: contendos a pasta Templates, com páginas do site, a pasta Static, com os arquivos estáticos, o arquivo app.py com os códigos de python, o arquivo banco.sql, com as tabelas do Banco de Dados e o arquivo requirements.txt; </p>
+<p> Pasta Src: contendo a pasta Templates, com páginas do site, a pasta Static, com os arquivos estáticos, o arquivo app.py com os códigos de python, o arquivo banco.sql, com as tabelas do Banco de Dados e o arquivo requirements.txt; </p>
+<p> Pasta doc/BD: contento os modelos do banco de dados(conceitual, lógico e físico)</p>
 <p>  README.MD: arquivo com o detalhamento do projeto.</p>
 
 <br>
@@ -74,15 +75,13 @@ Na parte de cadastro, o administrador deve criar uma conta com o e-mail "adminis
 
 Vale destacar que o administrador deve promover ao menos um usuário a técnico (aba usuários -> promover) antes de uma solicitação ser criada:
 
-Templates usuário comum:
+Templates clientes:
 
-Templates executores:
+Templates técnico:
 
 Templates administrador:
 
 <h2>Requisitos</h2>
-
-
 
 <h3>Funcionais</h3>
 <ul type="circle">
@@ -157,8 +156,7 @@ Templates administrador:
 
 <br>
 
-<h2> Histórias de Usuários
-
+<h2> Histórias de Usuários </h2>
 
 ​    <img src="src\static\imagens\users_stories.png" />
 

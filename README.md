@@ -5,7 +5,7 @@
 
 
 <h2 align="center"> Grupo 5 - BrazilianTech💻</h2>
-<div align='center'> <a href='#-descrição-do-projeto-'>Descrição do Projeto </a> |  <a href='#-execução-'>Execução</a> | <a href='#-sobre-o-site-'>Sobre o site</a> |<a href='#requisitos'>Requisitos</a> | <a href='#-backlog-do-produto-'>Backlog</a> | <a href='#-histórias-de-usuários-'>Histórias de Usuários</a> | <a href='#-tecnologias'>Tecnologias</a> | <a href='#-equipe-'> Equipe </a> | <a href='#-vídeo-'>Vídeo</a> </div>
+<div align='center'> <a href='#-descrição-do-projeto-'>Descrição do Projeto </a> |  <a href='#-execução-'>Execução</a> | <a href='#-sobre-o-site-'>Sobre o site</a> |<a href='#requisitos'>Requisitos</a> | <a href='#-backlog-do-produto-'>Backlog</a> | <a href='#-histórias-de-usuários-'>Histórias de Usuários</a> | <a href='#-tecnologias'>Tecnologias</a> | <a href='#-equipe-'> Equipe </a> | <a href='#-vídeos-'>Vídeo</a> </div>
 
 <br>
 
@@ -216,4 +216,5 @@ Templates administrador:
 
 -Sprint 1: clique <a href='https://youtu.be/A1cXFDZgTSA'>aqui</a> 
 
--Sprint 2: clique 
+-Sprint 2: clique <a href='https://youtu.be/YaW2hexfnQ4'>aqui</a>
+

@@ -53,7 +53,7 @@
 ```
 
 <br>
--Ir no MySQL Workbench > open script > Banco.sql > executar linhas
+-Ir no MySQL Workbench > open script > banco.sql > executar linhas
 <img src="src\static\imagens\print_db.png" />
 <br>
 -Retornar ao  Visual Code e alterar as informações sobre o banco:
@@ -73,7 +73,7 @@ Nossa site  irá facilitar a comunicação entre os cliente e técnicos, pois co
 
 Na parte de cadastro, o administrador deve criar uma conta com o e-mail "administrador@adm" e a senha "fatec" para ter acesso ao sistema de chamados, já os clientes e os técnicos poderam criar uma conta com um e-mail e senha de sua preferência.
 
-Vale destacar que o administrador deve promover ao menos um usuário a técnico (aba usuários -> promover) antes de uma solicitação ser criada:
+Vale destacar que o administrador deve promover ao menos um usuário para técnico (aba usuários -> promover) antes de uma solicitação ser criada:
 
 Templates clientes:
 

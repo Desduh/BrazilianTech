@@ -12,8 +12,8 @@
 <h2> Descrição do Projeto </h2>
 <p> Este projeto tem por objetivo desenvolvimento de uma plataforma de central de serviços para que a empresa cliente possa receber, atender e recusar serviços.</p> 
 <p>Organização do repositório:</p>  
-<p> Pasta Src: contendo a pasta Templates, com páginas do site, a pasta Static, com os arquivos estáticos, o arquivo app.py com os códigos de python e o arquivo requirements.txt; </p>
-<p> Pasta doc/BD: contento os modelos do banco de dados(conceitual, lógico e script)</p>
+<p> Pasta Src: pasta templates contém as páginas do site; pasta static contém as imagens e os arquivos de estilização em css; arquivo app.py com os códigos de python; arquivo banco.sql com o script do banco de dados; e o arquivo requirements.txt; </p>
+<p> Pasta doc/BD: contento os modelos do banco de dados(conceitual e lógico)</p>
 <p>  README.MD: arquivo com o detalhamento do projeto.</p>
 
 <br>

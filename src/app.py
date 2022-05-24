@@ -10,9 +10,9 @@ import functools
 app = Flask('__name__') 
 app.config['MYSQL_HOST'] = 'localhost' #adicione o hostname
 app.config['MYSQL_USER'] = 'root' #adicione o nome do seu usuário do MySQL
-app.config['MYSQL_PASSWORD'] = 'fatec' #adicione a senha do seu usuário do MySQL
+app.config['MYSQL_PASSWORD'] = 'franca' #adicione a senha do seu usuário do MySQL
 app.config['MYSQL_DB'] = 'usuarios_solicitacoes' 
-con = MySQLdb.connect( user="root", password="fatec", db="usuarios_solicitacoes")#adicione o nome e a senha do seu usuário do MySQL
+con = MySQLdb.connect( user="root", password="franca", db="usuarios_solicitacoes")#adicione o nome e a senha do seu usuário do MySQL
 mysql = MySQL(app)
 logado = False
 app.secret_key = "fatec"
@@ -331,9 +331,39 @@ def usuarios(id):
 
 @app.route('/tornaruser/<id>', methods= ['POST']) 
 def executor(id):
-    #isso possibilita o adm tornar um executor em usuario
     cur = con.cursor()
+    cur.execute('SELECT codigo_solicitacao FROM solicitacao WHERE codigo_usuario=%s', [id])
+    soli_exec = cur.fetchall()
+    solicitacoes = []
+    for n in soli_exec:
+        n = int(str(n).strip('(,)'))
+        solicitacoes.append(n)
+    
+
     cur.execute('UPDATE usuarios SET funcao=%s, contador_solicitacao=%s WHERE codigo_usuario = %s', [1,None,id])
     feedback = cur.fetchall
     con.commit()
+
+    cur.execute('SELECT codigo_usuario FROM usuarios WHERE funcao=%s', [2])
+    execu = cur.fetchall()
+    executores = []
+    for n in execu:
+        n = int(str(n).strip('(,)'))
+        executores.append(n)
+
+    print(executores)
+    print(solicitacoes)
+    current_exec = 0
+    for s in solicitacoes:
+        if current_exec == len(executores):
+            current_exec = 0
+            print('aumenta')
+        cur.execute('UPDATE solicitacao SET codigo_usuario=%s WHERE codigo_solicitacao=%s', [executores[current_exec], s])
+        print('comanda')
+        current_exec = current_exec+1
+
+    con.commit()
+    print(executores)
+    print(solicitacoes)
+
     return redirect ("/telaadm#usuarios")

@@ -58,7 +58,7 @@ body, html {
     color: rgb(177, 10, 4);
     text-align: center;
 }
-a {
-    text-decoration: underline;
-    color: black;
+.aviso {
+    color: rgb(177, 10, 4);
+    text-align: center;
 }

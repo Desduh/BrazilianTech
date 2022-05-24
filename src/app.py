@@ -131,23 +131,30 @@ def loginact():
     cur = mysql.connection.cursor()
     cur.execute(check_user, [email])
     feedback = cur.fetchall()
-
-    cur = mysql.connection.cursor()
-    cur.execute(check_cod_usu, [email])
-    cod = int(str(cur.fetchall()).strip('(,)'))
     
-    if not feedback:
-        return redirect('/cadastro.html')
-    else:
-        cur.execute(check_password, [senha, email])
-        feedback = cur.fetchall()
+    if feedback != ():
+
+        cur = mysql.connection.cursor()
+        cur.execute(check_cod_usu, [email])
+        cod = int(str(cur.fetchall()).strip('(,)'))
         
-        if feedback:
-            global logado
-            logado = True
-            return redirect('/validacao')
+        if not feedback:
+            return redirect('/cadastro.html')
         else:
-            return redirect('/login.html')
+            cur.execute(check_password, [senha, email])
+            feedback = cur.fetchall()
+            
+            if feedback:
+                global logado
+                logado = True
+                return redirect('/validacao')
+            else:
+                aviso = "*Senha errada, tente novamente"
+                return render_template('/login.html', aviso=aviso)
+            
+    else:
+        aviso ="*Email informado não possui conta, crie uma!"
+        return render_template('/cadastro.html', aviso=aviso)
 
 
 @app.route('/validacao')

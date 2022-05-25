@@ -2,11 +2,10 @@
     font-family: 'Quicksand', sans-serif;
 }
 
-
-html,
-body {
+body, html {
+    display: flex;
+    height: 100%; 
     width: 100%;
-    height: 100%;
 }
 body {
     display: block;
@@ -28,7 +27,6 @@ main {
     background-color: white;
     padding: 60px;
 }
-
 header {
     background-color: rgb(179, 175, 175);
     width: 250px;
@@ -40,7 +38,7 @@ header {
 .corpo{
     background-color: white;
     text-align: center;
-    border: 3px ;
+    border: 3px;
     display: flex;
 }
 .perfil,
@@ -99,27 +97,21 @@ main{
     margin-left: 10px;
     flex-direction: column;
 }
-
-details {
-    background-color: rgb(219, 219, 219);
+table{
+    background-color: rgb(204, 204, 204);
+    border: none;
+    border-radius: 2px;
     width: 100%;
-    margin-bottom: 30px;
+    text-align: center;
+    border-spacing: 1px;
 }
-details > summary {
-    list-style: none;
-    display: flex;
-    justify-content: space-around;
+table td{
+    padding: 15px;
+    color: black;
 }
-thead {
-    background-color: #a9a9a9;
+.desc_problema{
+    background-color: rgb(143, 142, 142);
 }
-.tela_solicitacao{
-    display: flex;
-    width: 100%;
-    height: 100%;
-    flex-direction: column;
-    align-items: center;
-} 
 .criacao{
     width: 100%;
     height: 60%;
@@ -131,12 +123,13 @@ thead {
     text-align: justify;
     font-family: unset;
 }
-.texto{
-    font-size: 20px;
-    text-align: center;
-    margin-right: 20px;
+.tela_solicitacao{
+    display: flex;
     width: 100%;
-}
+    height: 100%;
+    flex-direction: column;
+    align-items: center;
+} 
 .botao{
     margin-top: 10px;
     font-size: 18px;
@@ -147,28 +140,6 @@ thead {
     color: white;
     border: 0;
 }
-
-
-table{
-    background-color: rgb(204, 204, 204);
-    border: none;
-}
-table td{
-    padding: 15px;
-    color: black;
-}
-
-.desc_problema{
-    background-color: rgb(143, 142, 142);
-}
-
-table {
-    border-radius: 2px;
-    width: 100%;
-    text-align: center;
-    border-spacing: 1px;
-}
-
 .text_table {
     font-size: 20px;
     background-color: rgb(177, 10 ,4);
@@ -176,19 +147,6 @@ table {
 .text_table td{
     color: whitesmoke;
 }
-.formulario{
-    display: flex;
-    flex-direction: column;
-    align-content: center;
-    flex-wrap: wrap;
-}
-
-.td {
-    display: flex;
-    justify-content: center;
-}
-
-
 .Boxtext_motivo{
 
     font-size: 18px;
@@ -202,7 +160,20 @@ table {
     text-align: justify;
     font-family: unset;
 }
-
+.aj {
+    border: 3px;
+    border-color: none;
+}
+.desc_solucao{
+    padding: 10px;
+}
+.btn_enviar{
+    background-color:whitesmoke;
+    color: black;
+    padding: 7px;
+    text-decoration: none;
+    border-radius: 5px;
+}
 .btn{
     display: flex;
     flex-direction: row;
@@ -210,7 +181,6 @@ table {
     justify-content: center;
     
 }
-
 .btn button{
     margin: 7px 5px;
 }
@@ -221,4 +191,31 @@ table {
     padding: 15px;
     color: white;
     border: 0;
+}
+thead {
+    background-color: #a9a9a9;
+}
+.tituloc{
+    margin-left: 10px;
+    text-align: center;
+}
+.formulario{
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    flex-wrap: wrap;
+}
+.td {
+    display: flex;
+    justify-content: center;
+}
+details {
+    background-color: rgb(219, 219, 219);
+    width: 100%;
+    margin-bottom: 30px;
+}
+details > summary {
+    list-style: none;
+    display: flex;
+    justify-content: space-around;
 }

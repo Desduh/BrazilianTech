@@ -350,7 +350,7 @@ def tecnico(id):
 
     # ------------------------------
     cur = con.cursor()
-    cur.execute('SELECT codigo_solicitacao FROM solicitacao WHERE codigo_usuario=%s', [id])
+    cur.execute('SELECT codigo_solicitacao FROM solicitacao WHERE codigo_usuario=%s  AND _status=%s', [id,'Aberto'])
     soli_tec = cur.fetchall()
     solicitacoes = []
     for n in soli_tec:

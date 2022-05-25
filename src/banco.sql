@@ -8,7 +8,7 @@ create table usuarios
 	email varchar(40) NOT NULL UNIQUE KEY,
     senha varchar(30) NOT NULL,
     funcao int,
-    contador_solicitacao int);
+    contador_solicitacao int unique key);
     
 insert into usuarios(email,senha,funcao) values("administrador@adm","fatec",3);
     

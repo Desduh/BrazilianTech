@@ -1,6 +1,6 @@
 <div align='center'>
 <h1> FATEC SJC - Profº Jessen Vidal- 1º DSM</h1>
-<img src="src\static\imagens\logo_nome.png" style="zoom:25%;" />
+<img src="src\static\imagens\logo.png" style="zoom:25%;" />
 </div>
 
 

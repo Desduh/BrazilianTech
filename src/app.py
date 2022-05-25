@@ -334,6 +334,21 @@ def usuarios(id):
 
 @app.route('/tornaruser/<id>', methods= ['POST']) 
 def tecnico(id):
+    # -------------------------------
+
+    cur = mysql.connection.cursor()  
+    a = cur.execute(quantia_tec)
+    max_cont = int(str(cur.fetchall()).strip('(,)'))
+
+    print (max_cont)
+
+    cur = mysql.connection.cursor()
+    cur.execute('SELECT codigo_usuario, contador_solicitacao FROM usuarios WHERE funcao=%s', [2])
+    tec_cont_soli = cur.fetchall()
+
+    print (tec_cont_soli)
+
+    # ------------------------------
     cur = con.cursor()
     cur.execute('SELECT codigo_solicitacao FROM solicitacao WHERE codigo_usuario=%s', [id])
     soli_tec = cur.fetchall()
@@ -360,9 +375,30 @@ def tecnico(id):
             current_tec = 0
 
         cur.execute('UPDATE solicitacao SET codigo_usuario=%s WHERE codigo_solicitacao=%s', [tecnicos[current_tec], s])
-        print('comanda')
         current_tec += 1
 
     con.commit()
+    # ------------------------------
+
+    cur = mysql.connection.cursor()
+    cur.execute('SELECT contador_solicitacao FROM usuarios WHERE codigo_usuario=%s', [id])
+    cod_cont = int(str(cur.fetchall()).strip('(,)'))
+
+    print (cod_cont)
+
+    if max_cont != cod_cont-1:
+        
+        for contador_tecs in range(max_cont):
+            print (contador_tecs)
+            if cod_cont < contador_tecs:
+                
+                x = contador_tecs-1
+
+                cur = con.cursor()
+                cur.execute('UPDATE usuarios SET contador_solicitacao=%s WHERE contador_solicitacao=%s', [x,contador_tecs])
+        con.commit()
+
+
+    # ------------------------------
 
     return redirect ("/telaadm#usuarios")

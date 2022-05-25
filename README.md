@@ -45,7 +45,7 @@
 ```
 
 ```console 
-	.\venv\scripts\activate
+	venv\scripts\activate
 ```
 
 ```console 
@@ -199,14 +199,13 @@ Templates administrador:
 
 <h2> Equipe </h2>
 
-| Cargo            | Membros                        |
-| :--------------- | ------------------------------ |
-| P.O              | Júlia Sousa Gayotto            |
-| Scrum Master     | Carlos Eduardo Falandes        |
-| Development Team | Ana Clara Marques Portes       |
-| Development Team | Bruno Henrique Menezes Ramos   |
-| Development Team | Ian Ferreira Tupinambá Machado |
-| Development Team | Lucas França Registro          |
+| Cargo            | Membros                      |                          GitHub                           |
+| :--------------- | :--------------------------- | :-------------------------------------------------------: |
+| P.O              | Júlia Sousa Gayotto          |    <a href='https://github.com/JuliaGayotto'>Link</a>     |
+| Scrum Master     | Carlos Eduardo Falandes      |       <a href='https://github.com/Desduh'>Link</a>        |
+| Development Team | Ana Clara Marques Portes     |      <a href='https://github.com/AnaMarks'>Link</a>       |
+| Development Team | Bruno Henrique Menezes Ramos |   <a href='https://github.com/BrunoHenriique'>Link</a>    |
+| Development Team | Lucas França Registro        | <a href='https://github.com/LucasFrancaRegistro'>Link</a> |
 
 <br>
 

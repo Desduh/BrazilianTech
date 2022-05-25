@@ -10,9 +10,9 @@ import functools
 app = Flask('__name__') 
 app.config['MYSQL_HOST'] = 'localhost' #adicione o hostname
 app.config['MYSQL_USER'] = 'root' #adicione o nome do seu usuário do MySQL
-app.config['MYSQL_PASSWORD'] = 'fatec' #adicione a senha do seu usuário do MySQL
+app.config['MYSQL_PASSWORD'] = 'franca' #adicione a senha do seu usuário do MySQL
 app.config['MYSQL_DB'] = 'usuarios_solicitacoes' 
-con = MySQLdb.connect( user="root", password="fatec", db="usuarios_solicitacoes")#adicione o nome e a senha do seu usuário do MySQL
+con = MySQLdb.connect( user="root", password="franca", db="usuarios_solicitacoes")#adicione o nome e a senha do seu usuário do MySQL
 mysql = MySQL(app)
 logado = False
 app.secret_key = "fatec"
@@ -336,69 +336,75 @@ def usuarios(id):
 def tecnico(id):
     # -------------------------------
 
-    cur = mysql.connection.cursor()  
-    a = cur.execute(quantia_tec)
-    max_cont = int(str(cur.fetchall()).strip('(,)'))
-
-    print (max_cont)
-
     cur = mysql.connection.cursor()
-    cur.execute('SELECT codigo_usuario, contador_solicitacao FROM usuarios WHERE funcao=%s', [2])
-    tec_cont_soli = cur.fetchall()
+    cur.execute('SELECT codigo_usuario FROM usuarios WHERE codigo_usuario!=%s AND funcao=%s', [id, 2])
+    executores_ativos = cur.fetchall()
+    if executores_ativos == ():
+        print(executores_ativos)
+        return redirect('/telaadm')
+    else:
+        a = cur.execute(quantia_tec)
+        max_cont = int(str(cur.fetchall()).strip('(,)'))
 
-    print (tec_cont_soli)
+        print (max_cont)
 
-    # ------------------------------
-    cur = con.cursor()
-    cur.execute('SELECT codigo_solicitacao FROM solicitacao WHERE codigo_usuario=%s  AND _status=%s', [id,'Aberto'])
-    soli_tec = cur.fetchall()
-    solicitacoes = []
-    for n in soli_tec:
-        n = int(str(n).strip('(,)'))
-        solicitacoes.append(n)
+        cur = mysql.connection.cursor()
+        cur.execute('SELECT codigo_usuario, contador_solicitacao FROM usuarios WHERE funcao=%s', [2])
+        tec_cont_soli = cur.fetchall()
+
+        print (tec_cont_soli)
+
+        # ------------------------------
+        cur = con.cursor()
+        cur.execute('SELECT codigo_solicitacao FROM solicitacao WHERE codigo_usuario=%s  AND _status=%s', [id,'Aberto'])
+        soli_tec = cur.fetchall()
+        solicitacoes = []
+        for n in soli_tec:
+            n = int(str(n).strip('(,)'))
+            solicitacoes.append(n)
     
 
-    cur.execute('UPDATE usuarios SET funcao=%s, contador_solicitacao=%s WHERE codigo_usuario = %s', [1,None,id])
-    feedback = cur.fetchall
-    con.commit()
+        cur.execute('UPDATE usuarios SET funcao=%s, contador_solicitacao=%s WHERE codigo_usuario = %s', [1,None,id])
+        feedback = cur.fetchall
+        con.commit()
 
-    cur.execute('SELECT codigo_usuario FROM usuarios WHERE funcao=%s', [2])
-    tecni = cur.fetchall()
-    tecnicos = []
-    for n in tecni:
-        n = int(str(n).strip('(,)'))
-        tecnicos.append(n)
+        cur.execute('SELECT codigo_usuario FROM usuarios WHERE funcao=%s', [2])
+        tecni = cur.fetchall()
+        tecnicos = []
+        for n in tecni:
+            n = int(str(n).strip('(,)'))
+            tecnicos.append(n)
 
-    current_tec = 0
-    for s in solicitacoes:
-        if current_tec == len(tecnicos):
-            current_tec = 0
+        current_tec = 0
+        for s in solicitacoes:
+            if current_tec == len(tecnicos):
+                current_tec = 0
 
-        cur.execute('UPDATE solicitacao SET codigo_usuario=%s WHERE codigo_solicitacao=%s', [tecnicos[current_tec], s])
-        current_tec += 1
+            cur.execute('UPDATE solicitacao SET codigo_usuario=%s WHERE codigo_solicitacao=%s', [tecnicos[current_tec], s])
+            current_tec += 1
 
-    con.commit()
+        con.commit()
     # ------------------------------
 
-    cur = mysql.connection.cursor()
-    cur.execute('SELECT contador_solicitacao FROM usuarios WHERE codigo_usuario=%s', [id])
-    cod_cont = int(str(cur.fetchall()).strip('(,)'))
+        cur = mysql.connection.cursor()
+        cur.execute('SELECT contador_solicitacao FROM usuarios WHERE codigo_usuario=%s', [id])
+        cod_cont = int(str(cur.fetchall()).strip('(,)'))
 
     print (cod_cont)
 
-    if max_cont != cod_cont-1:
+        if max_cont != cod_cont-1:
         
-        for contador_tecs in range(max_cont):
-            print (contador_tecs)
-            if cod_cont < contador_tecs:
+            for contador_tecs in range(max_cont):
+                #print (contador_tecs)
+                if cod_cont < contador_tecs:
                 
-                x = contador_tecs-1
+                    x = contador_tecs-1
 
-                cur = con.cursor()
-                cur.execute('UPDATE usuarios SET contador_solicitacao=%s WHERE contador_solicitacao=%s', [x,contador_tecs])
-        con.commit()
+                    cur = con.cursor()
+                    cur.execute('UPDATE usuarios SET contador_solicitacao=%s WHERE contador_solicitacao=%s', [x,contador_tecs])
+            con.commit()
 
 
     # ------------------------------
 
-    return redirect ("/telaadm#usuarios")
+        return redirect ("/telaadm#usuarios")

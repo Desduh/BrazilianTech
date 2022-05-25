@@ -25,15 +25,15 @@ check_user = ("SELECT * FROM usuarios WHERE email=%s")
 check_password = ("SELECT * FROM usuarios WHERE senha=%s AND email=%s")
 historico = ("SELECT * FROM solicitacao WHERE codigo_usuario_cli=%s ORDER BY data_abertura DESC;")
 verifica_funcao = ("SELECT funcao FROM usuarios WHERE codigo_usuario =%s")
-quantia_exe = ("SELECT COUNT(*) FROM usuarios WHERE funcao = 2;")
+quantia_tec = ("SELECT COUNT(*) FROM usuarios WHERE funcao = 2;")
 quantia_chamado = ("SELECT COUNT(*) FROM solicitacao;")
 
 #FUNÇÕES INSERT/UPDATE
 add_user = ('INSERT into usuarios (email,senha,funcao) VALUES (%s,%s,%s)')
 add_solicitacao = ('INSERT into solicitacao (descricao,codigo_usuario_cli,codigo_usuario,_status,tipo_problema,data_abertura) VALUES (%s,%s,%s,%s,%s, now())')
 add_resposta = ("UPDATE solicitacao SET resposta=%s, _status=%s, data_fechamento=now() WHERE codigo_solicitacao = %s")
-tornar_exe = ("UPDATE usuarios SET funcao=%s WHERE codigo_usuario = %s")
-exe_cont = ("UPDATE usuarios SET contador_solicitacao=%s WHERE codigo_usuario = %s")
+tornar_tec = ("UPDATE usuarios SET funcao=%s WHERE codigo_usuario = %s")
+tec_cont = ("UPDATE usuarios SET contador_solicitacao=%s WHERE codigo_usuario = %s")
 check_cod_usu = ("select codigo_usuario FROM usuarios where email=%s;")
 
 
@@ -56,7 +56,7 @@ def check_id_user(view):
         return redirect("/")
     return wrapped_view
 
-def check_id_exec(view):
+def check_id_tec(view):
     @functools.wraps(view)
     def wrapped_view(**kwargs):        
         if not 'func' in session.keys():
@@ -165,12 +165,12 @@ def validacao():
 
     for f in funcao:  #função no sentido de qual a função do usuario
         if logado:
-            if f[0] == 3: #validacao para ver se é o executor 
+            if f[0] == 3: #validacao para ver se é o técnico
                 session['func'] = str(f[0])
                 return redirect('telaadm')
             elif f[0] == 2:
                 session['func'] = str(f[0])
-                return redirect('telaexecutor')
+                return redirect('telatecnico')
             else: 
                 session['func'] = str(f[0])
                 return redirect('telausuario')
@@ -185,7 +185,7 @@ def logout():
 
 
 
-#PAGINAS DE USUARIO/EXECUTOR/ADIMINISTRADOR------------------------------------PAGINAS DE USUARIO/EXECUTOR/ADIMINISTRADOR-----------------------------------------------------------
+#PAGINAS DE USUARIO/TÉCNICO/ADIMINISTRADOR------------------------------------PAGINAS DE USUARIO/TÉCNICO/ADIMINISTRADOR-----------------------------------------------------------
 @app.route('/telaadm')
 @check_id_adm
 def telaadm():
@@ -214,9 +214,9 @@ def telaadm():
     return render_template("adm.html", usuarios=usuarios, Details=Details, lista=lista, per_cham=per_cham)
 
 
-@app.route('/telaexecutor')
-@check_id_exec
-def telaexecutor():
+@app.route('/telatecnico')
+@check_id_tec
+def telatecnico():
     cur = mysql.connection.cursor()
     cur.execute("select codigo_usuario FROM usuarios where codigo_usuario=%s;", [cod])
     x = int(str(cur.fetchall()).strip('(,)'))
@@ -228,7 +228,7 @@ def telaexecutor():
     cur.execute("select * FROM usuarios;")
     usuarios = cur.fetchall()
 
-    return render_template("telaexecutor.html", Details=Details, usuarios=usuarios)
+    return render_template("telatecnico.html", Details=Details, usuarios=usuarios)
 
 @app.route('/telausuario')
 @check_id_user
@@ -245,26 +245,29 @@ def hist():
 def solicitacao():
     #isso possibilita o usuario fazer a solicitacao
     cur = mysql.connection.cursor()  
-    a = cur.execute(quantia_exe)
-    qta_exe = int(str(cur.fetchall()).strip('(,)'))
+    a = cur.execute(quantia_tec)
+    qta_tec = int(str(cur.fetchall()).strip('(,)'))
   
     cur.execute(quantia_chamado)
     qta_cha = int(str(cur.fetchall()).strip('(,)')) +1
 
-    if qta_exe == 0:
-        qta_exe = 1
+    if qta_tec == 0:
+        qta_tec = 1
     else:
-        qta_exe = qta_exe
-    cont = qta_cha % qta_exe
+        qta_tec = qta_tec
+    cont = qta_cha % qta_tec
+
+    print (cont)
 
     cur.execute("SELECT codigo_usuario FROM usuarios WHERE contador_solicitacao=%s;", [cont])
-    executor = int(str(cur.fetchall()).strip('(,)'))
+    tecnico = cur.fetchall()
+    tecnico = int(str(tecnico).strip('(,)'))
 
     solicitacao = request.form['solicitacao']
     problema = request.form['tipo']
     aberto = 'Aberto'
     cur = con.cursor()
-    cur.execute(add_solicitacao, [solicitacao,cod,executor,aberto,problema])
+    cur.execute(add_solicitacao, [solicitacao,cod,tecnico,aberto,problema])
     feedback = cur.fetchall
     con.commit()
 
@@ -281,7 +284,7 @@ def solicitacao():
 
 @app.route('/resposta/<id>', methods= ['POST']) 
 def resposta(id):
-    #isso possibilita o executor ou o adm responder a solicitacao
+    #isso possibilita o técnico ou o adm responder a solicitacao
     resposta = request.form['resposta']
     status = request.form['status']
 
@@ -294,7 +297,7 @@ def resposta(id):
             if f[0] == 3:
                 return redirect ('/telaadm#ab')
             else:
-                return redirect ('/telaexecutor#ab')
+                return redirect ('/telatecnico#ab')
 
     cur = con.cursor()
     cur.execute(add_resposta, [resposta,status,id])
@@ -305,37 +308,37 @@ def resposta(id):
         if f[0] == 3:
             return redirect ('/telaadm#ab')
         else:
-            return redirect ('/telaexecutor#ab')
+            return redirect ('/telatecnico#ab')
 
 
 
 #FUNÇÕES DE ADM PROMOVER/REBAIXAR----------------------------------------------FUNÇÕES DE ADM PROMOVER/REBAIXAR-------------------------------------------------
 @app.route('/tornarexe/<id>', methods= ['POST']) 
 def usuarios(id):
-    #isso possibilita o adm tornar um usuario em executor
+    #isso possibilita o adm tornar um usuario em tecnico
     cur = con.cursor()
-    cur.execute(tornar_exe, [2,id])
+    cur.execute(tornar_tec, [2,id])
     feedback = cur.fetchall
     con.commit()
 
     cur = mysql.connection.cursor()  
-    a = cur.execute(quantia_exe)
-    qta_exe = int(str(cur.fetchall()).strip('(,)')) -1
+    a = cur.execute(quantia_tec)
+    qta_tec = int(str(cur.fetchall()).strip('(,)')) -1
     
     cur = con.cursor()
-    cur.execute(exe_cont, [qta_exe,id])
+    cur.execute(tec_cont, [qta_tec,id])
     feedback = cur.fetchall
     con.commit()
     return redirect ("/telaadm#usuarios")
 
 
 @app.route('/tornaruser/<id>', methods= ['POST']) 
-def executor(id):
+def tecnico(id):
     cur = con.cursor()
     cur.execute('SELECT codigo_solicitacao FROM solicitacao WHERE codigo_usuario=%s', [id])
-    soli_exec = cur.fetchall()
+    soli_tec = cur.fetchall()
     solicitacoes = []
-    for n in soli_exec:
+    for n in soli_tec:
         n = int(str(n).strip('(,)'))
         solicitacoes.append(n)
     
@@ -345,25 +348,21 @@ def executor(id):
     con.commit()
 
     cur.execute('SELECT codigo_usuario FROM usuarios WHERE funcao=%s', [2])
-    execu = cur.fetchall()
-    executores = []
-    for n in execu:
+    tecni = cur.fetchall()
+    tecnicos = []
+    for n in tecni:
         n = int(str(n).strip('(,)'))
-        executores.append(n)
+        tecnicos.append(n)
 
-    print(executores)
-    print(solicitacoes)
-    current_exec = 0
+    current_tec = 0
     for s in solicitacoes:
-        if current_exec == len(executores):
-            current_exec = 0
-            print('aumenta')
-        cur.execute('UPDATE solicitacao SET codigo_usuario=%s WHERE codigo_solicitacao=%s', [executores[current_exec], s])
+        if current_tec == len(tecnicos):
+            current_tec = 0
+
+        cur.execute('UPDATE solicitacao SET codigo_usuario=%s WHERE codigo_solicitacao=%s', [tecnicos[current_tec], s])
         print('comanda')
-        current_exec = current_exec+1
+        current_tec += 1
 
     con.commit()
-    print(executores)
-    print(solicitacoes)
 
     return redirect ("/telaadm#usuarios")

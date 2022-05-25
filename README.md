@@ -81,7 +81,7 @@ Templates clientes:
 
 Templates técnico:
 
-<img src="src\static\imagens\executor.gif" />
+<img src="src\static\imagens\tecnico.gif" />
 
 Templates administrador:
 

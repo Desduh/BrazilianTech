@@ -409,3 +409,20 @@ def tecnico(id):
     # ------------------------------
 
         return redirect ("/telaadm#usuarios")
+
+
+
+#FUNÇÕES DE AVALIAÇÃO----------------------------------------------FUNÇÕES DE AVALIAÇÃO-------------------------------------------------
+@app.route('/avaliacao_solicitacao/<cod_soli>', methods= ['POST']) 
+def avaliacao_solicitacao(cod_soli):
+    nota = request.form['nota']
+
+    cur = con.cursor()
+    cur.execute("UPDATE solicitacao SET avaliacao=%s WHERE codigo_solicitacao = %s", [nota,cod_soli])
+    feedback = cur.fetchall
+    con.commit()
+
+    if check_func('3'):
+        return redirect ('/telaadm#ab')
+    else:
+        return redirect ('/telausuario')

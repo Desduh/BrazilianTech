@@ -9,9 +9,7 @@ create table usuarios
     senha varchar(30) NOT NULL,
     funcao int,
     contador_solicitacao int unique key);
-    
-insert into usuarios(email,senha,funcao) values("administrador@adm","fatec",3);
-    
+
 
 create table solicitacao
 (	codigo_solicitacao int primary key AUTO_INCREMENT,
@@ -25,4 +23,6 @@ create table solicitacao
     constraint ck_status check(_status in('Aceito','Negado','Aberto')),
 	resposta varchar(1000),
     data_fechamento datetime,
-    tipo_problema varchar(40)); 
+    tipo_problema varchar(40),
+    avaliacao int
+    constraint ck_avaliacao check(0 < avaliacao <= 6)); 

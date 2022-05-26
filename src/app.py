@@ -245,41 +245,47 @@ def hist():
 def solicitacao():
     #isso possibilita o usuario fazer a solicitacao
     cur = mysql.connection.cursor()  
-    a = cur.execute(quantia_tec)
-    qta_tec = int(str(cur.fetchall()).strip('(,)'))
-  
-    cur.execute(quantia_chamado)
-    qta_cha = int(str(cur.fetchall()).strip('(,)')) +1
-
-    if qta_tec == 0:
-        qta_tec = 1
+    cur.execute('SELECT codigo_usuario FROM usuarios WHERE funcao=%s', [2])
+    executores_ativos = cur.fetchall()
+    if executores_ativos == ():
+        print(executores_ativos)
+        return redirect('/telaadm')
     else:
-        qta_tec = qta_tec
-    cont = qta_cha % qta_tec
 
-    print (cont)
+        cur.execute(quantia_tec)
+        qta_tec = int(str(cur.fetchall()).strip('(,)'))
+  
+        cur.execute(quantia_chamado)
+        qta_cha = int(str(cur.fetchall()).strip('(,)')) +1
 
-    cur.execute("SELECT codigo_usuario FROM usuarios WHERE contador_solicitacao=%s;", [cont])
-    tecnico = cur.fetchall()
-    tecnico = int(str(tecnico).strip('(,)'))
-
-    solicitacao = request.form['solicitacao']
-    problema = request.form['tipo']
-    aberto = 'Aberto'
-    cur = con.cursor()
-    cur.execute(add_solicitacao, [solicitacao,cod,tecnico,aberto,problema])
-    feedback = cur.fetchall
-    con.commit()
-
-    cur = mysql.connection.cursor()
-    cur.execute(verifica_funcao, [cod])
-    funcao = cur.fetchall()
-
-    for f in funcao: 
-        if f[0] == 3:
-            return redirect ('/telaadm')
+        if qta_tec == 0:
+            qta_tec = 1
         else:
-            return redirect ('/telausuario')
+            qta_tec = qta_tec
+        cont = qta_cha % qta_tec
+
+        print (cont)
+
+        cur.execute("SELECT codigo_usuario FROM usuarios WHERE contador_solicitacao=%s;", [cont])
+        tecnico = cur.fetchall()
+        tecnico = int(str(tecnico).strip('(,)'))
+
+        solicitacao = request.form['solicitacao']
+        problema = request.form['tipo']
+        aberto = 'Aberto'
+        cur = con.cursor()
+        cur.execute(add_solicitacao, [solicitacao,cod,tecnico,aberto,problema])
+        con.commit()
+
+        cur = mysql.connection.cursor()
+        cur.execute(verifica_funcao, [cod])
+        funcao = cur.fetchall()
+
+        for f in funcao: 
+            if f[0] == 3:
+                return redirect ('/telaadm')
+            else:
+                return redirect ('/telausuario')
 
 
 @app.route('/resposta/<id>', methods= ['POST']) 
@@ -340,19 +346,16 @@ def tecnico(id):
     cur.execute('SELECT codigo_usuario FROM usuarios WHERE codigo_usuario!=%s AND funcao=%s', [id, 2])
     executores_ativos = cur.fetchall()
     if executores_ativos == ():
-        print(executores_ativos)
         return redirect('/telaadm')
     else:
         a = cur.execute(quantia_tec)
         max_cont = int(str(cur.fetchall()).strip('(,)'))
 
-        print (max_cont)
 
         cur = mysql.connection.cursor()
         cur.execute('SELECT codigo_usuario, contador_solicitacao FROM usuarios WHERE funcao=%s', [2])
         tec_cont_soli = cur.fetchall()
 
-        print (tec_cont_soli)
 
         # ------------------------------
         cur = con.cursor()
@@ -389,8 +392,6 @@ def tecnico(id):
         cur = mysql.connection.cursor()
         cur.execute('SELECT contador_solicitacao FROM usuarios WHERE codigo_usuario=%s', [id])
         cod_cont = int(str(cur.fetchall()).strip('(,)'))
-
-    print (cod_cont)
 
         if max_cont != cod_cont-1:
         

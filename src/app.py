@@ -264,6 +264,27 @@ def graficos():
 
     return render_template('adm_graficos.html', per_cham=per_cham)
 
+@app.route('/intervalo', methods= ['POST'])
+def intervalo():
+    
+    intervalo = request.form['intervalo']
+    print(intervalo)
+
+    cur = mysql.connection.cursor()
+    cur.execute("select _status FROM solicitacao ORDER BY data_abertura DESC;")
+    chamados = cur.fetchall()
+    aberto = 0
+    fechado = 0
+    for k in chamados:
+        list(k)
+        if k[0] == 'Aberto':
+            aberto = aberto + 1
+        else:
+            fechado = fechado + 1
+    per_cham = [aberto,fechado]
+
+    return render_template('adm_graficos.html', per_cham=per_cham)
+
 #----------------------------------------------------
 
 

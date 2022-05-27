@@ -58,6 +58,21 @@
         </header>
         
         <main id="graficos">
+            <div>
+                <form method="post" action="/intervalo">
+                    <label class="texto">Informe o intervalo de tempo desejado</label>
+                    <select name="intervalo">
+                        <option value="hoje">Hoje</option>
+                        <option value="semana">Última semana</option>
+                        <option value="15dias">Últimos 15 dias</option>
+                        <option value="mes">Último mês</option>
+                        <option value="tudo">Tudo</option>
+                    </select>
+                    <button type="submit">Ver</button>
+                </form>
+            </div>
+
+
             <h1 class="relatorios-titulo"> Relatórios do Sistema</h1>
             <div class="graficos-cima">
                 <div class="grafico-porcentagem">
@@ -67,8 +82,8 @@
                         function drawChart() {
                             var data = google.visualization.arrayToDataTable([
                             ['Status',  'Quantidade'],
-                            ['Fechados', 1],
-                            ['Abertos', 2],
+                            ['Fechados', {{per_cham[1]}}],
+                            ['Abertos', {{per_cham[0]}}],
                             ]);
 
                             var options ={
@@ -87,52 +102,54 @@
                     </script> 
                     <div id="donutchart" style="width: 100%; height: 100%;"></div>
                 </div>
+
                 <div class="grafico-evolucao">
-                <script type="text/javascript">
-                    google.charts.load('current', {'packages':['line']});
-                    google.charts.setOnLoadCallback(drawChart);
+                        <script type="text/javascript">
+                            google.charts.load('current', {'packages':['line']});
+                            google.charts.setOnLoadCallback(drawChart);
 
-                function drawChart() {
+                        function drawChart() {
 
-                    var data = new google.visualization.DataTable();
-                    data.addColumn('number', 'Day');
-                    data.addColumn('number', 'Abertos');
-                    data.addColumn('number', 'Fechados');
-                    
+                            var data = new google.visualization.DataTable();
+                            data.addColumn('number', 'Day');
+                            data.addColumn('number', 'Abertos');
+                            data.addColumn('number', 'Fechados');
+                            
 
-                    data.addRows([
-                        [1,  37.8, 80.8],
-                        [3,  25.4,   57],
-                        [4,  11.7, 18.8],
-                        [5,  11.9, 17.6],
-                        [6,   8.8, 13.6],
-                        [7,   7.6, 12.3],
-                        [8,  12.3, 29.2],
-                        [9,  16.9, 42.9],
-                        [10, 12.8, 30.9],
-                        [11,  5.3,  7.9],
-                        [12,  6.6,  8.4],
-                        [13,  4.8,  6.3],
-                        [14,  4.2,  6.2]
-                    ]);
+                            data.addRows([
+                                [1,  37.8, 80.8],
+                                [3,  25.4,   57],
+                                [4,  11.7, 18.8],
+                                [5,  11.9, 17.6],
+                                [6,   8.8, 13.6],
+                                [7,   7.6, 12.3],
+                                [8,  12.3, 29.2],
+                                [9,  16.9, 42.9],
+                                [10, 12.8, 30.9],
+                                [11,  5.3,  7.9],
+                                [12,  6.6,  8.4],
+                                [13,  4.8,  6.3],
+                                [14,  4.2,  6.2]
+                            ]);
 
-                var options = {
-                    chart: {
-                        title: 'Evolução de chamados abertos e fechados',
-                        width: 600,
-                        height: 400,
-                    },
-                    
-                };
+                        var options = {
+                            chart: {
+                                title: 'Evolução de chamados abertos e fechados',
+                                width: 600,
+                                height: 400,
+                            },
+                            
+                        };
 
-                var chart = new google.charts.Line(document.getElementById('linechart_material'));
+                        var chart = new google.charts.Line(document.getElementById('linechart_material'));
 
-                chart.draw(data, google.charts.Line.convertOptions(options));
-                }
-                </script>
-                <div id="linechart_material" style="width: 600px; height: 400px;"></div>
+                        chart.draw(data, google.charts.Line.convertOptions(options));
+                        }
+                        </script>
+                    <div id="linechart_material" style="width: 600px; height: 400px;"></div>
                 </div>
             </div>
+
             <div class="graficos-baixo">
                 <div class="relatorio-med-tecnicos">
                     <div class="media-tecnicos">
@@ -158,6 +175,7 @@
                             </div>
                     </div>
                 </div>
+
                 <div class="relatorio-med-sistema">
                     <div class="media-sistema">
                         <h2 class="titulo-media-sistema"> Média geral do sistema </h2>

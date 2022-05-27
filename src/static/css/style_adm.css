@@ -1,0 +1,215 @@
+*{
+    font-family: 'Quicksand', sans-serif;
+}
+
+body, html {
+    display: flex;
+    height: 100%; 
+    width: 100%;
+}
+body {
+    display: block;
+    margin: 0;
+}
+section {
+    min-height: 100%;
+    display: flex;
+    flex-direction: row;
+}
+main {
+    flex-grow: 1;
+    background-color: white;
+    padding: 60px;
+}
+header {
+    background-color: rgb(179, 175, 175);
+    width: 250px;
+    padding: 15px 10px 15px 0;
+    border-right: 4px ;
+}
+.perfil,
+.solicitacao,
+.corpo{
+    background-color: white;
+    text-align: center;
+    border: 3px;
+    display: flex;
+}
+.perfil,
+.solicitacao{
+    padding: 10px 0;
+}
+.solicitacao,
+.corpo{
+    text-decoration: none;
+    color: black;
+    border-radius: 0px 30px 30px 0;
+}
+.perfil{
+    margin-left: 10px;
+    border-radius: 3px;
+    align-items: center;
+    justify-content: flex-start;
+}
+.solicitacao{
+    margin: 40px 0 50px 0;
+    justify-content: center;
+}
+.corpo{
+    height: 32px;
+    justify-content: space-around;
+    align-items: center;
+}
+.img{
+    width: 32px;
+    height: 32ps;
+    margin-left: 15px;
+    border-radius: 50%;
+}
+.texto{
+    font-size: 20px;
+    text-align: center;
+    margin-right: 20px;
+    width: 100%;
+}
+.icone{
+    width: 20px;
+    height: 20px;
+    margin-right: 15px;
+}
+header,
+main{
+    flex-shrink: 0;
+}
+.logout1{
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+}
+.logout{
+    display: flex;
+    margin-left: 10px;
+    flex-direction: column;
+}
+table{
+    background-color: rgb(204, 204, 204);
+    border: none;
+    border-radius: 2px;
+    width: 100%;
+    text-align: center;
+    border-spacing: 1px;
+}
+table td{
+    padding: 15px;
+    color: black;
+}
+.desc_problema{
+    background-color: rgb(143, 142, 142);
+}
+.criacao{
+    width: 100%;
+    height: 60%;
+    border-radius: 5px;
+    border: 3px solid rgb(146, 146, 146);
+    background-color: rgb(245, 245, 245);
+    font-size: 22px;
+    padding: 15px;
+    text-align: justify;
+    font-family: unset;
+}
+.tela_solicitacao{
+    display: flex;
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    align-items: center;
+} 
+.botao{
+    margin-top: 10px;
+    font-size: 18px;
+    background-color: rgb(177, 10, 4);
+    width: 400px;
+    border-radius: 5px;
+    padding: 15px;
+    color: white;
+    border: 0;
+}
+.text_table {
+    font-size: 20px;
+    background-color: rgb(177, 10 ,4);
+}
+.text_table td{
+    color: whitesmoke;
+}
+.Boxtext_motivo{
+
+    font-size: 18px;
+    width: 200px;
+    height: 100px;
+    border-radius: 5px;
+    border: 3px solid rgb(146, 146, 146);
+    background-color: rgb(245, 245, 245);
+    font-size: 22px;
+    padding: 15px;
+    text-align: justify;
+    font-family: unset;
+}
+.aj {
+    border: 3px;
+    border-color: none;
+}
+.desc_solucao{
+    padding: 10px;
+}
+.btn_enviar{
+    background-color:whitesmoke;
+    color: black;
+    padding: 7px;
+    text-decoration: none;
+    border-radius: 5px;
+}
+.btn{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    
+}
+.btn button{
+    margin: 7px 5px;
+}
+.btn_{
+    background-color: rgb(177, 10, 4);
+    width: 30%;
+    border-radius: 5px;
+    padding: 15px;
+    color: white;
+    border: 0;
+}
+thead {
+    background-color: #a9a9a9;
+}
+.tituloc{
+    margin-left: 10px;
+    text-align: center;
+}
+.formulario{
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    flex-wrap: wrap;
+}
+.td {
+    display: flex;
+    justify-content: center;
+}
+details {
+    background-color: rgb(219, 219, 219);
+    width: 100%;
+    margin-bottom: 30px;
+}
+details > summary {
+    list-style: none;
+    display: flex;
+    justify-content: space-around;
+}

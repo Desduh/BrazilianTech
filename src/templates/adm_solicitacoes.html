@@ -5,8 +5,7 @@
     <meta name="viewport" content="width=device-width,inital-scarle=1.0">
     <meta http-equiv="X-UA-compatible" content="ie=edge">
     <title>Todas as Solicitações</title>
-    <link rel="stylesheet" href="../static/css/style.css">
-    <link rel="stylesheet" href="../static/css/style.css">
+    <link rel="stylesheet" href="../static/css/style_adm.css">
 </head>
 
 <body>
@@ -55,8 +54,78 @@
                 <p style="margin: 0;">Sair</p>
             </div>
         </header>
+
+        <main>
+
+            <h1>Aceitos</h1>
+            <table>
+                <thead>
+                    <tr class="text_table">
+                        <td class="aj">Solicitação</td>
+                        <td class="aj">Cliente</td>
+                        <td class="aj">Data da solicitação</td>
+                        <td class="aj">Técnico</td>
+                        <td class="aj">Resposta</td>
+                        <td class="aj">Data da resposta</td>
+                    </tr>
+                </thead>
+                {% for user in Details %}
+                    {% if user[5] == 'Aceito' %}
+                        <tr>
+                            <td class="aj">{{user[1]}}</td>
+                            {% for w in usuarios %}
+                            {% if user[2] == w[0] %}
+                            <td class="aj">{{w[1]}}</td>
+                            {% endif %}
+                            {% endfor %}
+                            <td class="aj">{{user[3]}}</td>
+                            {% for w in usuarios %}
+                            {% if user[4] == w[0] %}
+                            <td class="aj">{{w[1]}}</td>
+                            {% endif %}
+                            {% endfor %}
+                            <td class="aj">{{user[6]}}</td>
+                            <td class="aj">{{user[7]}}</td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}  
+            </table>
         
-        <div id="ab">
+            <h1>Negados</h1>
+            <table>
+                <thead>
+                    <tr class="text_table">
+                        <td class="aj">Solicitação</td>
+                        <td class="aj">Cliente</td>
+                        <td class="aj">Data da solicitação</td>
+                        <td class="aj">Técnico</td>
+                        <td class="aj">Resposta</td>
+                        <td class="aj">Data da resposta</td>
+                    </tr>
+                </thead>
+                {% for user in Details %}
+                    {% if user[5] == 'Negado' %}
+                        <tr>
+                            <td class="aj">{{user[1]}}</td>
+                            {% for w in usuarios %}
+                            {% if user[2] == w[0] %}
+                            <td class="aj">{{w[1]}}</td>
+                            {% endif %}
+                            {% endfor %}
+                            <td class="aj">{{user[3]}}</td>
+                            {% for w in usuarios %}
+                            {% if user[4] == w[0] %}
+                            <td class="aj">{{w[1]}}</td>
+                            {% endif %}
+                            {% endfor %}
+                            <td class="aj">{{user[6]}}</td>
+                            <td class="aj">{{user[7]}}</td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}  
+            </table>
+      
+            <h1>Abertos</h1>
             {% for user in Details %}
             {% if user[5] == 'Aberto' %}
             <details>
@@ -67,6 +136,11 @@
                                 {% for w in usuarios %}
                                 {% if user[2] == w[0] %}
                                 <td>Cliente: {{w[1]}}</td>
+                                {% endif %}
+                                {% endfor %}
+                                {% for w in usuarios %}
+                                {% if user[4] == w[0] %}
+                                <td>Técnico: {{w[1]}}</td>
                                 {% endif %}
                                 {% endfor %}
                                 <td>Data da solicitação: {{user[3]}}</td>
@@ -105,7 +179,9 @@
             </details>
             {% endif %}
             {% endfor %}
-        </div>
+            
+        </main>
+        
     </section>
 </body>
 

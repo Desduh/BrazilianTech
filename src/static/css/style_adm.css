@@ -213,3 +213,7 @@ details > summary {
     display: flex;
     justify-content: space-around;
 }
+.aviso {
+    color: rgb(177, 10, 4);
+    text-align: center;
+}

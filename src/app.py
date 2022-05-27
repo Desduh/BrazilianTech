@@ -399,7 +399,7 @@ def tecnico(id):
     cur.execute('SELECT codigo_usuario FROM usuarios WHERE codigo_usuario!=%s AND funcao=%s', [id, 2])
     executores_ativos = cur.fetchall()
     if executores_ativos == ():
-        return redirect('/telaadm')
+        return redirect("/usuarios_erro")
     else:
         a = cur.execute(quantia_tec)
         max_cont = int(str(cur.fetchall()).strip('(,)'))
@@ -461,7 +461,18 @@ def tecnico(id):
 
     # ------------------------------
 
-        return redirect ("/telaadm#usuarios")
+        return redirect("/usuarioss")
+
+@app.route('/usuarios_erro')
+def falta_tec():
+
+    cur = mysql.connection.cursor()
+    cur.execute("select * FROM usuarios;")
+    usuarios = cur.fetchall()
+
+    aviso = "*O sistema precisa ter ao menos um técnico!"
+
+    return render_template('adm_usuarios.html', usuarios=usuarios, aviso=aviso)
 
 
 

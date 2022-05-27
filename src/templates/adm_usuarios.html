@@ -24,31 +24,30 @@
                     </div>
                 </div>
                 <hr>
-                <a href="#soli" class="solicitacao">
+                <a href="./nova_soli" class="solicitacao">
                     <img class="icone" src="https://cdn-icons-png.flaticon.com/512/37/37770.png?w=360">
                     <div>
                         Nova solicitação
                     </div>
                 </a>
-                <a href="#graficos" class="solicitacao">
+                <a href="./graficos" class="solicitacao">
                     <div>
                         Graficos
                     </div>
                 </a>
-                <a href="#usuarios" class="solicitacao">
+                <a href="./usuarioss" class="solicitacao">
                     <div>
                         Usuários
                     </div>
                 </a>
-                <a href="#historico" class="solicitacao">
+                <a href="./historico" class="solicitacao">
                     <div>
                         Minhas solicitações
                     </div>
                 </a>
-                <h3>Solicitações:</h3>
-                <a href="/src/templates/" class="solicitacao">
+                <a href="./solicitacoes" class="solicitacao">
                     <div>
-                        Todas as solicitações
+                        Solicitações
                     </div> 
                 </a>
             </nav>
@@ -57,43 +56,44 @@
                 <p style="margin: 0;">Sair</p>
             </div>
         </header>
-        <div id="usuarios">
-                <table>
-                    <thead>
-                        <tr class="text_table">
-                            <td>Usuários</td>
-                            <td>Função</td>
-                            <td>Tornar Técnico</td>
-                        </tr>
-                    </thead>
-                    {% for user in usuarios %}
-                        {% if user[3] == 3 %}
-                        {% else %}
-                    <tr>
-                        <td class="aj">{{user[1]}}</td>
-                        {% if user[3] == 1 %}
-                        <td class="aj">Usuário</td>
-                        {% elif user[3] == 2 %}
-                        <td class="aj">Técnico</td>
-                        {% endif %}
-                        {% if user[3] == 1 %}
-                        <td class="aj">
-                            <form method="POST" action="/tornarexe/{{user.0}}">
-                                <button type="submit">Promover</button>
-                            </form>
-                        </td>
-                        {% else %}
-                        <td class="aj">
-                            <form method="POST" action="/tornaruser/{{user.0}}">
-                                <button type="submit">Rebaixar</button>
-                            </form>
-                        </td>
-                        {% endif %}
+
+        <main>
+            <table>
+                <thead>
+                    <tr class="text_table">
+                        <td>Usuários</td>
+                        <td>Função</td>
+                        <td>Tornar Técnico</td>
                     </tr>
-                        {% endif %}
-                    {% endfor %}
-                </table>
-            </div>
+                </thead>
+                {% for user in usuarios %}
+                    {% if user[3] == 3 %}
+                    {% else %}
+                <tr>
+                    <td class="aj">{{user[1]}}</td>
+                    {% if user[3] == 1 %}
+                    <td class="aj">Usuário</td>
+                    {% elif user[3] == 2 %}
+                    <td class="aj">Técnico</td>
+                    {% endif %}
+                    {% if user[3] == 1 %}
+                    <td class="aj">
+                        <form method="POST" action="/tornarexe/{{user.0}}">
+                            <button type="submit">Promover</button>
+                        </form>
+                    </td>
+                    {% else %}
+                    <td class="aj">
+                        <form method="POST" action="/tornaruser/{{user.0}}">
+                            <button type="submit">Rebaixar</button>
+                        </form>
+                    </td>
+                    {% endif %}
+                </tr>
+                    {% endif %}
+                {% endfor %}
+            </table>
+        </main>
     </section>
 </body>
 

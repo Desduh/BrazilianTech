@@ -17,56 +17,45 @@
             </div>
             <nav>
                 <div class="perfil">
-                    <img class="img"
-                        src="https://cdn-icons-png.flaticon.com/512/64/64572.png?w=740&t=st=1649205811~exp=1649206411~hmac=2b5ab8271b0f5e8fad6bbbfaf3aebb98fc508fa02302d598d79b31bb4239cf53">
+                    <img class="img"src="https://cdn-icons-png.flaticon.com/512/64/64572.png?w=740&t=st=1649205811~exp=1649206411~hmac=2b5ab8271b0f5e8fad6bbbfaf3aebb98fc508fa02302d598d79b31bb4239cf53">
                     <div class="texto">
-                        Meu perfil
+                       Administrador
                     </div>
                 </div>
                 <hr>
-                <a href="/src/templates/respondidas.html" class="solicitacao">
-                    <div>
-                        Respondidas
-                    </div>
-                </a>
-
-                <a href="#soli" class="solicitacao">
+                <a href="./nova_soli" class="solicitacao">
                     <img class="icone" src="https://cdn-icons-png.flaticon.com/512/37/37770.png?w=360">
                     <div>
                         Nova solicitação
                     </div>
                 </a>
-
-                <a href="/src/templates/historico.html" class="solicitacao">
-                    <div>
-                        Minhas solicitações
-                    </div>
-                </a>
-                <hr>
-                <a href="/src/templates/usuarios.html" class="solicitacao">
-                    <div>
-                        Usuários
-                    </div>
-                </a>
-
-                <a href="#graficos" class="solicitacao">  
+                <a href="./graficos" class="solicitacao">
                     <div>
                         Graficos
                     </div>
                 </a>
-
-                <a href="/src/templates/solicitacoes.html" class="solicitacao">
+                <a href="./usuarioss" class="solicitacao">
                     <div>
-                        Todas as solicitações
+                        Usuários
+                    </div>
+                </a>
+                <a href="./historico" class="solicitacao">
+                    <div>
+                        Minhas solicitações
+                    </div>
+                </a>
+                <a href="./solicitacoes" class="solicitacao">
+                    <div>
+                        Solicitações
                     </div> 
                 </a>
-                
             </nav>
             <div class="logout">
                 <a href="./login.html"><img src="..\static\Imagens\logout.png" alt="Logout"></a>
                 <p style="margin: 0;">Sair</p>
             </div>
         </header>
+        
         <div id="ab">
             {% for user in Details %}
             {% if user[5] == 'Aberto' %}

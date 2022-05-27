@@ -56,6 +56,31 @@
                 <p style="margin: 0;">Sair</p>
             </div>
         </header>
+        
+        <main id="historico">
+            <table>
+                <thead>
+                    <tr class="text_table">
+                        <td class="aj">Solicitação</td>
+                        <td class="aj">Problema</td>
+                        <td class="aj">Data da solicitação</td>
+                        <td class="aj">Resposta</td>
+                        <td class="aj">Data da resposta</td>
+                        <td class="aj">Status</td>
+                    </tr>
+                </thead>
+                {% for user in dados %}
+                    <tr>
+                        <td class="aj">{{user[1]}}</td>
+                        <td class="aj">{{user[8]}}</td>
+                        <td class="aj">{{user[3]}}</td>
+                        <td class="aj">{{user[6]}}</td>
+                        <td class="aj">{{user[7]}}</td>
+                        <td class="aj">{{user[5]}}</td>
+                    </tr>
+                {% endfor %}  
+            </table>
+        </main>
     </section>
 </body>
 

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,inital-scarle=1.0">
     <meta http-equiv="X-UA-compatible" content="ie=edge">
-    <title>Página do Administrador</title>
+    <title>Nova Solicitação</title>
     <link rel="stylesheet" href="../static/css/style.css">
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 </head>
@@ -24,66 +24,56 @@
                     </div>
                 </div>
                 <hr>
-                <a href="#soli" class="solicitacao">
+                <a href="./nova_soli" class="solicitacao">
                     <img class="icone" src="https://cdn-icons-png.flaticon.com/512/37/37770.png?w=360">
                     <div>
                         Nova solicitação
                     </div>
                 </a>
-
-                <a href="/src/templates/historico.html" class="solicitacao">
+                <a href="./graficos" class="solicitacao">
                     <div>
-                        Minhas solicitações
+                        Graficos
                     </div>
                 </a>
-                <hr>
-                <a href="/src/templates/usuarios.html" class="solicitacao">
+                <a href="./usuarioss" class="solicitacao">
                     <div>
                         Usuários
                     </div>
                 </a>
-
-                <a href="#graficos" class="solicitacao">  
+                <a href="./historico" class="solicitacao">
                     <div>
-                        Gráficos
+                        Minhas solicitações
                     </div>
                 </a>
-
-                <a href="/src/templates/solicitacoes.html" class="solicitacao">
+                <a href="./solicitacoes" class="solicitacao">
                     <div>
-                        Todas as solicitações
+                        Solicitações
                     </div> 
                 </a>
-                
             </nav>
             <div class="logout">
                 <a href="./login.html"><img src="..\static\Imagens\logout.png" alt="Logout"></a>
                 <p style="margin: 0;">Sair</p>
             </div>
         </header>
-        <main id="historico">
-            <table>
-                <thead>
-                    <tr class="text_table">
-                        <td class="aj">Solicitação</td>
-                        <td class="aj">Problema</td>
-                        <td class="aj">Data da solicitação</td>
-                        <td class="aj">Resposta</td>
-                        <td class="aj">Data da resposta</td>
-                        <td class="aj">Status</td>
-                    </tr>
-                </thead>
-                {% for user in lista %}
-                    <tr>
-                        <td class="aj">{{user[1]}}</td>
-                        <td class="aj">{{user[8]}}</td>
-                        <td class="aj">{{user[3]}}</td>
-                        <td class="aj">{{user[6]}}</td>
-                        <td class="aj">{{user[7]}}</td>
-                        <td class="aj">{{user[5]}}</td>
-                    </tr>
-                {% endfor %}  
-            </table>
+
+        <main>
+            <div class="tela_solicitacao">
+                <form class="tela_solicitacao" name="solicitacao" method="post" action="{{url_for('solicitacao')}}">
+                    <label class="texto">Descrição do problema</label>
+                    <br>
+                    <textarea type ='text' name="solicitacao" class="criacao" placeholder="Descreva a solicitação..." request></textarea>
+                    <br>
+                    <label class="texto">Tipo de problema</label>
+                    <select name="tipo">
+                        <option value="Dúvidas ou Esclarecimentos">Dúvidas ou Esclarecimentos</option>
+                        <option value="Problemas de Software">Problemas de Software</option>
+                        <option value="Problemas de Hardware">Problemas de Hardware</option>
+                    </select>
+                    <br>
+                    <button class="botao" type="submit">Enviar</button>
+                </form>
+            </div>
         </main>
     </section>
 </body>

@@ -229,7 +229,11 @@ def solicitacaos():
     cur.execute("select * FROM solicitacao ORDER BY data_abertura DESC;") #pegar todas infos dos chamados 
     Details = cur.fetchall()
 
-    return render_template('adm_solicitacoes.html', Details=Details)
+    cur = mysql.connection.cursor()
+    cur.execute("select * FROM usuarios;")
+    usuarios = cur.fetchall()
+
+    return render_template('adm_solicitacoes.html', Details=Details, usuarios=usuarios)
 
 
 @app.route('/usuarioss')
@@ -361,7 +365,7 @@ def resposta(id):
 
     for f in funcao: 
         if f[0] == 3:
-            return redirect ('/telaadm#ab')
+            return redirect ('/solicitacoes')
         else:
             return redirect ('/telatecnico#ab')
 

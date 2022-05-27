@@ -6,6 +6,7 @@ import MySQLdb
 import functools
 
 
+
 #CONGFIGURAÇÃO MYSQL/FLASK----------------------------------------------------CONGFIGURAÇÃO MYSQL/FLASK------------------------
 app = Flask('__name__') 
 app.config['MYSQL_HOST'] = 'localhost' #adicione o hostname
@@ -90,6 +91,14 @@ def login():
 @app.route('/cadastro.html')
 def cadastro():
     return render_template('cadastro.html')
+
+
+
+
+
+
+
+
 
 #FUNÇÕES
 @app.route('/cadastro.html', methods= ['POST'])
@@ -186,19 +195,57 @@ def logout():
 
 
 #PAGINAS DE USUARIO/TÉCNICO/ADIMINISTRADOR------------------------------------PAGINAS DE USUARIO/TÉCNICO/ADIMINISTRADOR-----------------------------------------------------------
+#AMD----------------------------------------------------------------
 @app.route('/telaadm')
 @check_id_adm
 def telaadm():
+    return render_template("adm.html")
+
+
+@app.route('/nova_soli')
+def nova_soli():
+    return render_template('adm_nova_soli.html')
+
+
+@app.route('/historico')
+def historio():
+
+    cur = mysql.connection.cursor()
+    cur.execute(historico, [cod])
+    dados = cur.fetchall()
+    
+    return render_template('adm_historico.html', dados=dados)
+
+
+@app.route('/respondidas')
+def respondidas():
+    return render_template('adm_respondidas.html')
+
+
+@app.route('/solicitacoes')
+def solicitacaos():
+
+    cur = mysql.connection.cursor()
+    cur.execute("select * FROM solicitacao ORDER BY data_abertura DESC;") #pegar todas infos dos chamados 
+    Details = cur.fetchall()
+
+    return render_template('adm_solicitacoes.html', Details=Details)
+
+
+@app.route('/usuarioss')
+def usuarioss():
+
     cur = mysql.connection.cursor()
     cur.execute("select * FROM usuarios;")
     usuarios = cur.fetchall()
 
-    cur.execute("select * FROM solicitacao ORDER BY data_abertura DESC;") #pegar todas infos dos chamados 
-    Details = cur.fetchall()
-    
-    cur.execute(historico, [cod])
-    lista = cur.fetchall()
+    return render_template('adm_usuarios.html', usuarios=usuarios)
 
+
+@app.route('/graficos')
+def graficos():
+
+    cur = mysql.connection.cursor()
     cur.execute("select _status FROM solicitacao ORDER BY data_abertura DESC;")
     chamados = cur.fetchall()
     aberto = 0
@@ -211,7 +258,9 @@ def telaadm():
             fechado = fechado + 1
     per_cham = [aberto,fechado]
 
-    return render_template("adm.html", usuarios=usuarios, Details=Details, lista=lista, per_cham=per_cham)
+    return render_template('adm_graficos.html', per_cham=per_cham)
+
+#----------------------------------------------------
 
 
 @app.route('/telatecnico')

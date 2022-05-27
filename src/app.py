@@ -4,6 +4,9 @@ from flask import Flask, render_template, request, url_for, redirect, session
 from flask_mysqldb import MySQL
 import MySQLdb
 import functools
+from datetime import datetime, date
+from dateutil.relativedelta import relativedelta
+
 
 
 
@@ -11,9 +14,9 @@ import functools
 app = Flask('__name__') 
 app.config['MYSQL_HOST'] = 'localhost' #adicione o hostname
 app.config['MYSQL_USER'] = 'root' #adicione o nome do seu usuário do MySQL
-app.config['MYSQL_PASSWORD'] = 'fatec' #adicione a senha do seu usuário do MySQL
+app.config['MYSQL_PASSWORD'] = 'franca' #adicione a senha do seu usuário do MySQL
 app.config['MYSQL_DB'] = 'usuarios_solicitacoes' 
-con = MySQLdb.connect( user="root", password="fatec", db="usuarios_solicitacoes")#adicione o nome e a senha do seu usuário do MySQL
+con = MySQLdb.connect( user="root", password="franca", db="usuarios_solicitacoes")#adicione o nome e a senha do seu usuário do MySQL
 mysql = MySQL(app)
 logado = False
 app.secret_key = "fatec"
@@ -250,17 +253,11 @@ def usuarioss():
 def graficos():
 
     cur = mysql.connection.cursor()
-    cur.execute("select _status FROM solicitacao ORDER BY data_abertura DESC;")
-    chamados = cur.fetchall()
-    aberto = 0
-    fechado = 0
-    for k in chamados:
-        list(k)
-        if k[0] == 'Aberto':
-            aberto = aberto + 1
-        else:
-            fechado = fechado + 1
-    per_cham = [aberto,fechado]
+    cur.execute('SELECT codigo_solicitacao FROM solicitacao WHERE data_abertura > 0000-00-00 AND data_abertura < now() AND data_fechamento IS null')
+    cham_abertos = cur.fetchall()
+    cur.execute('select codigo_solicitacao from solicitacao where data_abertura > 0000-00-00 and data_abertura < now() and data_fechamento< now()')
+    cham_fechados = cur.fetchall()
+    per_cham = [len(cham_abertos), len(cham_fechados)]
 
     return render_template('adm_graficos.html', per_cham=per_cham)
 
@@ -268,20 +265,24 @@ def graficos():
 def intervalo():
     
     intervalo = request.form['intervalo']
-    print(intervalo)
-
-    cur = mysql.connection.cursor()
-    cur.execute("select _status FROM solicitacao ORDER BY data_abertura DESC;")
-    chamados = cur.fetchall()
-    aberto = 0
-    fechado = 0
-    for k in chamados:
-        list(k)
-        if k[0] == 'Aberto':
-            aberto = aberto + 1
-        else:
-            fechado = fechado + 1
-    per_cham = [aberto,fechado]
+    agora = date.today()
+    if intervalo == 'hoje':
+        inter = agora
+    elif intervalo == 'semana':
+        inter = agora - relativedelta(days=7)
+    elif intervalo == '15dias':
+        inter = agora - relativedelta(days=15)
+    elif intervalo == 'mes':
+        inter = agora - relativedelta(months=1)
+    elif intervalo == 'tudo':
+        inter = '0000-00-00'
+    
+    cur = con.cursor()
+    cur.execute('SELECT codigo_solicitacao FROM solicitacao WHERE data_abertura >%s AND data_abertura < now() AND data_fechamento IS null', [inter])
+    cham_abertos = cur.fetchall()
+    cur.execute('select codigo_solicitacao from solicitacao where data_abertura >%s and data_abertura < now() and data_fechamento< now()', [inter])
+    cham_fechados = cur.fetchall()
+    per_cham = [len(cham_abertos), len(cham_fechados)]
 
     return render_template('adm_graficos.html', per_cham=per_cham)
 

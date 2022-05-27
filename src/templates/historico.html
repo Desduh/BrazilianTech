@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,inital-scarle=1.0">
+    <meta http-equiv="X-UA-compatible" content="ie=edge">
+    <title>Página do Administrador</title>
+    <link rel="stylesheet" href="../static/css/style.css">
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+</head>
+
+<body>
+    <section class="abas">
+        <header>
+            <div class="logout1">
+                <img src="..\static\Imagens\logo.png" width="50%" alt="Logout">
+            </div>
+            <nav>
+                <div class="perfil">
+                    <img class="img"src="https://cdn-icons-png.flaticon.com/512/64/64572.png?w=740&t=st=1649205811~exp=1649206411~hmac=2b5ab8271b0f5e8fad6bbbfaf3aebb98fc508fa02302d598d79b31bb4239cf53">
+                    <div class="texto">
+                       Administrador
+                    </div>
+                </div>
+                <hr>
+                <a href="#soli" class="solicitacao">
+                    <img class="icone" src="https://cdn-icons-png.flaticon.com/512/37/37770.png?w=360">
+                    <div>
+                        Nova solicitação
+                    </div>
+                </a>
+
+                <a href="/src/templates/historico.html" class="solicitacao">
+                    <div>
+                        Minhas solicitações
+                    </div>
+                </a>
+                <hr>
+                <a href="/src/templates/usuarios.html" class="solicitacao">
+                    <div>
+                        Usuários
+                    </div>
+                </a>
+
+                <a href="#graficos" class="solicitacao">  
+                    <div>
+                        Gráficos
+                    </div>
+                </a>
+
+                <a href="/src/templates/solicitacoes.html" class="solicitacao">
+                    <div>
+                        Todas as solicitações
+                    </div> 
+                </a>
+                
+            </nav>
+            <div class="logout">
+                <a href="./login.html"><img src="..\static\Imagens\logout.png" alt="Logout"></a>
+                <p style="margin: 0;">Sair</p>
+            </div>
+        </header>
+        <main id="historico">
+            <table>
+                <thead>
+                    <tr class="text_table">
+                        <td class="aj">Solicitação</td>
+                        <td class="aj">Problema</td>
+                        <td class="aj">Data da solicitação</td>
+                        <td class="aj">Resposta</td>
+                        <td class="aj">Data da resposta</td>
+                        <td class="aj">Status</td>
+                    </tr>
+                </thead>
+                {% for user in lista %}
+                    <tr>
+                        <td class="aj">{{user[1]}}</td>
+                        <td class="aj">{{user[8]}}</td>
+                        <td class="aj">{{user[3]}}</td>
+                        <td class="aj">{{user[6]}}</td>
+                        <td class="aj">{{user[7]}}</td>
+                        <td class="aj">{{user[5]}}</td>
+                    </tr>
+                {% endfor %}  
+            </table>
+        </main>
+    </section>
+</body>
+
+</html>

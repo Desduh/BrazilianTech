@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,inital-scarle=1.0">
+    <meta http-equiv="X-UA-compatible" content="ie=edge">
+    <title>Página do Administrador</title>
+    <link rel="stylesheet" href="../static/css/style.css">
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+</head>
+
+<body>
+    <section class="abas">
+        <header>
+            <div class="logout1">
+                <img src="..\static\Imagens\logo.png" width="50%" alt="Logout">
+            </div>
+            <nav>
+                <div class="perfil">
+                    <img class="img"src="https://cdn-icons-png.flaticon.com/512/64/64572.png?w=740&t=st=1649205811~exp=1649206411~hmac=2b5ab8271b0f5e8fad6bbbfaf3aebb98fc508fa02302d598d79b31bb4239cf53">
+                    <div class="texto">
+                       Administrador
+                    </div>
+                </div>
+                <hr>
+                <a href="#soli" class="solicitacao">
+                    <img class="icone" src="https://cdn-icons-png.flaticon.com/512/37/37770.png?w=360">
+                    <div>
+                        Nova solicitação
+                    </div>
+                </a>
+                <a href="#graficos" class="solicitacao">
+                    <div>
+                        Graficos
+                    </div>
+                </a>
+                <a href="#usuarios" class="solicitacao">
+                    <div>
+                        Usuários
+                    </div>
+                </a>
+                <a href="#historico" class="solicitacao">
+                    <div>
+                        Minhas solicitações
+                    </div>
+                </a>
+                <h3>Solicitações:</h3>
+                <a href="/src/templates/" class="solicitacao">
+                    <div>
+                        Todas as solicitações
+                    </div> 
+                </a>
+            </nav>
+            <div class="logout">
+                <a href="./login.html"><img src="..\static\Imagens\logout.png" alt="Logout"></a>
+                <p style="margin: 0;">Sair</p>
+            </div>
+        </header>
+        <div id="usuarios">
+                <table>
+                    <thead>
+                        <tr class="text_table">
+                            <td>Usuários</td>
+                            <td>Função</td>
+                            <td>Tornar Técnico</td>
+                        </tr>
+                    </thead>
+                    {% for user in usuarios %}
+                        {% if user[3] == 3 %}
+                        {% else %}
+                    <tr>
+                        <td class="aj">{{user[1]}}</td>
+                        {% if user[3] == 1 %}
+                        <td class="aj">Usuário</td>
+                        {% elif user[3] == 2 %}
+                        <td class="aj">Técnico</td>
+                        {% endif %}
+                        {% if user[3] == 1 %}
+                        <td class="aj">
+                            <form method="POST" action="/tornarexe/{{user.0}}">
+                                <button type="submit">Promover</button>
+                            </form>
+                        </td>
+                        {% else %}
+                        <td class="aj">
+                            <form method="POST" action="/tornaruser/{{user.0}}">
+                                <button type="submit">Rebaixar</button>
+                            </form>
+                        </td>
+                        {% endif %}
+                    </tr>
+                        {% endif %}
+                    {% endfor %}
+                </table>
+            </div>
+    </section>
+</body>
+
+</html>

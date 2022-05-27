@@ -213,7 +213,93 @@ details > summary {
     display: flex;
     justify-content: space-around;
 }
-.aviso {
-    color: rgb(177, 10, 4);
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+.relatorios-titulo {
     text-align: center;
 }
+.graficos-cima {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.grafico-porcentagem {
+    align-content: center;
+}
+
+.graficos-baixo {
+    display: flex;
+    justify-content: space-evenly;
+    padding-top: 2%;
+}
+
+.relatorio-med-tecnicos {
+    width: 30%;
+    height: 30%;
+}
+
+.media-tecnicos {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    justify-content: flex-start;
+}
+
+.titulo-media-tecnicos{
+    font-size: x-large;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif
+}
+
+.tabela-media-tecnicos {
+    display: flex;
+    justify-content: center;
+    padding-top: 2%;
+}
+
+.tabela{
+    width: 60%;
+    height: 80%;
+    justify-content: center;
+}
+
+.cabecalho-tabela{
+    background-color: rgb(189, 32, 32);
+    padding: 2%;
+    font-size: larger;
+    color: white
+}
+
+.relatorio-med-sistema {
+    width: 30%;
+    height: 30%;
+    align-items: center;
+}
+
+.media-sistema {
+    border: 3px solid black;
+    text-align: center;
+    width: 60%;
+    height: 60%;
+    justify-content: center;
+}
+
+.titulo-media-sistema{
+    font-size: x-large;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    color: rgb(189, 32, 32);
+}
+
+.nota-sistema {
+    font-size: xx-large;
+    text-align: center;
+}
+
+
+
+
+
+
+
+
+

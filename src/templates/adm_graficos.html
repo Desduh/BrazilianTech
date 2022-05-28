@@ -32,7 +32,7 @@
                 </a>
                 <a href="./graficos" class="solicitacao">
                     <div>
-                        Graficos
+                        Relatórios do Sistema
                     </div>
                 </a>
                 <a href="./usuarioss" class="solicitacao">
@@ -58,23 +58,18 @@
         </header>
         
         <main id="graficos">
-            <div class="tudo">
-                <form method="post" action="/intervalo">
-                    <label class="texto">Informe o intervalo de tempo desejado</label>
-                    <select class="tempo" name="intervalo">
-                        <option value="hoje">Hoje</option>
-                        <option value="semana">Última semana</option>
-                        <option value="15dias">Últimos 15 dias</option>
-                        <option value="mes">Último mês</option>
-                        <option value="tudo">Tudo</option>
-                    </select>
-                    <button class="ver" type="submit">Ver</button>
-                </form>
-            </div>
-            <br>
             <div class="relatorios-graficos">
-                <h1 class="relatorios-titulo"> Relatórios do Sistema</h1>
-                <br>
+
+                <div class="div_intervalo">
+                    <h3 class="test_inter">Período a visualizar:</h3>
+                    <form class="form_intervalo" method="post" action="/intervalo">
+                            <input class="tempo" type="submit" name="intervalo" value="hoje">
+                            <input class="tempo" type="submit" name="intervalo" value="semana">
+                            <input class="tempo" type="submit" name="intervalo" value="15dias">
+                            <input class="tempo" type="submit" name="intervalo" value="mes">
+                            <input class="tempo" type="submit" name="intervalo" value="tudo">
+                    </form>
+                </div>
 
                 <div>
                     <script type="text/javascript">

@@ -14,9 +14,9 @@ from dateutil.relativedelta import relativedelta
 app = Flask('__name__') 
 app.config['MYSQL_HOST'] = 'localhost' #adicione o hostname
 app.config['MYSQL_USER'] = 'root' #adicione o nome do seu usuário do MySQL
-app.config['MYSQL_PASSWORD'] = 'franca' #adicione a senha do seu usuário do MySQL
+app.config['MYSQL_PASSWORD'] = 'fatec' #adicione a senha do seu usuário do MySQL
 app.config['MYSQL_DB'] = 'usuarios_solicitacoes' 
-con = MySQLdb.connect( user="root", password="franca", db="usuarios_solicitacoes")#adicione o nome e a senha do seu usuário do MySQL
+con = MySQLdb.connect( user="root", password="fatec", db="usuarios_solicitacoes")#adicione o nome e a senha do seu usuário do MySQL
 mysql = MySQL(app)
 logado = False
 app.secret_key = "fatec"
@@ -94,12 +94,6 @@ def login():
 @app.route('/cadastro.html')
 def cadastro():
     return render_template('cadastro.html')
-
-
-
-
-
-
 
 
 
@@ -501,7 +495,8 @@ def falta_tec():
 #FUNÇÕES DE AVALIAÇÃO----------------------------------------------FUNÇÕES DE AVALIAÇÃO-------------------------------------------------
 @app.route('/avaliacao_solicitacao/<cod_soli>', methods= ['POST']) 
 def avaliacao_solicitacao(cod_soli):
-    nota = request.form['nota']
+
+    nota = request.form['rate']
 
     cur = con.cursor()
     cur.execute("UPDATE solicitacao SET avaliacao=%s WHERE codigo_solicitacao = %s", [nota,cod_soli])
@@ -509,6 +504,6 @@ def avaliacao_solicitacao(cod_soli):
     con.commit()
 
     if check_func('3'):
-        return redirect ('/telaadm#ab')
+        return redirect ('/historico')
     else:
         return redirect ('/telausuario')

@@ -213,30 +213,61 @@ details > summary {
     display: flex;
     justify-content: space-around;
 }
-/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+.ver {
+    color:rgb(255, 255, 255);
+    background-color: #080808;
+    border-color: rgb(0, 0, 0);
+    border-radius: 10%;
+    padding: 0.2%;
+    padding-left: 1.5%;
+    padding-right: 1.5%;
+}
+.tempo{
+    padding: 0.25%;
+    padding-right: 4%;
+    border-radius: 7%;
+    border-color: rgb(177, 10, 4);
+    margin-right: 1%;
+    background-color: #d8d5d5;
+
+}
+
+.tudo{
+    background-color: rgb(180, 3, 3);
+    padding: 0.5%;
+    border-radius: 1%;
+    margin: 0;
+    color: white;
+}
+.relatorios-graficos {
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+}
 
 .relatorios-titulo {
+    font-size: xx-large;
+    padding-top: 1%;
+}
+
+.media-sistema {
+  
+    width: 20%;
+    height: 100%;
     text-align: center;
-}
-.graficos-cima {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    padding: 3%;
 }
 
-.grafico-porcentagem {
-    align-content: center;
+.titulo-media-sistema{
+    font-size: x-large;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    color: rgb(189, 32, 32);
 }
 
-.graficos-baixo {
-    display: flex;
-    justify-content: space-evenly;
-    padding-top: 2%;
-}
-
-.relatorio-med-tecnicos {
-    width: 30%;
-    height: 30%;
+.nota-sistema {
+    font-size: xx-large;
+    color: black;
 }
 
 .media-tecnicos {
@@ -244,6 +275,7 @@ details > summary {
     height: 100%;
     text-align: center;
     justify-content: flex-start;
+    padding-top: 3%;
 }
 
 .titulo-media-tecnicos{
@@ -254,11 +286,11 @@ details > summary {
 .tabela-media-tecnicos {
     display: flex;
     justify-content: center;
-    padding-top: 2%;
+    padding-top: 1%;
 }
 
 .tabela{
-    width: 60%;
+    width: 35%;
     height: 80%;
     justify-content: center;
 }
@@ -270,30 +302,7 @@ details > summary {
     color: white
 }
 
-.relatorio-med-sistema {
-    width: 30%;
-    height: 30%;
-    align-items: center;
-}
 
-.media-sistema {
-    border: 3px solid black;
-    text-align: center;
-    width: 60%;
-    height: 60%;
-    justify-content: center;
-}
-
-.titulo-media-sistema{
-    font-size: x-large;
-    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    color: rgb(189, 32, 32);
-}
-
-.nota-sistema {
-    font-size: xx-large;
-    text-align: center;
-}
 
 /* ------------------------------------------------------------------- */
 /* Estilização das estrelas */

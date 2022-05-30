@@ -14,9 +14,9 @@ from dateutil.relativedelta import relativedelta
 app = Flask('__name__') 
 app.config['MYSQL_HOST'] = 'localhost' #adicione o hostname
 app.config['MYSQL_USER'] = 'root' #adicione o nome do seu usuário do MySQL
-app.config['MYSQL_PASSWORD'] = 'fatec' #adicione a senha do seu usuário do MySQL
+app.config['MYSQL_PASSWORD'] = 'franca' #adicione a senha do seu usuário do MySQL
 app.config['MYSQL_DB'] = 'usuarios_solicitacoes' 
-con = MySQLdb.connect( user="root", password="fatec", db="usuarios_solicitacoes")#adicione o nome e a senha do seu usuário do MySQL
+con = MySQLdb.connect( user="root", password="franca", db="usuarios_solicitacoes")#adicione o nome e a senha do seu usuário do MySQL
 mysql = MySQL(app)
 logado = False
 app.secret_key = "fatec"
@@ -259,6 +259,57 @@ def graficos():
 def intervalo():
     
     intervalo = request.form['intervalo']
+    dia_ref = request.form['dataini']
+    print(dia_ref)
+    dia_ref = datetime.strptime(dia_ref[2:], '%d-%m-%y').date()
+    per_cham = get_pie_info(intervalo)
+    evo_cham = get_bar_info(intervalo, dia_ref)
+
+    return render_template('adm_graficos.html', per_cham=per_cham, evo_cham=evo_cham)
+#--------------------------------------------------------
+
+def get_bar_info(intervalo, dia_ref):
+    now = datetime.now()
+    cur = con.cursor()
+    print(intervalo)
+    if intervalo == 'Hoje':
+        inter = dia_ref
+        periodo = 1
+        print('hoje')
+    elif intervalo == 'Semana':
+        inter = dia_ref - relativedelta(days=7)
+        periodo = 8
+        print('semana')
+    elif intervalo == 'Últimos 15 dias':
+        inter = dia_ref - relativedelta(days=15)
+        periodo = 16
+        print('15dia')
+    elif intervalo == 'Último mês':
+        inter = dia_ref - relativedelta(months=1)
+        periodo = 16
+        print('mes')
+    elif intervalo == 'Tudo':
+        cur.execute('SELECT min(data_abertura) AS primeira_solicitacao FROM solicitacao')
+        inter = cur.fetchall()
+        inter = inter[0][0]
+        periodo = (now - inter).days
+        inter = inter.date()
+        print('tudo')
+    
+    evo_cham = []
+    for dias in range(periodo):
+
+        cur.execute('SELECT codigo_solicitacao FROM solicitacao WHERE data_abertura >=%s AND data_abertura <=%s AND data_fechamento IS null', [inter, str(inter)+' 23:59:59'])
+        cham_abertos = cur.fetchall()
+        cur.execute('SELECT codigo_solicitacao FROM solicitacao WHERE data_fechamento >=%s AND data_fechamento<=%s', [inter, str(inter)+' 23:59:59'])
+        cham_fechados = cur.fetchall()
+        per_cham = [len(cham_abertos), len(cham_fechados)]
+        per_cham.append(str(inter))
+        evo_cham.append(per_cham)
+        inter = inter + relativedelta(days=1)
+    return evo_cham
+
+def get_pie_info(intervalo):
     agora = date.today()
     if intervalo == 'Hoje':
         inter = agora
@@ -277,9 +328,7 @@ def intervalo():
     cur.execute('select codigo_solicitacao from solicitacao where data_abertura >%s and data_abertura < now() and data_fechamento< now()', [inter])
     cham_fechados = cur.fetchall()
     per_cham = [len(cham_abertos), len(cham_fechados)]
-
-    return render_template('adm_graficos.html', per_cham=per_cham)
-
+    return per_cham
 #----------------------------------------------------
 
 

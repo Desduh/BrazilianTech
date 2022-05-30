@@ -58,47 +58,64 @@
         </header>
         
         <main id="historico">
-            <table>
-                <thead>
-                    <tr class="text_table">
-                        <td class="aj">Solicitação</td>
-                        <td class="aj">Problema</td>
-                        <td class="aj">Data da solicitação</td>
-                        <td class="aj">Resposta</td>
-                        <td class="aj">Data da resposta</td>
-                        <td class="aj">Status</td>
-                        <td class="aj">Avaliação</td>
-                    </tr>
-                </thead>
-                {% for user in dados %}
-                    <tr>
-                        <td class="aj">{{user[1]}}</td>
-                        <td class="aj">{{user[8]}}</td>
-                        <td class="aj">{{user[3]}}</td>
-                        <td class="aj">{{user[6]}}</td>
-                        <td class="aj">{{user[7]}}</td>
-                        <td class="aj">{{user[5]}}</td>
-                        <td class="aj">
-                            <form class="rate" method="post" action="/avaliacao_solicitacao/{{user.0}}">
-                                <input type="submit" id="star1" name="rate" value="10" />
-                                <label for="star1" title="text"></label>
+            {% for user in lista %}
+            <details>
+                <summary>
+                    <table>
+                        <thead>
+                            <tr class="text_table">
+                                <td>Tipo da solicitacao: {{user[8]}}</td>
+                                <td>Status: {{user[5]}}</td>
+                                <td>Data da solicitação: {{user[3]}}</td>
+                            </tr>
+                        </thead>
+                    </table>
+                </summary>
 
-                                <input type="submit" id="star2" name="rate" value="8" />
-                                <label for="star2" title="text"></label>
+                <table>
+                    <thead>
+                        <tr class="text_table">
+                            <td class="aj">Solicitação</td>
+                            <td class="aj">Resposta</td>
+                            <td class="aj">Data da resposta</td>
+                            {% if user[5] != 'Aberto' %}
+                            {% if user[9] == None %}
+                            <td class="aj">Avaliação</td>
+                            {% endif %}
+                            {% endif %}
+                        </tr>
+                    </thead>
+                    
+                        <tr>
+                            <td class="aj">{{user[1]}}</td>
+                            <td class="aj">{{user[6]}}</td>
+                            <td class="aj">{{user[7]}}</td>
+                            {% if user[5] != 'Aberto' %}
+                            {% if user[9] == None %}
+                            <td class="aj" style="display: flex; justify-content: center;">
+                                <form class="rate" method="post" action="/avaliacao_solicitacao/{{user.0}}">
+                                    <input type="submit" id="star1" name="rate" value="10" />
+                                    <label for="star1" title="text"></label>
 
-                                <input type="submit" id="star3" name="rate" value="6" />
-                                <label for="star3" title="text"></label>
+                                    <input type="submit" id="star2" name="rate" value="8" />
+                                    <label for="star2" title="text"></label>
 
-                                <input type="submit" id="star4" name="rate" value="4" />
-                                <label for="star4" title="text"></label>
+                                    <input type="submit" id="star3" name="rate" value="6" />
+                                    <label for="star3" title="text"></label>
 
-                                <input type="submit" id="star5" name="rate" value="2" />
-                                <label for="star5" title="text"></label>
-                            </form>
-                        </td>
-                    </tr>
-                {% endfor %}  
-            </table>
+                                    <input type="submit" id="star4" name="rate" value="4" />
+                                    <label for="star4" title="text"></label>
+
+                                    <input type="submit" id="star5" name="rate" value="2" />
+                                    <label for="star5" title="text"></label>
+                                </form>
+                            </td>
+                            {% endif %}
+                            {% endif %}
+                        </tr> 
+                </table>
+            </details>
+            {% endfor %}
         </main>
     </section>
 </body>

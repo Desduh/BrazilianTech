@@ -88,7 +88,9 @@
                                 width: 600,
                                 height: 480,
                                 colors: ['rgb(177, 10, 4)', 'rgb(15, 76, 129)'],
-                               
+                                chartArea:{
+                                    left:180,
+                                }
                                 
                             };
 
@@ -101,7 +103,7 @@
                 
                
                 <br>
-                <div>
+                <div class="evo-grafico">
                     <script type="text/javascript">
                         google.charts.load('current', {'packages':['line']});
                         google.charts.setOnLoadCallback(drawChart);

@@ -107,12 +107,21 @@
 
                 <div class="div_intervalo">
                     <h3 class="test_inter">Período a visualizar, entre:</h3>
-                    <form class="form_intervalo" method="post" action="/intervalo">
-                            Dia:
+                    <form method="post" action="/intervalo">
+
+                        <div class="form_intervalo" style="justify-content: center;">
+                            A partir do dia: 
                             <input id="date" type="date" name="dataini">
-                            até
-                            <input id="date" type="date" name="datafim" min='dataini'>
-                            <input type="submit">
+                        </div>
+
+                        <h4 class="test_inter">Intervalo de dias:</h4>
+                        <div class="form_intervalo">
+                            <input class="tempo" type="submit" name="intervalo" value="Hoje">
+                            <input class="tempo" type="submit" name="intervalo" value="Semamna">
+                            <input class="tempo" type="submit" name="intervalo" value="15 dias">
+                            <input class="tempo" type="submit" name="intervalo" value="Mês">
+                            <input class="tempo" type="submit" name="intervalo" value="Tudo">
+                        </div>
                     </form>
                 </div>
 

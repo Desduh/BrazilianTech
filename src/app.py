@@ -498,6 +498,7 @@ def avaliacao_solicitacao(cod_soli):
 
     nota = request.form['rate']
 
+
     cur = con.cursor()
     cur.execute("UPDATE solicitacao SET avaliacao=%s WHERE codigo_solicitacao = %s", [nota,cod_soli])
     feedback = cur.fetchall

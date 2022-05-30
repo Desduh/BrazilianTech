@@ -25,4 +25,4 @@ create table solicitacao
     data_fechamento datetime,
     tipo_problema varchar(40),
     avaliacao int
-    constraint ck_avaliacao check(0 < avaliacao <= 6)); 
+    constraint ck_avaliacao check(0 < avaliacao <= 10));  

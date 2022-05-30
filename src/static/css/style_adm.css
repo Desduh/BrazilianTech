@@ -256,12 +256,16 @@ details > summary {
     padding-top: 1%;
 }
 
+.evo-grafico {
+    margin: left 1%;
+}
 .media-sistema {
   
     width: 20%;
     height: 100%;
     text-align: center;
     padding: 3%;
+    padding-bottom: 0%;
 }
 
 .titulo-media-sistema{

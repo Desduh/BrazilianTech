@@ -260,15 +260,15 @@ def intervalo():
     
     intervalo = request.form['intervalo']
     agora = date.today()
-    if intervalo == 'hoje':
+    if intervalo == 'Hoje':
         inter = agora
-    elif intervalo == 'semana':
+    elif intervalo == 'Última semana':
         inter = agora - relativedelta(days=7)
-    elif intervalo == '15dias':
+    elif intervalo == 'Últimos 15 dias':
         inter = agora - relativedelta(days=15)
-    elif intervalo == 'mes':
+    elif intervalo == 'Último mês':
         inter = agora - relativedelta(months=1)
-    elif intervalo == 'tudo':
+    elif intervalo == 'Tudo':
         inter = '0000-00-00'
     
     cur = con.cursor()

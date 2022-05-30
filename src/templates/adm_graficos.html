@@ -63,11 +63,11 @@
                 <div class="div_intervalo">
                     <h3 class="test_inter">Período a visualizar:</h3>
                     <form class="form_intervalo" method="post" action="/intervalo">
-                            <input class="tempo" type="submit" name="intervalo" value="hoje">
-                            <input class="tempo" type="submit" name="intervalo" value="semana">
-                            <input class="tempo" type="submit" name="intervalo" value="15dias">
-                            <input class="tempo" type="submit" name="intervalo" value="mes">
-                            <input class="tempo" type="submit" name="intervalo" value="tudo">
+                            <input class="tempo" type="submit" name="intervalo" value="Hoje">
+                            <input class="tempo" type="submit" name="intervalo" value="Última semana">
+                            <input class="tempo" type="submit" name="intervalo" value="Últimos 15 dias">
+                            <input class="tempo" type="submit" name="intervalo" value="Último mês">
+                            <input class="tempo" type="submit" name="intervalo" value="Tudo">
                     </form>
                 </div>
 
@@ -103,6 +103,22 @@
                 
                
                 <br>
+
+
+                <div class="div_intervalo">
+                    <h3 class="test_inter">Período a visualizar, entre:</h3>
+                    <form class="form_intervalo" method="post" action="/intervalo">
+                            Dia:
+                            <input id="date" type="date" name="dataini">
+                            até
+                            <input id="date" type="date" name="datafim" min='dataini'>
+                            <input type="submit">
+                    </form>
+                </div>
+
+                <br>
+                <br>
+
                 <div class="evo-grafico">
                     <script type="text/javascript">
                         google.charts.load('current', {'packages':['line']});

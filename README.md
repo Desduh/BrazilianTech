@@ -9,7 +9,7 @@
 
 <br>
 
-<h2> Descrição do Projeto </h2>
+<h2> 📚Descrição do Projeto </h2>
 <p> Este projeto tem por objetivo desenvolvimento de uma plataforma de central de serviços para que a empresa cliente possa receber, atender e recusar serviços.</p> 
 <p>Organização do repositório:</p>  
 <p> Pasta Src: pasta templates contém as páginas do site; pasta static contém as imagens e os arquivos de estilização em css; arquivo app.py com os códigos de python; arquivo banco.sql com o script do banco de dados; e o arquivo requirements.txt; </p>
@@ -18,7 +18,7 @@
 
 <br>
 
-<h2> Execução </h2>
+<h2> 🖥 Execução </h2>
 
 -Criar uma pasta
 
@@ -53,7 +53,7 @@
 ```
 
 <br>
--Ir no MySQL Workbench > open script > banco.sql > executar linhas
+-Ir no MySQL Workbench > open script > banco.sql > adiconar um  e-mail e uma senha para o  administrador > executar linhas
 <img src="src\static\imagens\print_db.png" />
 <br>
 -Retornar ao  Visual Code e alterar as informações sobre o banco:
@@ -68,10 +68,9 @@
 
 <br>
 
-<h2> Sobre o site </h2>
-Nossa site  irá facilitar a comunicação entre os cliente e técnicos, pois conecta as pessoas que necessitam de suporte, seja ele: software ou hardware a um profissional da área de TI, onde os mesmos podem solicitar um pedido ou ver seus pedidos anteriores e tais pedidos são disponibilizados aos profissionais, que solucionarão o problema.
+<h2>🔍 Sobre o site </h2>
 
-Na parte de cadastro, o administrador deve criar uma conta com o e-mail "administrador@adm" e a senha "fatec" para ter acesso ao sistema de chamados, já os clientes e os técnicos poderam criar uma conta com um e-mail e senha de sua preferência.
+Nossa site  irá facilitar a comunicação entre os clientes e técnicos, pois conecta as pessoas que necessitam de suporte, seja ele: software ou hardware a um profissional da área de TI, onde os mesmos podem solicitar um pedido ou ver seus pedidos anteriores e tais pedidos são disponibilizados aos profissionais, que solucionarão o problema.
 
 Vale destacar que o administrador deve promover ao menos um usuário para técnico (aba usuários -> promover) antes de uma solicitação ser criada:
 
@@ -79,7 +78,7 @@ Templates clientes:
 
 <img src="src\static\imagens\usuario.gif" />
 
-Templates técnico:
+Templates técnicos:
 
 <img src="src\static\imagens\tecnico.gif" />
 
@@ -87,7 +86,7 @@ Templates administrador:
 
 <img src="src\static\imagens\administrador.gif" />
 
-<h2>Requisitos</h2>
+<h2>📜 Requisitos</h2>
 
 <h3>Funcionais</h3>
 <ul type="circle">
@@ -162,11 +161,11 @@ Templates administrador:
 
 <br>
 
-<h2> Histórias de Usuários </h2>
+<h2>🙋‍♂️ Histórias de Usuários </h2>
 
 ​    <img src="src\static\imagens\users_stories.png" />
 
-<h1> Tecnologias:</h1>
+<h1>🛠 Tecnologias:</h1>
 <div align='center'>
 	<h3>Linguagem Folha de Estilo:</h3>
 	<ol><h4>Css3</h4></ol>
@@ -174,6 +173,7 @@ Templates administrador:
 </div>
 
 <br>
+
 <div align='center'>
 	<h3>Linguagem de Marcação:</h3>
 	<ol><h4>Html5</h4></ol>
@@ -197,7 +197,7 @@ Templates administrador:
 
 <br>
 
-<h2> Equipe </h2>
+<h2>👨‍👨‍👧‍👧 Equipe </h2>
 
 | Cargo            | Membros                      |                          GitHub                           |
 | :--------------- | :--------------------------- | :-------------------------------------------------------: |
@@ -209,7 +209,7 @@ Templates administrador:
 
 <br>
 
-<h2> Vídeos 🎬</h2>
+<h2>🎬 Vídeos </h2>
 
 <p>Assista nossos vídeos, neles contém explicaçôes mais detalhadas sobre o projeto.</p>
 

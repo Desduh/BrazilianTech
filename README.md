@@ -16,6 +16,8 @@
 <p> Pasta doc/BD: contento os modelos do banco de dados(conceitual e lógico)</p>
 <p>  README.MD: arquivo com o detalhamento do projeto.</p>
 
+<a href="#-grupo-5---braziliantech">--> voltar ao menu</a>
+
 <br>
 
 <h2>🖥 Execução </h2>
@@ -68,6 +70,10 @@
 
 <br>
 
+<a href="#-grupo-5---braziliantech">--> voltar ao menu</a>
+
+<br>
+
 <h2>🔍 Sobre o site </h2>
 
 Nossa site  irá facilitar a comunicação entre os clientes e técnicos, pois conecta as pessoas que necessitam de suporte, seja ele: software ou hardware a um profissional da área de TI, onde os mesmos podem solicitar um pedido ou ver seus pedidos anteriores e tais pedidos são disponibilizados aos profissionais, que solucionarão o problema.
@@ -88,6 +94,10 @@ Templates administrador:
 
 <br>
 
+<a href="#-grupo-5---braziliantech">--> voltar ao menu</a>
+
+<br>
+
 <h2>📜 Requisitos</h2>
 
 |                            | REQUISITOS FUNCIONAIS                                        |
@@ -95,7 +105,7 @@ Templates administrador:
 | <strong>RF.1.</strong>     | O sistema só deverá ser acessado por pessoas devidamente cadastradas; |
 | <strong>RF.2.</strong>     | Apenas o administrador do sistema deve possuir acesso total às funcionalidades do sistema; |
 | <strong>RF.3.</strong>     | O técnico deve ser capaz de atender e recusar chamados(caso recuse é necessário que  possa justificar); |
-| <strong>RF.4.</strong>     | Um cliente deve ser capaz de abrir uma solicitação, visualizar o estado, da mais recente à mais antiga e atribuir uma nota pelo serviço; |
+| <strong>RF.4.</strong>     | Um usuário deve ser capaz de abrir uma solicitação, visualizar o estado, da mais recente à mais antiga e atribuir uma nota pelo serviço; |
 | <strong>RF.5 E 7.</strong> | Ao ser criada, um chamado deve ser atrelada seu criador e atribuída um técnico; |
 | <strong>RF.6.</strong>     | Atribuíção do técnico deve seguir um esquema de distribuição cíclica; |
 | <strong>RF.8.</strong>     | Solicitação: data/hora de criação e fechamento, tipo de problema ou esclarecimento, uma descrição, uma imagem/arquivo (opcional), uma resposta/justificativa para o fechamento e uma avaliação atribuída pelo cliente que a originou, após o fechamento (opcional); |
@@ -113,6 +123,10 @@ Templates administrador:
 | <strong>RN.P.6.</strong> | Interface com navegação intuitiva (e.g. acesso à informação com poucos “cliques”); |
 | <strong>RN.P.7.</strong> | Sistema responsivo.                                          |
 | <strong>RN.P.8.</strong> | Utilizar JavaScript no front end                             |
+
+<br>
+
+<a href="#-grupo-5---braziliantech">--> voltar ao menu</a>
 
 <br>
 
@@ -134,7 +148,7 @@ Templates administrador:
 | 1      |       -       | Criação do READ.ME - 1ºsprint                                | ✅      |
 | 1      |       -       | Vídeo - 1º sprint                                            | ✅      |
 | 2      |     RF.3      | Atender e recusar solicitações                               | ✅      |
-| 2      |     RF.4      | Cliente ser capaz de visualizar os suas solicitações e  o status delas | ✅      |
+| 2      |     RF.4      | Usuário ser capaz de visualizar as suas solicitações e  o status delas | ✅      |
 | 2      |     RF.2      | Página do Administrador                                      | ✅      |
 | 2      |     RF.9      | Gráfico 1: percentual de solicitações abertas e fechadas     | ✅      |
 | 2      |     RF.6      | Função cíclica das solicitações                              | ✅      |
@@ -154,9 +168,17 @@ Templates administrador:
 
 <br>
 
+<a href="#-grupo-5---braziliantech">--> voltar ao menu</a>
+
+<br>
+
 <h2>🙋‍ Histórias de Usuários </h2>
 
 ​    <img src="src\static\imagens\users_stories.png" />
+
+<br>
+
+<a href="#-grupo-5---braziliantech">--> voltar ao menu</a>
 
 <br>
 
@@ -189,6 +211,9 @@ Templates administrador:
 	<ol><h4>Python JavaScript</h4></ol>
 	<img src="src\static\imagens\linguagens.png" alt="Linguagens"> 
 </div>
+<br>
+
+<a href="#-grupo-5---braziliantech">--> voltar ao menu</a>
 
 <br>
 
@@ -204,6 +229,10 @@ Templates administrador:
 
 <br>
 
+<a href="#-grupo-5---braziliantech">--> voltar ao menu</a>
+
+<br>
+
 <h2>🎬 Vídeos </h2>
 
 <p>Assista nossos vídeos, neles contém explicaçôes mais detalhadas sobre o projeto.</p>
@@ -213,4 +242,8 @@ Templates administrador:
 -Sprint 2: clique <a href='https://youtu.be/YaW2hexfnQ4'>aqui</a>
 
 -Sprint 3: clique aqui
+
+<br>
+
+<a href="#-grupo-5---braziliantech">--> voltar ao menu</a>
 

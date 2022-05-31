@@ -108,7 +108,7 @@ Templates administrador:
 | <strong>RF.4.</strong>     | Um usuário deve ser capaz de abrir uma solicitação, visualizar o estado, da mais recente à mais antiga e atribuir uma nota pelo serviço; |
 | <strong>RF.5 E 7.</strong> | Ao ser criada, um chamado deve ser atrelada seu criador e atribuída um técnico; |
 | <strong>RF.6.</strong>     | Atribuíção do técnico deve seguir um esquema de distribuição cíclica; |
-| <strong>RF.8.</strong>     | Solicitação: data/hora de criação e fechamento, tipo de problema ou esclarecimento, uma descrição, uma imagem/arquivo (opcional), uma resposta/justificativa para o fechamento e uma avaliação atribuída pelo cliente que a originou, após o fechamento (opcional); |
+| <strong>RF.8.</strong>     | Solicitação: data/hora de criação e fechamento, tipo de problema ou esclarecimento, uma descrição, uma imagem/arquivo (opcional), uma resposta/justificativa para o fechamento e uma avaliação atribuída pelo usuário a originou, após o fechamento (opcional); |
 | <strong>RF.9.</strong>     | Relátorios sobre o percentual de solicitações abertas e fechadas em um intervalo de tempo, a evolução diária da quantidade de solicitações abertas e fechadas em intervalos de tempo especificados, uma média de cada técnico e uma média global do sistema. |
 
 <br>

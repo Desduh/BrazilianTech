@@ -61,13 +61,22 @@
             <div class="relatorios-graficos">
 
                 <div class="div_intervalo">
-                    <h3 class="test_inter">Período a visualizar:</h3>
-                    <form class="form_intervalo" method="post" action="/intervalo">
-                            <input class="tempo" type="submit" name="intervalo" value="Hoje">
-                            <input class="tempo" type="submit" name="intervalo" value="Última semana">
-                            <input class="tempo" type="submit" name="intervalo" value="Últimos 15 dias">
-                            <input class="tempo" type="submit" name="intervalo" value="Último mês">
+                    <h3 class="test_inter">Período a visualizar, entre:</h3>
+                    <form method="post" action="/intervalo">
+
+                        <div class="form_intervalo" style="justify-content: center;">
+                            A partir do dia: 
+                            <input id="date" type="date" name="dataini">
+                        </div>
+
+                        <h4 class="test_inter">Intervalo de dias:</h4>
+                        <div class="form_intervalo">
+                            <input class="tempo" type="submit" name="intervalo" value="Semamna">
+                            <input class="tempo" type="submit" name="intervalo" value="Semamna">
+                            <input class="tempo" type="submit" name="intervalo" value="15 dias">
+                            <input class="tempo" type="submit" name="intervalo" value="Mês">
                             <input class="tempo" type="submit" name="intervalo" value="Tudo">
+                        </div>
                     </form>
                 </div>
 
@@ -101,31 +110,6 @@
                         <div id="donutchart" style="width: 100%; height: 100%;"></div>
                 </div>
                 
-               
-                <br>
-
-
-                <div class="div_intervalo">
-                    <h3 class="test_inter">Período a visualizar, entre:</h3>
-                    <form method="post" action="/intervalo">
-
-                        <div class="form_intervalo" style="justify-content: center;">
-                            A partir do dia: 
-                            <input id="date" type="date" name="dataini">
-                        </div>
-
-                        <h4 class="test_inter">Intervalo de dias:</h4>
-                        <div class="form_intervalo">
-                            <input class="tempo" type="submit" name="intervalo" value="Semamna">
-                            <input class="tempo" type="submit" name="intervalo" value="Semamna">
-                            <input class="tempo" type="submit" name="intervalo" value="15 dias">
-                            <input class="tempo" type="submit" name="intervalo" value="Mês">
-                            <input class="tempo" type="submit" name="intervalo" value="Tudo">
-                        </div>
-                    </form>
-                </div>
-
-                <br>
                 <br>
 
                 <div class="evo-grafico">

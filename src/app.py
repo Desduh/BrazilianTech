@@ -253,7 +253,9 @@ def graficos():
     cham_fechados = cur.fetchall()
     per_cham = [len(cham_abertos), len(cham_fechados)]
 
-    return render_template('adm_graficos.html', per_cham=per_cham)
+    intervalo = 'Tudo'
+
+    return render_template('adm_graficos.html', per_cham=per_cham, intervalo=intervalo)
 
 @app.route('/intervalo', methods= ['POST'])
 def intervalo():
@@ -269,7 +271,7 @@ def intervalo():
 
     print(evo_cham)
 
-    return render_template('adm_graficos.html', per_cham=per_cham, evo_cham=evo_cham)
+    return render_template('adm_graficos.html', per_cham=per_cham, evo_cham=evo_cham, intervalo=intervalo)
 #--------------------------------------------------------
 
 def get_bar_info(intervalo, dia_ref):

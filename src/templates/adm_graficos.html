@@ -71,11 +71,35 @@
 
                         <h4 class="test_inter">Intervalo de dias:</h4>
                         <div class="form_intervalo">
+                            {% if intervalo == 'Hoje' %}
+                            <input type="submit" name="intervalo" value="Hoje">
+                            {% else: %}
                             <input class="tempo" type="submit" name="intervalo" value="Hoje">
+                            {% endif %}
+
+                            {% if intervalo == 'Última semana' %}
+                            <input type="submit" name="intervalo" value="Última semana">
+                            {% else: %}
                             <input class="tempo" type="submit" name="intervalo" value="Última semana">
+                            {% endif %}
+
+                            {% if intervalo == 'Últimos 15 dias' %}
+                            <input type="submit" name="intervalo" value="Últimos 15 dias">
+                            {% else: %}
                             <input class="tempo" type="submit" name="intervalo" value="Últimos 15 dias">
+                            {% endif %}
+
+                            {% if intervalo == 'Último mês' %}
+                            <input type="submit" name="intervalo" value="Último mês">
+                            {% else: %}
                             <input class="tempo" type="submit" name="intervalo" value="Último mês">
+                            {% endif %}
+
+                            {% if intervalo == 'Tudo' %}
+                            <input type="submit" name="intervalo" value="Tudo">
+                            {% else: %}
                             <input class="tempo" type="submit" name="intervalo" value="Tudo">
+                            {% endif %}
                         </div>
                     </form>
                 </div>

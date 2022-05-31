@@ -226,9 +226,18 @@ details > summary {
 .tempo{
     padding: 7px 14px;
     margin: 0 5px;
+    border: 0;
+    border-radius: 2px;
+    color: white;
+    color: black;
+    border: 1px solid rgb(0, 0, 0);
+}
+.tempoatv{
+    padding: 7px 14px;
+    margin: 0 5px;
     background-color: rgb(177, 10, 4);
     border: 0;
-    border-radius: 5px;
+    border-radius: 2px;
     color: white;
 }
 .test_inter{

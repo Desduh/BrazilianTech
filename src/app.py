@@ -14,9 +14,9 @@ from dateutil.relativedelta import relativedelta
 app = Flask('__name__') 
 app.config['MYSQL_HOST'] = 'localhost' #adicione o hostname
 app.config['MYSQL_USER'] = 'root' #adicione o nome do seu usuário do MySQL
-app.config['MYSQL_PASSWORD'] = 'fatec' #adicione a senha do seu usuário do MySQL
+app.config['MYSQL_PASSWORD'] = 'franca' #adicione a senha do seu usuário do MySQL
 app.config['MYSQL_DB'] = 'usuarios_solicitacoes' 
-con = MySQLdb.connect( user="root", password="fatec", db="usuarios_solicitacoes")#adicione o nome e a senha do seu usuário do MySQL
+con = MySQLdb.connect( user="root", password="franca", db="usuarios_solicitacoes")#adicione o nome e a senha do seu usuário do MySQL
 mysql = MySQL(app)
 logado = False
 app.secret_key = "fatec"
@@ -246,16 +246,12 @@ def usuarioss():
 @app.route('/graficos')
 def graficos():
 
-    cur = mysql.connection.cursor()
-    cur.execute('SELECT codigo_solicitacao FROM solicitacao WHERE data_abertura > 0000-00-00 AND data_abertura < now() AND data_fechamento IS null')
-    cham_abertos = cur.fetchall()
-    cur.execute('select codigo_solicitacao from solicitacao where data_abertura > 0000-00-00 and data_abertura < now() and data_fechamento< now()')
-    cham_fechados = cur.fetchall()
-    per_cham = [len(cham_abertos), len(cham_fechados)]
-
+    dia_ref = date.today()
     intervalo = 'Tudo'
+    per_cham = get_pie_info(intervalo, dia_ref)
+    evo_cham = get_bar_info(intervalo, dia_ref)
 
-    return render_template('adm_graficos.html', per_cham=per_cham, intervalo=intervalo)
+    return render_template('adm_graficos.html', per_cham=per_cham, evo_cham=evo_cham, intervalo=intervalo)
 
 @app.route('/intervalo', methods= ['POST'])
 def intervalo():
@@ -268,11 +264,23 @@ def intervalo():
         dia_ref = datetime.strptime(dia_ref[2:], '%y-%m-%d').date()
     per_cham = get_pie_info(intervalo, dia_ref)
     evo_cham = get_bar_info(intervalo, dia_ref)
+    media_geral = get_media_geral()
 
-    print(evo_cham)
-
-    return render_template('adm_graficos.html', per_cham=per_cham, evo_cham=evo_cham, intervalo=intervalo)
+    return render_template('adm_graficos.html', per_cham=per_cham, evo_cham=evo_cham, media_geral=media_geral)
 #--------------------------------------------------------
+
+def get_media_geral():
+    cur = con.cursor()
+    cur.execute('SELECT avaliacao FROM solicitacao WHERE avaliacao is not null')
+    notas = cur.fetchall()
+    print(notas)
+    total = 0
+    for n in notas:
+        total = total + n[0]
+    media = total/len(notas)
+    media = format(media, '.2f')
+    return media
+
 
 def get_bar_info(intervalo, dia_ref):
     now = datetime.now()
@@ -288,7 +296,7 @@ def get_bar_info(intervalo, dia_ref):
         periodo = 16
     elif intervalo == 'Último mês':
         inter = dia_ref - relativedelta(months=1)
-        periodo = 30
+        periodo = 16
     elif intervalo == 'Tudo':
         cur.execute('SELECT min(data_abertura) AS primeira_solicitacao FROM solicitacao')
         inter = cur.fetchall()
@@ -329,6 +337,8 @@ def get_pie_info(intervalo, dia_ref):
     cur.execute('select codigo_solicitacao from solicitacao where data_abertura >%s and data_abertura <%s and data_fechamento<%s', [inter, dia_ref, dia_ref])
     cham_fechados = cur.fetchall()
     per_cham = [len(cham_abertos), len(cham_fechados)]
+    if per_cham == [0, 0]:
+        return 'Não houve soilictações durante esse periodo'
     return per_cham
 #----------------------------------------------------
 
@@ -354,8 +364,8 @@ def telatecnico():
 def hist():
     cur = mysql.connection.cursor()  
     users = cur.execute(historico, [cod])
-    dados = cur.fetchall()
-    return render_template("telausuario.html", dados=dados)
+    lista = cur.fetchall()
+    return render_template("telausuario.html", lista=lista)
 
 
 

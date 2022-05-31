@@ -14,9 +14,9 @@ from dateutil.relativedelta import relativedelta
 app = Flask('__name__') 
 app.config['MYSQL_HOST'] = 'localhost' #adicione o hostname
 app.config['MYSQL_USER'] = 'root' #adicione o nome do seu usuário do MySQL
-app.config['MYSQL_PASSWORD'] = 'franca' #adicione a senha do seu usuário do MySQL
+app.config['MYSQL_PASSWORD'] = 'fatec' #adicione a senha do seu usuário do MySQL
 app.config['MYSQL_DB'] = 'usuarios_solicitacoes' 
-con = MySQLdb.connect( user="root", password="franca", db="usuarios_solicitacoes")#adicione o nome e a senha do seu usuário do MySQL
+con = MySQLdb.connect( user="root", password="fatec", db="usuarios_solicitacoes")#adicione o nome e a senha do seu usuário do MySQL
 mysql = MySQL(app)
 logado = False
 app.secret_key = "fatec"
@@ -267,6 +267,8 @@ def intervalo():
     per_cham = get_pie_info(intervalo, dia_ref)
     evo_cham = get_bar_info(intervalo, dia_ref)
 
+    print(evo_cham)
+
     return render_template('adm_graficos.html', per_cham=per_cham, evo_cham=evo_cham)
 #--------------------------------------------------------
 
@@ -284,7 +286,7 @@ def get_bar_info(intervalo, dia_ref):
         periodo = 16
     elif intervalo == 'Último mês':
         inter = dia_ref - relativedelta(months=1)
-        periodo = 16
+        periodo = 30
     elif intervalo == 'Tudo':
         cur.execute('SELECT min(data_abertura) AS primeira_solicitacao FROM solicitacao')
         inter = cur.fetchall()
@@ -350,8 +352,8 @@ def telatecnico():
 def hist():
     cur = mysql.connection.cursor()  
     users = cur.execute(historico, [cod])
-    lista = cur.fetchall()
-    return render_template("telausuario.html", lista=lista)
+    dados = cur.fetchall()
+    return render_template("telausuario.html", dados=dados)
 
 
 

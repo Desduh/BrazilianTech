@@ -310,7 +310,10 @@ details > summary {
     font-size: larger;
     color: white
 }
-
+.aviso {
+    color: rgb(177, 10, 4);
+    text-align: center;
+}
 
 
 /* ------------------------------------------------------------------- */

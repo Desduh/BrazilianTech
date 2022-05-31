@@ -265,6 +265,8 @@ def intervalo():
     per_cham = get_pie_info(intervalo)
     evo_cham = get_bar_info(intervalo, dia_ref)
 
+    print(evo_cham)
+
     return render_template('adm_graficos.html', per_cham=per_cham, evo_cham=evo_cham)
 #--------------------------------------------------------
 

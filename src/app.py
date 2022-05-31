@@ -265,8 +265,6 @@ def intervalo():
     per_cham = get_pie_info(intervalo)
     evo_cham = get_bar_info(intervalo, dia_ref)
 
-    print(evo_cham)
-
     return render_template('adm_graficos.html', per_cham=per_cham, evo_cham=evo_cham)
 #--------------------------------------------------------
 
@@ -364,12 +362,27 @@ def hist():
 @app.route('/solicitacao', methods= ['POST']) 
 def solicitacao():
     #isso possibilita o usuario fazer a solicitacao
+
+    cur = mysql.connection.cursor()
+    cur.execute(verifica_funcao, [cod])
+    funcao = cur.fetchall()
+
     cur = mysql.connection.cursor()  
     cur.execute('SELECT codigo_usuario FROM usuarios WHERE funcao=%s', [2])
     executores_ativos = cur.fetchall()
     if executores_ativos == ():
         print(executores_ativos)
-        return redirect('/telaadm')
+
+        aviso = 2
+
+        for f in funcao: 
+            if f[0] == 3:
+                return render_template('adm_nova_soli.html', aviso=aviso)
+            else:
+                cur = mysql.connection.cursor()  
+                users = cur.execute(historico, [cod])
+                lista = cur.fetchall()
+                return render_template("telausuario.html", lista=lista, aviso=aviso)
     else:
 
         cur.execute(quantia_tec)
@@ -397,15 +410,16 @@ def solicitacao():
         cur.execute(add_solicitacao, [solicitacao,cod,tecnico,aberto,problema])
         con.commit()
 
-        cur = mysql.connection.cursor()
-        cur.execute(verifica_funcao, [cod])
-        funcao = cur.fetchall()
+        aviso = 1
 
         for f in funcao: 
             if f[0] == 3:
-                return redirect ('/telaadm')
+                return render_template('adm_nova_soli.html', aviso=aviso)
             else:
-                return redirect ('/telausuario')
+                cur = mysql.connection.cursor()  
+                users = cur.execute(historico, [cod])
+                lista = cur.fetchall()
+                return render_template("telausuario.html", lista=lista, aviso=aviso)
 
 
 @app.route('/resposta/<id>', methods= ['POST']) 

@@ -57,6 +57,22 @@
             </div>
         </header>
 
+        
+    {% if aviso == 1 %}
+    <script>
+        {
+        alert('*Solicitação enviada com sucesso');
+        }
+    </script>
+    {% endif %}
+    {% if aviso == 2 %}
+    <script>
+        {
+        alert('*Sua solicitação não foi enviada, pois não há técnicos no sistema');
+        }
+    </script>
+    {% endif %}
+
         <main>
             <div class="tela_solicitacao">
                 <form class="tela_solicitacao" name="solicitacao" method="post" action="{{url_for('solicitacao')}}">

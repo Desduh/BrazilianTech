@@ -57,6 +57,61 @@
 
         <main>
 
+            <h1>Abertos</h1>
+            {% for user in Details %}
+            {% if user[5] == 'Aberto' %}
+            <details>
+                <summary>
+                    <table>
+                        <thead>
+                            <tr class="text_table">
+                                {% for w in usuarios %}
+                                {% if user[2] == w[0] %}
+                                <td>Cliente: {{w[1]}}</td>
+                                {% endif %}
+                                {% endfor %}
+                                {% for w in usuarios %}
+                                {% if user[4] == w[0] %}
+                                <td>Técnico: {{w[1]}}</td>
+                                {% endif %}
+                                {% endfor %}
+                                <td>Data da solicitação: {{user[3]}}</td>
+                            </tr>
+                        </thead>
+                    </table>
+                </summary>
+                <table>
+                    <thead>
+                        <tr>
+                            <td>Tipo de problema:</td>
+                            <td>Descrição:</td>
+                            <td>Resposta:</td>
+                        </tr>
+                    </thead>
+                      <tr>
+                        <td><p class="td">{{user[8]}}</p></td>
+                        <td><p class="td">{{user[1]}}</p></td>
+                        <td>
+                            <form class="formulario" method="POST" action="/resposta/{{user.0}}">
+                                <textarea type='text' name="resposta" class='Boxtext_motivo' placeholder="Motivo..."request></textarea>
+                                <br>
+                                <select name="status">
+                                    <option value="Aceito">Aceitar chamado</option>
+                                    <option value="Negado">Negar chamado</option>
+                                </select>
+                                <div class="btn">
+                                    <button class='btn_' type="submit">Enviar</button>
+                            </form>
+                            </div>
+
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </details>
+            {% endif %}
+            {% endfor %}
+
             <h1>Aceitos</h1>
             <table>
                 <thead>
@@ -124,61 +179,6 @@
                     {% endif %}
                 {% endfor %}  
             </table>
-      
-            <h1>Abertos</h1>
-            {% for user in Details %}
-            {% if user[5] == 'Aberto' %}
-            <details>
-                <summary>
-                    <table>
-                        <thead>
-                            <tr class="text_table">
-                                {% for w in usuarios %}
-                                {% if user[2] == w[0] %}
-                                <td>Cliente: {{w[1]}}</td>
-                                {% endif %}
-                                {% endfor %}
-                                {% for w in usuarios %}
-                                {% if user[4] == w[0] %}
-                                <td>Técnico: {{w[1]}}</td>
-                                {% endif %}
-                                {% endfor %}
-                                <td>Data da solicitação: {{user[3]}}</td>
-                            </tr>
-                        </thead>
-                    </table>
-                </summary>
-                <table>
-                    <thead>
-                        <tr>
-                            <td>Tipo de problema:</td>
-                            <td>Descrição:</td>
-                            <td>Resposta:</td>
-                        </tr>
-                    </thead>
-                      <tr>
-                        <td><p class="td">{{user[8]}}</p></td>
-                        <td><p class="td">{{user[1]}}</p></td>
-                        <td>
-                            <form class="formulario" method="POST" action="/resposta/{{user.0}}">
-                                <textarea type='text' name="resposta" class='Boxtext_motivo' placeholder="Motivo..."request></textarea>
-                                <br>
-                                <select name="status">
-                                    <option value="Aceito">Aceitar chamado</option>
-                                    <option value="Negado">Negar chamado</option>
-                                </select>
-                                <div class="btn">
-                                    <button class='btn_' type="submit">Enviar</button>
-                            </form>
-                            </div>
-
-                            </div>
-                        </td>
-                    </tr>
-                </table>
-            </details>
-            {% endif %}
-            {% endfor %}
             
         </main>
         

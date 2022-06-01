@@ -267,7 +267,7 @@ def intervalo():
     evo_cham = get_bar_info(intervalo, dia_ref)
     media_geral = get_media_geral()
 
-    return render_template('adm_graficos.html', per_cham=per_cham, evo_cham=evo_cham, media_geral=media_geral)
+    return render_template('adm_graficos.html', per_cham=per_cham, evo_cham=evo_cham, intervalo=intervalo, media_geral=media_geral)
 #--------------------------------------------------------
 
 def get_media_geral():

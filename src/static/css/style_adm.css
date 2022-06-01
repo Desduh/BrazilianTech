@@ -248,6 +248,13 @@ details > summary {
     background-color: rgba(146, 146, 146, 0.158);
     width: 60%;
     border-radius: 10px;
+    padding-bottom: 30px;
+}
+.div_notas{
+    background-color: rgba(146, 146, 146, 0.158);
+    width: 60%;
+    border-radius: 10px;
+    padding-bottom: 30px;
 }
 .form_intervalo{
     display: flex;
@@ -269,14 +276,14 @@ details > summary {
     margin: left 1%;
 }
 .media-sistema {
-  
-    width: 20%;
+    width: 50%;
     height: 100%;
     text-align: center;
-    padding: 3%;
-    padding-bottom: 0%;
 }
-
+.media{
+    display: flex;
+    justify-content: center;
+}
 .titulo-media-sistema{
     font-size: x-large;
     font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
@@ -286,6 +293,7 @@ details > summary {
 .nota-sistema {
     font-size: xx-large;
     color: black;
+    margin: 10px;
 }
 
 .media-tecnicos {

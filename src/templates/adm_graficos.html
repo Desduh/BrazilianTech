@@ -122,13 +122,13 @@
                                     var options ={
                                         title: 'Percentual de chamados abertos e fechados',
                                         pieHole: 0.4,
+                                        bold: true,
                                         width: 600,
                                         height: 480,
                                         colors: ['rgb(177, 10, 4)', 'rgb(15, 76, 129)'],
-                                        chartArea:{
-                                            left:180,
-                                        }
-                                        
+                                        chartArea:{left:180},
+                                        backgroundColor: 'transparent',
+                                        fontSize: 17,
                                     };
 
                                     var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
@@ -163,12 +163,13 @@
                             ]);
 
                         var options = {
-                            chart: {
                                 title: 'Evolução de chamados abertos e fechados',
+                                bold: true,
+                                backgroundColor: 'transparent',
                                 width: 600,
                                 height: 400,
-                            },
-                            
+                                colors: ['rgb(177, 10, 4)', 'rgb(15, 76, 129)'],
+                                fontSize: 17,
                         };
 
                         var chart = new google.charts.Line(document.getElementById('linechart_material'));

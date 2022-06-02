@@ -14,9 +14,9 @@ from dateutil.relativedelta import relativedelta
 app = Flask('__name__') 
 app.config['MYSQL_HOST'] = 'localhost' #adicione o hostname
 app.config['MYSQL_USER'] = 'root' #adicione o nome do seu usuário do MySQL
-app.config['MYSQL_PASSWORD'] = 'fatec' #adicione a senha do seu usuário do MySQL
+app.config['MYSQL_PASSWORD'] = 'franca' #adicione a senha do seu usuário do MySQL
 app.config['MYSQL_DB'] = 'usuarios_solicitacoes' 
-con = MySQLdb.connect( user="root", password="fatec", db="usuarios_solicitacoes")#adicione o nome e a senha do seu usuário do MySQL
+con = MySQLdb.connect( user="root", password="franca", db="usuarios_solicitacoes")#adicione o nome e a senha do seu usuário do MySQL
 mysql = MySQL(app)
 logado = False
 app.secret_key = "fatec"
@@ -249,7 +249,7 @@ def graficos():
     dia_ref = date.today()
     intervalo = 'Tudo'
     per_cham = get_pie_info(intervalo, dia_ref)
-    evo_cham = get_bar_info(intervalo, dia_ref)
+    evo_cham = get_evo_info(intervalo, dia_ref)
     media_geral = get_media_geral()
 
     return render_template('adm_graficos.html', per_cham=per_cham, evo_cham=evo_cham, intervalo=intervalo, media_geral=media_geral)
@@ -264,11 +264,9 @@ def intervalo():
     else:
         dia_ref = datetime.strptime(dia_ref[2:], '%y-%m-%d').date()
     per_cham = get_pie_info(intervalo, dia_ref)
-    evo_cham = get_bar_info(intervalo, dia_ref)
+    evo_cham = get_evo_info(intervalo, dia_ref)
     media_geral = get_media_geral()
 
-    print(per_cham)
-    print(evo_cham)
 
     return render_template('adm_graficos.html', per_cham=per_cham, evo_cham=evo_cham, intervalo=intervalo, media_geral=media_geral)
 #--------------------------------------------------------
@@ -277,7 +275,6 @@ def get_media_geral():
     cur = con.cursor()
     cur.execute('SELECT avaliacao FROM solicitacao WHERE avaliacao is not null')
     notas = cur.fetchall()
-    print(notas)
     total = 0
     for n in notas:
         total = total + n[0]
@@ -286,7 +283,7 @@ def get_media_geral():
     return media
 
 
-def get_bar_info(intervalo, dia_ref):
+def get_evo_info(intervalo, dia_ref):
     now = datetime.now()
     cur = con.cursor()
     if intervalo == 'Hoje':
@@ -300,27 +297,41 @@ def get_bar_info(intervalo, dia_ref):
         periodo = 16
     elif intervalo == 'Último mês':
         inter = dia_ref - relativedelta(months=1)
-        periodo = 16
+        periodo = 30
     elif intervalo == 'Tudo':
         cur.execute('SELECT min(data_abertura) AS primeira_solicitacao FROM solicitacao')
         inter = cur.fetchall()
         inter = inter[0][0]
-        periodo = (now - inter).days
+        periodo = (dia_ref - (inter.date())).days
         inter = inter.date()
 
-    
+    cur.execute('SELECT min(data_abertura) AS primeira_solicitacao FROM solicitacao')
+    p_soli = cur.fetchall()
+    p_soli = p_soli[0][0]
+    p_soli = p_soli.date()
+
+    if intervalo != 'Tudo':
+        cur.execute('SELECT codigo_solicitacao FROM solicitacao WHERE data_abertura >=%s AND data_abertura <=%s AND data_fechamento IS null', [p_soli, str(inter)+' 23:59:59'])
+        cham_abertos_n = len(cur.fetchall())
+        cham_fechados_n = 0
+    else:
+        cham_fechados_n, cham_abertos_n = 0, 0
     evo_cham = []
     for dias in range(periodo):
 
-        cur.execute('SELECT codigo_solicitacao FROM solicitacao WHERE data_abertura >=%s AND data_abertura <=%s AND data_fechamento IS null', [inter, str(inter)+' 23:59:59'])
+        cur.execute('SELECT codigo_solicitacao FROM solicitacao WHERE data_abertura >%s AND data_abertura<=%s and (data_fechamento <%s or data_fechamento is null)', [inter, str(inter) + ' 23:59:59', dia_ref])
         cham_abertos = cur.fetchall()
         cur.execute('SELECT codigo_solicitacao FROM solicitacao WHERE data_fechamento >=%s AND data_fechamento<=%s', [inter, str(inter)+' 23:59:59'])
         cham_fechados = cur.fetchall()
-        per_cham = [len(cham_abertos), len(cham_fechados)]
-        per_cham.append(str(inter))
+        cham_abertos_n = (cham_abertos_n + len(cham_abertos)) - len(cham_fechados)
+        cham_fechados_n = cham_fechados_n + len(cham_fechados)
+        per_cham = [cham_abertos_n, cham_fechados_n]
+        per_cham.append(str(inter).replace('-', '/'))
         evo_cham.append(per_cham)
         inter = inter + relativedelta(days=1)
     return evo_cham
+
+
 
 def get_pie_info(intervalo, dia_ref):
     if intervalo == 'Hoje':
@@ -336,7 +347,7 @@ def get_pie_info(intervalo, dia_ref):
     
 
     cur = con.cursor()
-    cur.execute('SELECT codigo_solicitacao FROM solicitacao WHERE data_abertura >%s AND data_abertura <%s AND data_fechamento IS null', [inter, dia_ref])
+    cur.execute('SELECT codigo_solicitacao FROM solicitacao WHERE data_abertura >%s AND data_abertura<=%s and (data_fechamento >%s or data_fechamento is null)', [inter, str(dia_ref) + ' 23:59:59', dia_ref])
     cham_abertos = cur.fetchall()
     cur.execute('select codigo_solicitacao from solicitacao where data_abertura >%s and data_abertura <%s and data_fechamento<%s', [inter, dia_ref, dia_ref])
     cham_fechados = cur.fetchall()

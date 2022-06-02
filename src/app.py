@@ -14,9 +14,9 @@ from dateutil.relativedelta import relativedelta
 app = Flask('__name__') 
 app.config['MYSQL_HOST'] = 'localhost' #adicione o hostname
 app.config['MYSQL_USER'] = 'root' #adicione o nome do seu usuário do MySQL
-app.config['MYSQL_PASSWORD'] = 'fatec' #adicione a senha do seu usuário do MySQL
+app.config['MYSQL_PASSWORD'] = 'franca' #adicione a senha do seu usuário do MySQL
 app.config['MYSQL_DB'] = 'usuarios_solicitacoes' 
-con = MySQLdb.connect( user="root", password="fatec", db="usuarios_solicitacoes")#adicione o nome e a senha do seu usuário do MySQL
+con = MySQLdb.connect( user="root", password="franca", db="usuarios_solicitacoes")#adicione o nome e a senha do seu usuário do MySQL
 mysql = MySQL(app)
 logado = False
 app.secret_key = "fatec"
@@ -282,10 +282,10 @@ def get_media_tec():
     for tec in tecs:
         cur.execute('SELECT avaliacao FROM solicitacao WHERE avaliacao is not null and codigo_usuario=%s', [tec])
         notas = cur.fetchall()
-
+        if not notas:
+            return 'Não existem solicitações no sistema'
         total = 0
         for n in notas:
-            print (n)
             total = total + int(n[0])
         media = total/len(notas)
         media = format(media, '.2f')
@@ -307,7 +307,7 @@ def get_media_geral():
     cur.execute('SELECT avaliacao FROM solicitacao WHERE avaliacao is not null')
     notas = cur.fetchall()
     if not notas:
-        return 'Não esistem solicitações no sistema'
+        return 'Não existem solicitações no sistema'
     total = 0
     for n in notas:
         total = total + n[0]
@@ -334,17 +334,16 @@ def get_evo_info(intervalo, dia_ref):
     elif intervalo == 'Tudo':
         cur.execute('SELECT min(data_abertura) AS primeira_solicitacao FROM solicitacao')
         inter = cur.fetchall()
-        print(inter)
         if inter == ((None,),):
-            return 'Não esistem solicitações no sistema'
+            return 'Não existem solicitações no sistema'
         inter = inter[0][0]
-        periodo = (dia_ref - (inter.date())).days
+        periodo = (dia_ref - (inter.date())).days + 1
         inter = inter.date()
 
     cur.execute('SELECT min(data_abertura) AS primeira_solicitacao FROM solicitacao')
     p_soli = cur.fetchall()
-    if p_soli ((None,),):
-        return 'Não esistem solicitações no sistema'
+    if p_soli == ((None,),):
+        return 'Não existem solicitações no sistema'
     p_soli = p_soli[0][0]
     p_soli = p_soli.date()
 
@@ -357,7 +356,7 @@ def get_evo_info(intervalo, dia_ref):
     evo_cham = []
     for dias in range(periodo):
 
-        cur.execute('SELECT codigo_solicitacao FROM solicitacao WHERE data_abertura >%s AND data_abertura<=%s and (data_fechamento <%s or data_fechamento is null)', [inter, str(inter) + ' 23:59:59', dia_ref])
+        cur.execute('SELECT codigo_solicitacao FROM solicitacao WHERE data_abertura >%s AND data_abertura<=%s', [inter, str(inter) + ' 23:59:59'])
         cham_abertos = cur.fetchall()
         cur.execute('SELECT codigo_solicitacao FROM solicitacao WHERE data_fechamento >=%s AND data_fechamento<=%s', [inter, str(inter)+' 23:59:59'])
         cham_fechados = cur.fetchall()
@@ -385,11 +384,12 @@ def get_pie_info(intervalo, dia_ref):
     
 
     cur = con.cursor()
-    cur.execute('SELECT codigo_solicitacao FROM solicitacao WHERE data_abertura >%s AND data_abertura<=%s and (data_fechamento >%s or data_fechamento is null)', [inter, str(dia_ref) + ' 23:59:59', dia_ref])
-    cham_abertos = cur.fetchall()
-    cur.execute('select codigo_solicitacao from solicitacao where data_abertura >%s and data_abertura <%s and data_fechamento<%s', [inter, dia_ref, dia_ref])
-    cham_fechados = cur.fetchall()
-    per_cham = [len(cham_abertos), len(cham_fechados)]
+    cur.execute('SELECT codigo_solicitacao FROM solicitacao WHERE data_abertura >%s AND data_abertura<=%s', [inter, str(dia_ref) + ' 23:59:59'])
+    cham_abertos = len(cur.fetchall())
+    cur.execute('select codigo_solicitacao from solicitacao where data_abertura >%s and data_abertura <=%s and data_fechamento<=%s', [inter, str(dia_ref) + ' 23:59:59', str(dia_ref) + ' 23:59:59'])
+    cham_fechados = len(cur.fetchall())
+    cham_abertos = cham_abertos - cham_fechados
+    per_cham = [cham_abertos, cham_fechados]
     if per_cham == [0, 0]:
         return 'Não houve soilictações durante esse periodo'
     return per_cham

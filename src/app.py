@@ -306,6 +306,8 @@ def get_media_geral():
     cur = con.cursor()
     cur.execute('SELECT avaliacao FROM solicitacao WHERE avaliacao is not null')
     notas = cur.fetchall()
+    if not notas:
+        return 'Não esistem solicitações no sistema'
     total = 0
     for n in notas:
         total = total + n[0]
@@ -332,12 +334,17 @@ def get_evo_info(intervalo, dia_ref):
     elif intervalo == 'Tudo':
         cur.execute('SELECT min(data_abertura) AS primeira_solicitacao FROM solicitacao')
         inter = cur.fetchall()
+        print(inter)
+        if inter == ((None,),):
+            return 'Não esistem solicitações no sistema'
         inter = inter[0][0]
         periodo = (dia_ref - (inter.date())).days
         inter = inter.date()
 
     cur.execute('SELECT min(data_abertura) AS primeira_solicitacao FROM solicitacao')
     p_soli = cur.fetchall()
+    if p_soli ((None,),):
+        return 'Não esistem solicitações no sistema'
     p_soli = p_soli[0][0]
     p_soli = p_soli.date()
 
@@ -428,7 +435,7 @@ def solicitacao():
     cur.execute('SELECT codigo_usuario FROM usuarios WHERE funcao=%s', [2])
     executores_ativos = cur.fetchall()
     if executores_ativos == ():
-        print(executores_ativos)
+
 
         aviso = 2
 
@@ -454,7 +461,6 @@ def solicitacao():
             qta_tec = qta_tec
         cont = qta_cha % qta_tec
 
-        print (cont)
 
         cur.execute("SELECT codigo_usuario FROM usuarios WHERE contador_solicitacao=%s;", [cont])
         tecnico = cur.fetchall()

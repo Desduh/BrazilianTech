@@ -10,6 +10,7 @@ create table usuarios
     funcao int,
     contador_solicitacao int unique key);
 
+insert into usuarios(email,senha,funcao) values('administrador@adm','fatec',3);
 
 create table solicitacao
 (	codigo_solicitacao int primary key AUTO_INCREMENT,

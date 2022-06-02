@@ -251,8 +251,9 @@ def graficos():
     per_cham = get_pie_info(intervalo, dia_ref)
     evo_cham = get_evo_info(intervalo, dia_ref)
     media_geral = get_media_geral()
+    media_tecs = get_media_tec()
 
-    return render_template('adm_graficos.html', per_cham=per_cham, evo_cham=evo_cham, intervalo=intervalo, media_geral=media_geral)
+    return render_template('adm_graficos.html', per_cham=per_cham, evo_cham=evo_cham, intervalo=intervalo, media_geral=media_geral, media_tecs=media_tecs)
 
 @app.route('/intervalo', methods= ['POST'])
 def intervalo():
@@ -266,10 +267,40 @@ def intervalo():
     per_cham = get_pie_info(intervalo, dia_ref)
     evo_cham = get_evo_info(intervalo, dia_ref)
     media_geral = get_media_geral()
+    media_tecs = get_media_tec()
 
-
-    return render_template('adm_graficos.html', per_cham=per_cham, evo_cham=evo_cham, intervalo=intervalo, media_geral=media_geral)
+    return render_template('adm_graficos.html', per_cham=per_cham, evo_cham=evo_cham, intervalo=intervalo, media_geral=media_geral, media_tecs=media_tecs)
 #--------------------------------------------------------
+def get_media_tec():
+    cur = con.cursor()
+
+    cur.execute('SELECT codigo_usuario FROM usuarios WHERE funcao=2')
+    tecs = cur.fetchall()
+
+    medias_tecs = []
+
+    for tec in tecs:
+        cur.execute('SELECT avaliacao FROM solicitacao WHERE avaliacao is not null and codigo_usuario=%s', [tec])
+        notas = cur.fetchall()
+
+        total = 0
+        for n in notas:
+            print (n)
+            total = total + int(n[0])
+        media = total/len(notas)
+        media = format(media, '.2f')
+        
+        cur.execute('SELECT email FROM usuarios WHERE codigo_usuario=%s', [tec])
+        email = cur.fetchall()
+        email = email[0][0]
+
+        media_email =[]
+        media_email.append(email)
+        media_email.append(media)
+
+        medias_tecs.append(media_email)
+
+    return medias_tecs
 
 def get_media_geral():
     cur = con.cursor()
@@ -286,16 +317,16 @@ def get_media_geral():
 def get_evo_info(intervalo, dia_ref):
     now = datetime.now()
     cur = con.cursor()
-    if intervalo == 'Hoje':
+    if intervalo == 'Dia':
         inter = dia_ref
         periodo = 1
-    elif intervalo == 'Última semana':
+    elif intervalo == 'Semana':
         inter = dia_ref - relativedelta(days=7)
         periodo = 8
-    elif intervalo == 'Últimos 15 dias':
+    elif intervalo == '15 dias':
         inter = dia_ref - relativedelta(days=15)
         periodo = 16
-    elif intervalo == 'Último mês':
+    elif intervalo == 'Mês':
         inter = dia_ref - relativedelta(months=1)
         periodo = 30
     elif intervalo == 'Tudo':
@@ -334,13 +365,13 @@ def get_evo_info(intervalo, dia_ref):
 
 
 def get_pie_info(intervalo, dia_ref):
-    if intervalo == 'Hoje':
+    if intervalo == 'Dia':
         inter = dia_ref
-    elif intervalo == 'Última semana':
+    elif intervalo == 'Semana':
         inter = dia_ref - relativedelta(days=7)
-    elif intervalo == 'Últimos 15 dias':
+    elif intervalo == '15 dias':
         inter = dia_ref - relativedelta(days=15)
-    elif intervalo == 'Último mês':
+    elif intervalo == 'Mês':
         inter = dia_ref - relativedelta(months=1)
     elif intervalo == 'Tudo':
         inter = '0000-00-00'

@@ -74,28 +74,28 @@
 
                             <h4 class="test_inter">Intervalo de dias:</h4>
                             <div class="form_intervalo">
-                                {% if intervalo == 'Hoje' %}
-                                <input class="tempoatv" type="submit" name="intervalo" value="Hoje">
+                                {% if intervalo == 'Dia' %}
+                                <input class="tempoatv" type="submit" name="intervalo" value="Dia">
                                 {% else: %}
-                                <input class="tempo" type="submit" name="intervalo" value="Hoje">
+                                <input class="tempo" type="submit" name="intervalo" value="Dia">
                                 {% endif %}
 
-                                {% if intervalo == 'Última semana' %}
-                                <input class="tempoatv" type="submit" name="intervalo" value="Última semana">
+                                {% if intervalo == 'Semana' %}
+                                <input class="tempoatv" type="submit" name="intervalo" value="Semana">
                                 {% else: %}
-                                <input class="tempo" type="submit" name="intervalo" value="Última semana">
+                                <input class="tempo" type="submit" name="intervalo" value="Semana">
                                 {% endif %}
 
-                                {% if intervalo == 'Últimos 15 dias' %}
-                                <input class="tempoatv" type="submit" name="intervalo" value="Últimos 15 dias">
+                                {% if intervalo == '15 dias' %}
+                                <input class="tempoatv" type="submit" name="intervalo" value="15 dias">
                                 {% else: %}
-                                <input class="tempo" type="submit" name="intervalo" value="Últimos 15 dias">
+                                <input class="tempo" type="submit" name="intervalo" value="15 dias">
                                 {% endif %}
 
-                                {% if intervalo == 'Último mês' %}
-                                <input class="tempoatv" type="submit" name="intervalo" value="Último mês">
+                                {% if intervalo == 'Mês' %}
+                                <input class="tempoatv" type="submit" name="intervalo" value="Mês">
                                 {% else: %}
-                                <input class="tempo" type="submit" name="intervalo" value="Último mês">
+                                <input class="tempo" type="submit" name="intervalo" value="Mês">
                                 {% endif %}
 
                                 {% if intervalo == 'Tudo' %}
@@ -208,18 +208,11 @@
                                     <tr class="cabecalho-tabela">
                                         <th>Técnico</th><th>Nota</th>
                                     </tr> 
+                                    {% for tecs in media_tecs %}
                                     <tr>
-                                        <td>Ana</td><td>1/5</td>
+                                        <td>{{tecs[0]}}</td><td>{{tecs[1]}}</td>
                                     </tr>
-                                    <tr>
-                                        <td>Bety</td><td>2/5</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Alfredo</td><td>3/5</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Pedro</td><td>4/5</td>
-                                    </tr>
+                                    {% endfor %}
                                 </table>
                             </div>
                     </div>

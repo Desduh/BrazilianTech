@@ -163,6 +163,12 @@ table td{
 .aj {
     border: 3px;
     border-color: none;
+    max-width: 28px;
+    word-wrap: break-word;
+}
+.estrela{
+    border: 3px;
+    border-color: none;
 }
 .desc_solucao{
     padding: 10px;
@@ -207,6 +213,8 @@ thead {
 }
 .td {
     display: flex;
+    max-width: 980px;
+    word-break: break-word;
     justify-content: center;
 }
 details {

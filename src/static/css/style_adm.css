@@ -157,6 +157,8 @@ table td{
 .aj {
     border: 3px;
     border-color: none;
+    max-width: 28px;
+    word-wrap: break-word;
 }
 .desc_solucao{
     padding: 10px;
@@ -202,6 +204,8 @@ thead {
 .td {
     display: flex;
     justify-content: center;
+    max-width: 980px;
+    word-break: break-word;
 }
 details {
     background-color: rgb(219, 219, 219);

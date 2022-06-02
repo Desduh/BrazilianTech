@@ -110,8 +110,9 @@
                             <td class="aj">{{user[7]}}</td>
                             {% if user[5] != 'Aberto' %}
                             {% if user[9] == None %}
-                            <td class="aj" style="display: flex; justify-content: center;">
-                                <form class="rate" method="post" action="/avaliacao_solicitacao/{{user.0}}">
+                            <td class="aj">
+                                <div class="estrela">
+                                    <form class="rate" method="post" action="/avaliacao_solicitacao/{{user.0}}">
                                     <input type="submit" id="star1" name="rate" value="10" />
                                     <label for="star1" title="text"></label>
 
@@ -127,6 +128,7 @@
                                     <input type="submit" id="star5" name="rate" value="2" />
                                     <label for="star5" title="text"></label>
                                 </form>
+                                </div>
                             </td>
                             {% endif %}
                             {% endif %}

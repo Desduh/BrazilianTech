@@ -160,6 +160,10 @@ table td{
     max-width: 28px;
     word-wrap: break-word;
 }
+.estrela{
+    display: flex; 
+    justify-content: center;
+}
 .desc_solucao{
     padding: 10px;
 }

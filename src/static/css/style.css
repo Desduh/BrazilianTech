@@ -167,9 +167,9 @@ table td{
     word-wrap: break-word;
 }
 .estrela{
-    border: 3px;
-    border-color: none;
-}
+    display: flex; 
+    justify-content: center;
+} 
 .desc_solucao{
     padding: 10px;
 }

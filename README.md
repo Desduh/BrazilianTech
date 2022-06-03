@@ -5,7 +5,7 @@
 
 
 <h2 align="center"> Grupo 5 - BrazilianTech💻</h2>
-<div align='center'> <a href='#-descrição-do-projeto-'>Descrição do Projeto </a> |  <a href='#-execução-'>Execução</a> | <a href='#-sobre-o-site-'>Sobre o site</a> |<a href='#-requisitos'>Requisitos</a> | <a href='#-backlog-do-produto-'>Backlog</a> | <a href='#-histórias-de-usuários-'>Histórias de Usuários</a> | <a href='#-tecnologias'>Tecnologias</a> | <a href='#-equipe-'> Equipe </a> | <a href='#-vídeos-'>Vídeos</a> </div>
+<div align='center'> <a href='#-descrição-do-projeto-'>Descrição do Projeto </a> |  <a href='#-execução-'>Execução</a> | <a href='#-sobre-o-site-'>Sobre o site</a> |<a href='#-requisitos'>Requisitos</a> | <a href='#-backlog-do-produto-'>Backlog</a> | <a href='#-histórias-de-usuários-'>Histórias de Usuários</a> | <a href='#-gráficos-de-burndown'>Gráficos de Burndown</a> | <a href='#-tecnologias'>Tecnologias</a> | <a href='#-equipe-'> Equipe </a> | <a href='#-vídeos-'>Vídeos</a> </div>
 
 <br>
 
@@ -158,10 +158,10 @@ Templates administrador:
 | 2      |       -       | Vídeo - 2º sprint                                            | ✅      |
 | 3      |     RF.4      | Cliente ser capaz de avaliar o serviço                       | ❌      |
 | 3      |    RN.P.7     | Responsivo                                                   | ❌      |
-| 3      |     RF.9      | Alteração do gráfico do percentual de solicitações abertas e fechadas, considerando agora um determinado intervalo de tempo | ❌      |
+| 3      |     RF.9      | Alteração do gráfico do percentual de solicitações abertas e fechadas, considerando agora um determinado intervalo de tempo | ✅      |
 | 3      |     RF.9      | Gráfico 2: evolução diária da quantidade de solicitações abertas e fechadas em intervalos de tempo especificados | ❌      |
-| 3      |     RF.9      | Avaliação média de cada técnico.                             | ❌      |
-| 3      |     RF.9      | Avaliação média global do sistema.                           | ❌      |
+| 3      |     RF.9      | Avaliação média de cada técnico.                             | ✅      |
+| 3      |     RF.9      | Avaliação média global do sistema.                           | ✅      |
 | 3      |    RN.P.4     | Estilização final do projeto                                 | ❌      |
 | 3      |       -       | Criação do READ.ME - 3ºsprint                                | ❌      |
 | 3      |       -       | Vídeo - 3º sprint                                            | ❌      |
@@ -182,20 +182,38 @@ Templates administrador:
 
 <br>
 
+<h2>📉 Gráficos de Burndown</h2>
+
+<img src="src\static\imagens\Burndown1.png">
+
+<br>
+
+<img src="src\static\imagens\Burndown2.png">
+
+<br>
+
+<a href="#-grupo-5---braziliantech">--> voltar ao menu</a>
+
+<br>
+
+
+
 <h1>🛠 Tecnologias:</h1>
 <div align='center'>
 	<h3>Linguagem Folha de Estilo:</h3>
 	<ol><h4>Css3</h4></ol>
-	<img src="src\static\imagens\CSS3.png" alt="CSS3" width="300px" >
+	<img src="src\static\imagens\CSS3.png" alt="CSS3" width="250px" >
 </div>
+
 
 <br>
 
 <div align='center'>
 	<h3>Linguagem de Marcação:</h3>
 	<ol><h4>Html5</h4></ol>
-	<img src="src\static\imagens\HTML5.png" alt="HTML5" width="300px" >
+	<img src="src\static\imagens\HTML5.png" alt="HTML5" width="250px" >
 </div>
+
 
 <br>
 
@@ -204,6 +222,7 @@ Templates administrador:
 	<ol><h4>MySQL</h4></ol>
 	<img src="src\static\imagens\MySQL.png" alt="HTML5" width="300px" > 
 </div>
+
 <br>
 
 <div align='center'>

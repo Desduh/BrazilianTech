@@ -129,6 +129,10 @@
                                         chartArea:{left:180},
                                         backgroundColor: 'transparent',
                                         fontSize: 17,
+                                        legend: {
+                                            position: 'top',
+                                            alignment: 'center'
+                                        },
                                     };
 
                                     var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
@@ -164,18 +168,27 @@
 
                         var options = {
                                 title: 'Evolução de chamados abertos e fechados',
-                                bold: true,
+                                titleTextStyle: {
+                                    color: 'black',
+                                    bold: true, 
+                                },
                                 backgroundColor: 'transparent',
-                                width: 600,
+                                width: 620,
                                 height: 400,
                                 colors: ['rgb(177, 10, 4)', 'rgb(15, 76, 129)'],
                                 fontSize: 17,
+                                legend: {
+                                    position: 'top',
+                                    alignment: 'center'
+                                }
+                                
                         };
+                        
 
                         var chart = new google.charts.Line(document.getElementById('linechart_material'));
 
                         chart.draw(data, google.charts.Line.convertOptions(options));
-                        }
+                        };
                         </script>
                         <div id="linechart_material" style="width: 600px; height: 400px;"></div>
                     </div>

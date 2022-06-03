@@ -339,11 +339,13 @@ details > summary {
     color: rgb(177, 10, 4);
     text-align: center;
 }
-
-
-/* ------------------------------------------------------------------- */
-/* Estilização das estrelas */
-
+.enviar{
+    color: white;
+    background-color: rgb(177, 10, 4);
+    border-radius: 5px;
+    border: 0;
+    margin-bottom: 4px;
+}
 .rate {
     float: left;
     height: 46px;

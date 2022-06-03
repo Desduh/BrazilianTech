@@ -283,7 +283,7 @@ def get_media_tec():
         cur.execute('SELECT avaliacao FROM solicitacao WHERE avaliacao is not null and codigo_usuario=%s', [tec])
         notas = cur.fetchall()
         if not notas:
-            return 'Não existem solicitações no sistema'
+            return ''
         total = 0
         for n in notas:
             total = total + int(n[0])
@@ -307,7 +307,7 @@ def get_media_geral():
     cur.execute('SELECT avaliacao FROM solicitacao WHERE avaliacao is not null')
     notas = cur.fetchall()
     if not notas:
-        return 'Não existem solicitações no sistema'
+        return 'Não existem avaliações no sistema'
     total = 0
     for n in notas:
         total = total + n[0]
@@ -320,8 +320,7 @@ def get_evo_info(intervalo, dia_ref):
     now = datetime.now()
     cur = con.cursor()
     if intervalo == 'Dia':
-        inter = dia_ref
-        periodo = 1
+        return 'Escolha um periodo maior para acessar o gráfico de evolução'
     elif intervalo == 'Semana':
         inter = dia_ref - relativedelta(days=7)
         periodo = 8
@@ -336,6 +335,8 @@ def get_evo_info(intervalo, dia_ref):
         inter = cur.fetchall()
         if inter == ((None,),):
             return 'Não existem solicitações no sistema'
+        if inter == date.today():
+            return 'Escolha um periodo maior para acessar o gráfico de evolução'
         inter = inter[0][0]
         periodo = (dia_ref - (inter.date())).days + 1
         inter = inter.date()
@@ -344,6 +345,8 @@ def get_evo_info(intervalo, dia_ref):
     p_soli = cur.fetchall()
     if p_soli == ((None,),):
         return 'Não existem solicitações no sistema'
+    if inter == date.today():
+        return 'Escolha um periodo maior para acessar o gráfico de evolução'
     p_soli = p_soli[0][0]
     p_soli = p_soli.date()
 

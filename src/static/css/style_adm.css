@@ -355,23 +355,24 @@ details > summary {
     width: 50%;
     height: 100%;
     text-align: center;
+    font-size: x-large;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
-.media{
+.media_azul,
+.media_vermelha{
     display: flex;
     justify-content: center;
 }
-.titulo-media-sistema{
-    font-size: x-large;
-    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    color: rgb(189, 32, 32);
+.media_azul{
+    color: rgb(15, 76, 129);
 }
-
+.media_vermelha{
+    color: rgb(177, 10, 4);
+}
 .nota-sistema {
-    font-size: xx-large;
-    color: black;
-    margin: 10px;
+    display: flex;
+    justify-content: center;
 }
-
 .media-tecnicos {
     width: 100%;
     height: 100%;

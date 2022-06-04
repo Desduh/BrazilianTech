@@ -215,9 +215,13 @@
 
                 <div class="div_notas">
                     <h2 class="test_inter">Notas</h2>
-                    <div class="media">
-                        <h4 class="titulo-media-sistema media-sistema"> Avaliação média global do sistema
-                            <p class='nota-sistema'> {{media_geral}} </p>
+                    <div class="nota-sistema">
+                        <h4 class="media-sistema"> Avaliação média global do sistema
+                            {% if media_geral >= 6 %}
+                            <p class='media_azul'> {{media_geral}} </p>
+                            {% else %}
+                            <p class='media_vermelha'> {{media_geral}} </p>
+                            {% endif %}
                         </h4>
                     </div>
 

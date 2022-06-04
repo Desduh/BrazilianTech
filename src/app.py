@@ -282,6 +282,7 @@ def get_media_geral():
         total = total + n[0]
     media = total/len(notas)
     media = format(media, '.2f')
+    media = float(media)
     return media
 
 

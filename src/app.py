@@ -8,8 +8,6 @@ from datetime import datetime, date
 from dateutil.relativedelta import relativedelta
 
 
-
-
 #CONGFIGURAÇÃO MYSQL/FLASK----------------------------------------------------CONGFIGURAÇÃO MYSQL/FLASK------------------------
 app = Flask('__name__') 
 app.config['MYSQL_HOST'] = 'localhost' #adicione o hostname
@@ -20,7 +18,6 @@ con = MySQLdb.connect( user="root", password="fatec", db="usuarios_solicitacoes"
 mysql = MySQL(app)
 logado = False
 app.secret_key = "fatec"
-
 
 
 #FUNCÇÕES MYSQL----------------------------------------------------------------FUNCÇÕES MYSQL-------------------------------
@@ -39,8 +36,6 @@ add_resposta = ("UPDATE solicitacao SET resposta=%s, _status=%s, data_fechamento
 tornar_tec = ("UPDATE usuarios SET funcao=%s WHERE codigo_usuario = %s")
 tec_cont = ("UPDATE usuarios SET contador_solicitacao=%s WHERE codigo_usuario = %s")
 check_cod_usu = ("select codigo_usuario FROM usuarios where email=%s;")
-
-
 
 
 #FUNÇÕES DE AUTENTICAÇÃO-------------------------------------------------------FUNÇÕES DE AUTENTICAÇÃO-----------------------------
@@ -81,8 +76,6 @@ def check_id_adm(view):
     return wrapped_view
 
 
-
-
 #LOGIN/CADASTRO----------------------------------------------------------------LOGIN/CADASTRO-------------------------------
 #ROTAS
 @app.route('/')
@@ -95,13 +88,9 @@ def login():
 def cadastro():
     return render_template('cadastro.html')
 
-
-
-#FUNÇÕES
 @app.route('/cadastro.html', methods= ['POST'])
 def cadastroact():
     global cod
-
     email= request.form['email']
     senha= request.form['senha']
     confirmacao_senha= request.form['confirmacao_senha']
@@ -109,7 +98,6 @@ def cadastroact():
     cur = con.cursor()
     cur.execute(check_user, [email])
     feedback = cur.fetchall()
-    
     if ciencia == 'yes':
         if feedback:
             return redirect('/login.html')
@@ -127,19 +115,15 @@ def cadastroact():
     else:
         return redirect('/cadastro.html')
 
-
 @app.route('/login.html', methods= ['POST'])
 def loginact():
     global cod
-
     email= request.form['email']
     senha= request.form['senha']
     cur = mysql.connection.cursor()
     cur.execute(check_user, [email])
     feedback = cur.fetchall()
-    
     if feedback != ():
-
         cur = mysql.connection.cursor()
         cur.execute(check_cod_usu, [email])
         cod = int(str(cur.fetchall()).strip('(,)'))
@@ -156,19 +140,16 @@ def loginact():
                 return redirect('/validacao')
             else:
                 aviso = "*Senha errada, tente novamente"
-                return render_template('/login.html', aviso=aviso)
-            
+                return render_template('/login.html', aviso=aviso) 
     else:
         aviso ="*Email informado não possui conta, crie uma!"
         return render_template('/cadastro.html', aviso=aviso)
-
 
 @app.route('/validacao')
 def validacao():
     cur = mysql.connection.cursor()
     cur.execute(verifica_funcao, [cod])
     funcao = cur.fetchall()
-
     for f in funcao:  #função no sentido de qual a função do usuario
         if logado:
             if f[0] == 3: #validacao para ver se é o técnico
@@ -189,8 +170,6 @@ def logout():
     return redirect("/login.html")
 
 
-
-
 #PAGINAS DE USUARIO/TÉCNICO/ADIMINISTRADOR------------------------------------PAGINAS DE USUARIO/TÉCNICO/ADIMINISTRADOR-----------------------------------------------------------
 #AMD----------------------------------------------------------------
 @app.route('/telaadm')
@@ -198,69 +177,55 @@ def logout():
 def telaadm():
     return render_template("adm.html")
 
-
 @app.route('/nova_soli')
 def nova_soli():
     return render_template('adm_nova_soli.html')
 
-
 @app.route('/historico')
 def historio():
-
     cur = mysql.connection.cursor()
     cur.execute(historico, [cod])
     dados = cur.fetchall()
-    
     return render_template('adm_historico.html', dados=dados)
-
 
 @app.route('/respondidas')
 def respondidas():
     return render_template('adm_respondidas.html')
 
-
 @app.route('/solicitacoes')
 def solicitacaos():
-
     cur = mysql.connection.cursor()
     cur.execute("select * FROM solicitacao ORDER BY data_abertura DESC;") #pegar todas infos dos chamados 
     Details = cur.fetchall()
-    
     if Details == ():
         Details = '*Não há chamados'
 
     cur = mysql.connection.cursor()
     cur.execute("select * FROM usuarios;")
     usuarios = cur.fetchall()
-
     return render_template('adm_solicitacoes.html', Details=Details, usuarios=usuarios)
 
 
 @app.route('/usuarioss')
 def usuarioss():
-
     cur = mysql.connection.cursor()
     cur.execute("select * FROM usuarios;")
     usuarios = cur.fetchall()
-
     return render_template('adm_usuarios.html', usuarios=usuarios)
 
 
 @app.route('/graficos')
 def graficos():
-
     dia_ref = date.today()
     intervalo = 'Tudo'
     per_cham = get_pie_info(intervalo, dia_ref)
     evo_cham = get_evo_info(intervalo, dia_ref)
     media_geral = get_media_geral()
     media_tecs = get_media_tec()
-
     return render_template('adm_graficos.html', per_cham=per_cham, evo_cham=evo_cham, intervalo=intervalo, media_geral=media_geral, media_tecs=media_tecs)
 
 @app.route('/intervalo', methods= ['POST'])
 def intervalo():
-    
     intervalo = request.form['intervalo']
     dia_ref = request.form['dataini']
     if dia_ref == '':
@@ -273,15 +238,12 @@ def intervalo():
     media_tecs = get_media_tec()
 
     return render_template('adm_graficos.html', per_cham=per_cham, evo_cham=evo_cham, intervalo=intervalo, media_geral=media_geral, media_tecs=media_tecs)
-#--------------------------------------------------------
+
 def get_media_tec():
     cur = con.cursor()
-
     cur.execute('SELECT codigo_usuario FROM usuarios WHERE funcao=2')
     tecs = cur.fetchall()
-
     medias_tecs = []
-
     for tec in tecs:
         cur.execute('SELECT avaliacao FROM solicitacao WHERE avaliacao is not null and codigo_usuario=%s', [tec])
         notas = cur.fetchall()
@@ -302,7 +264,6 @@ def get_media_tec():
         media_email.append(media)
 
         medias_tecs.append(media_email)
-
     return medias_tecs
 
 def get_media_geral():
@@ -343,7 +304,6 @@ def get_evo_info(intervalo, dia_ref):
         inter = inter[0][0]
         periodo = (dia_ref - (inter.date())).days + 1
         inter = inter.date()
-
     cur.execute('SELECT min(data_abertura) AS primeira_solicitacao FROM solicitacao')
     p_soli = cur.fetchall()
     if p_soli == ((None,),):
@@ -352,7 +312,6 @@ def get_evo_info(intervalo, dia_ref):
         return 'Escolha um periodo maior para acessar o gráfico de evolução'
     p_soli = p_soli[0][0]
     p_soli = p_soli.date()
-
     if intervalo != 'Tudo':
         cur.execute('SELECT codigo_solicitacao FROM solicitacao WHERE data_abertura >=%s AND data_abertura <=%s AND data_fechamento IS null', [p_soli, str(inter)+' 23:59:59'])
         cham_abertos_n = len(cur.fetchall())
@@ -361,7 +320,6 @@ def get_evo_info(intervalo, dia_ref):
         cham_fechados_n, cham_abertos_n = 0, 0
     evo_cham = []
     for dias in range(periodo):
-
         cur.execute('SELECT codigo_solicitacao FROM solicitacao WHERE data_abertura >%s AND data_abertura<=%s', [inter, str(inter) + ' 23:59:59'])
         cham_abertos = cur.fetchall()
         cur.execute('SELECT codigo_solicitacao FROM solicitacao WHERE data_fechamento >=%s AND data_fechamento<=%s', [inter, str(inter)+' 23:59:59'])
@@ -374,8 +332,6 @@ def get_evo_info(intervalo, dia_ref):
         inter = inter + relativedelta(days=1)
     return evo_cham
 
-
-
 def get_pie_info(intervalo, dia_ref):
     if intervalo == 'Dia':
         inter = dia_ref
@@ -387,8 +343,6 @@ def get_pie_info(intervalo, dia_ref):
         inter = dia_ref - relativedelta(months=1)
     elif intervalo == 'Tudo':
         inter = '0000-00-00'
-    
-
     cur = con.cursor()
     cur.execute('SELECT codigo_solicitacao FROM solicitacao WHERE data_abertura >%s AND data_abertura<=%s', [inter, str(dia_ref) + ' 23:59:59'])
     cham_abertos = len(cur.fetchall())
@@ -400,25 +354,20 @@ def get_pie_info(intervalo, dia_ref):
         return 'Não houve soilictações durante esse periodo'
     return per_cham
 
-
-
 @app.route('/telatecnico')
 @check_id_tec
 def telatecnico():
     cur = mysql.connection.cursor()
     cur.execute("select codigo_usuario FROM usuarios where codigo_usuario=%s;", [cod])
     x = int(str(cur.fetchall()).strip('(,)'))
-    
     cur.execute("select * FROM solicitacao where codigo_usuario=%s ORDER BY data_abertura DESC;",[x])
     Details = cur.fetchall()
-    
     if Details == ():
         Details = '*Não há chamados'
 
     cur = mysql.connection.cursor()
     cur.execute("select * FROM usuarios;")
     usuarios = cur.fetchall()
-
     return render_template("telatecnico.html", Details=Details, usuarios=usuarios)
 
 @app.route('/user_ini')
@@ -434,24 +383,17 @@ def user_hist():
     return render_template("user_historico.html", dados=dados)
 
 
-
 #FUNÇÕES DE CHAMADO------------------------------------------------------------FUNÇÕES DE CHAMADO-----------------------------------
 @app.route('/solicitacao', methods= ['POST']) 
 def solicitacao():
-    #isso possibilita o usuario fazer a solicitacao
-
     cur = mysql.connection.cursor()
     cur.execute(verifica_funcao, [cod])
     funcao = cur.fetchall()
-
     cur = mysql.connection.cursor()  
     cur.execute('SELECT codigo_usuario FROM usuarios WHERE funcao=%s', [2])
     executores_ativos = cur.fetchall()
     if executores_ativos == ():
-
-
         aviso = 2
-
         for f in funcao: 
             if f[0] == 3:
                 return render_template('adm_nova_soli.html', aviso=aviso)
@@ -461,33 +403,25 @@ def solicitacao():
                 lista = cur.fetchall()
                 return render_template("user_nova_soli.html", lista=lista, aviso=aviso)
     else:
-
         cur.execute(quantia_tec)
         qta_tec = int(str(cur.fetchall()).strip('(,)'))
-  
         cur.execute(quantia_chamado)
         qta_cha = int(str(cur.fetchall()).strip('(,)')) +1
-
         if qta_tec == 0:
             qta_tec = 1
         else:
             qta_tec = qta_tec
         cont = qta_cha % qta_tec
-
-
         cur.execute("SELECT codigo_usuario FROM usuarios WHERE contador_solicitacao=%s;", [cont])
         tecnico = cur.fetchall()
         tecnico = int(str(tecnico).strip('(,)'))
-
         solicitacao = request.form['solicitacao']
         problema = request.form['tipo']
         aberto = 'Aberto'
         cur = con.cursor()
         cur.execute(add_solicitacao, [solicitacao,cod,tecnico,aberto,problema])
         con.commit()
-
         aviso = 1
-
         for f in funcao: 
             if f[0] == 3:
                 return render_template('adm_nova_soli.html', aviso=aviso)
@@ -497,17 +431,14 @@ def solicitacao():
                 lista = cur.fetchall()
                 return render_template("user_nova_soli.html", lista=lista, aviso=aviso)
 
-
 @app.route('/resposta/<id>', methods= ['POST']) 
 def resposta(id):
     #isso possibilita o técnico ou o adm responder a solicitacao
     resposta = request.form['resposta']
     status = request.form['status']
-
     cur = mysql.connection.cursor()
     cur.execute(verifica_funcao, [cod])
     funcao = cur.fetchall()
-
     if resposta == '':
         for f in funcao: 
             if f[0] == 3:
@@ -519,13 +450,11 @@ def resposta(id):
     cur.execute(add_resposta, [resposta,status,id])
     feedback = cur.fetchall
     con.commit()
-
     for f in funcao: 
         if f[0] == 3:
             return redirect ('/solicitacoes')
         else:
             return redirect ('/telatecnico#ab')
-
 
 
 #FUNÇÕES DE ADM PROMOVER/REBAIXAR----------------------------------------------FUNÇÕES DE ADM PROMOVER/REBAIXAR-------------------------------------------------
@@ -536,22 +465,17 @@ def usuarios(id):
     cur.execute(tornar_tec, [2,id])
     feedback = cur.fetchall
     con.commit()
-
     cur = mysql.connection.cursor()  
     a = cur.execute(quantia_tec)
     qta_tec = int(str(cur.fetchall()).strip('(,)')) -1
-    
     cur = con.cursor()
     cur.execute(tec_cont, [qta_tec,id])
     feedback = cur.fetchall
     con.commit()
     return redirect ("/usuarioss")
 
-
 @app.route('/tornaruser/<id>', methods= ['POST']) 
 def tecnico(id):
-    # -------------------------------
-
     cur = mysql.connection.cursor()
     cur.execute('SELECT codigo_usuario FROM usuarios WHERE codigo_usuario!=%s AND funcao=%s', [id, 2])
     executores_ativos = cur.fetchall()
@@ -560,14 +484,9 @@ def tecnico(id):
     else:
         a = cur.execute(quantia_tec)
         max_cont = int(str(cur.fetchall()).strip('(,)'))
-
-
         cur = mysql.connection.cursor()
         cur.execute('SELECT codigo_usuario, contador_solicitacao FROM usuarios WHERE funcao=%s', [2])
         tec_cont_soli = cur.fetchall()
-
-
-        # ------------------------------
         cur = con.cursor()
         cur.execute('SELECT codigo_solicitacao FROM solicitacao WHERE codigo_usuario=%s  AND _status=%s', [id,'Aberto'])
         soli_tec = cur.fetchall()
@@ -575,12 +494,10 @@ def tecnico(id):
         for n in soli_tec:
             n = int(str(n).strip('(,)'))
             solicitacoes.append(n)
-    
 
         cur.execute('UPDATE usuarios SET funcao=%s, contador_solicitacao=%s WHERE codigo_usuario = %s', [1,None,id])
         feedback = cur.fetchall
         con.commit()
-
         cur.execute('SELECT codigo_usuario FROM usuarios WHERE funcao=%s', [2])
         tecni = cur.fetchall()
         tecnicos = []
@@ -595,56 +512,39 @@ def tecnico(id):
 
             cur.execute('UPDATE solicitacao SET codigo_usuario=%s WHERE codigo_solicitacao=%s', [tecnicos[current_tec], s])
             current_tec += 1
-
         con.commit()
-    # ------------------------------
 
         cur = mysql.connection.cursor()
         cur.execute('SELECT contador_solicitacao FROM usuarios WHERE codigo_usuario=%s', [id])
         cod_cont = int(str(cur.fetchall()).strip('(,)'))
 
         if max_cont != cod_cont-1:
-        
             for contador_tecs in range(max_cont):
                 #print (contador_tecs)
                 if cod_cont < contador_tecs:
-                
                     x = contador_tecs-1
-
                     cur = con.cursor()
                     cur.execute('UPDATE usuarios SET contador_solicitacao=%s WHERE contador_solicitacao=%s', [x,contador_tecs])
             con.commit()
-
-
-    # ------------------------------
-
         return redirect("/usuarioss")
 
 @app.route('/usuarios_erro')
 def falta_tec():
-
     cur = mysql.connection.cursor()
     cur.execute("select * FROM usuarios;")
     usuarios = cur.fetchall()
-
     aviso = "*O sistema precisa ter ao menos um técnico!"
-
     return render_template('adm_usuarios.html', usuarios=usuarios, aviso=aviso)
-
 
 
 #FUNÇÕES DE AVALIAÇÃO----------------------------------------------FUNÇÕES DE AVALIAÇÃO-------------------------------------------------
 @app.route('/avaliacao_solicitacao/<cod_soli>', methods= ['POST']) 
 def avaliacao_solicitacao(cod_soli):
-
     nota = request.form['rate']
-
-
     cur = con.cursor()
     cur.execute("UPDATE solicitacao SET avaliacao=%s WHERE codigo_solicitacao = %s", [nota,cod_soli])
     feedback = cur.fetchall
     con.commit()
-
     if check_func('3'):
         return redirect ('/historico')
     else:

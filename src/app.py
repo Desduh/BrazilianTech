@@ -179,7 +179,7 @@ def validacao():
                 return redirect('telatecnico')
             else: 
                 session['func'] = str(f[0])
-                return redirect('telausuario')
+                return redirect('user_ini')
         else:
             return redirect('/cadastro.html')
 
@@ -415,13 +415,17 @@ def telatecnico():
 
     return render_template("telatecnico.html", Details=Details, usuarios=usuarios)
 
-@app.route('/telausuario')
+@app.route('/user_ini')
 @check_id_user
-def hist():
+def user():
+    return render_template("user_nova_soli.html")
+
+@app.route('/user_historico')
+def user_hist():
     cur = mysql.connection.cursor()  
     users = cur.execute(historico, [cod])
     dados = cur.fetchall()
-    return render_template("telausuario.html", dados=dados)
+    return render_template("user_historico.html", dados=dados)
 
 
 
@@ -449,7 +453,7 @@ def solicitacao():
                 cur = mysql.connection.cursor()  
                 users = cur.execute(historico, [cod])
                 lista = cur.fetchall()
-                return render_template("telausuario.html", lista=lista, aviso=aviso)
+                return render_template("user_nova_soli.html", lista=lista, aviso=aviso)
     else:
 
         cur.execute(quantia_tec)
@@ -485,7 +489,7 @@ def solicitacao():
                 cur = mysql.connection.cursor()  
                 users = cur.execute(historico, [cod])
                 lista = cur.fetchall()
-                return render_template("telausuario.html", lista=lista, aviso=aviso)
+                return render_template("user_nova_soli.html", lista=lista, aviso=aviso)
 
 
 @app.route('/resposta/<id>', methods= ['POST']) 
@@ -638,4 +642,4 @@ def avaliacao_solicitacao(cod_soli):
     if check_func('3'):
         return redirect ('/historico')
     else:
-        return redirect ('/telausuario')
+        return redirect ('/user_ini')

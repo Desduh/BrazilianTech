@@ -318,6 +318,8 @@ def get_evo_info(intervalo, dia_ref):
         return 'Escolha um periodo maior para acessar o gráfico de evolução'
     p_soli = p_soli[0][0]
     p_soli = p_soli.date()
+    if p_soli == date.today():
+        return 'Não existem solicitações suficientes para formar um gráfico'
     if intervalo != 'Tudo':
         cur.execute('SELECT codigo_solicitacao FROM solicitacao WHERE data_abertura >=%s AND data_abertura <=%s AND data_fechamento IS null', [p_soli, str(inter)+' 23:59:59'])
         cham_abertos_n = len(cur.fetchall())

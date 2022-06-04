@@ -150,7 +150,9 @@
                 
                     
                     <br>
-
+                    {% if evo_cham == 'Escolha um periodo maior para acessar o gráfico de evolução' %}
+                    <p class="aviso">{{evo_cham}}</p>
+                    {% else %}
                     <div class="evo-grafico">
                         <script type="text/javascript">
                             google.charts.load('current', {'packages':['line']});
@@ -198,6 +200,7 @@
                         </script>
                         <div id="linechart_material" style="width: 600px; height: 400px;"></div>
                     </div>
+                    {% endif %}
 
                     {% else %}
                     <div>

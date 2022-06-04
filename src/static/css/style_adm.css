@@ -21,12 +21,73 @@ main {
     background-color: white;
     padding: 60px;
 }
+
 header {
+    position: fixed;
+    height: 100%;
+    left: -250px;
     background-color: rgb(179, 175, 175);
     width: 250px;
     padding: 15px 10px 15px 0;
     border-right: 4px ;
+    transition: all 300ms ease-in-out;
 }
+
+header .toggle_btn{
+    position: absolute;
+    top:10px;
+    right: -40px;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    
+}
+
+header .toggle_btn span{
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background-color: #111;
+    transform: translateY(-50);
+    transition: all 300ms ease-in-out;
+}
+
+header .toggle_btn span:nth-child(1){
+    top:10%;
+}
+
+header .toggle_btn span:nth-child(2){
+    top:50%;
+}
+
+header .toggle_btn span:nth-child(3){
+    top:90%;
+}
+
+header nav a.active, header nav a:hover{
+    background: rgb(107, 107, 107);
+    color: #ffffff;
+}
+
+
+header.active{
+    left: 0px;
+}
+
+header.active .toggle_btn span:nth-child(1){
+    top:50%;
+    transform: translateY(-50%) rotate(45deg);
+}
+
+header.active .toggle_btn span:nth-child(2){
+    display: none;
+}
+
+header.active .toggle_btn span:nth-child(3){
+    top:50%;
+    transform: translateY(-50%) rotate(-45deg);
+}
+
 .perfil,
 .solicitacao,
 .corpo{
@@ -87,19 +148,22 @@ main{
     justify-content: center;
 }
 .logout{
+    position: fixed;
+    bottom: 3px;
     display: flex;
     margin-left: 10px;
     flex-direction: column;
 }
 table{
     background-color: rgb(204, 204, 204);
-    border: none;
+
     border-radius: 2px;
     width: 100%;
     text-align: center;
     border-spacing: 1px;
 }
 table td{
+    
     padding: 15px;
     color: black;
 }
@@ -155,7 +219,9 @@ table td{
     font-family: unset;
 }
 .aj {
-    border: 3px;
+    padding: 5px;
+    border: 1px solid #ffffff;
+    color: #000000;
     border-color: none;
     max-width: 28px;
     word-wrap: break-word;
@@ -205,7 +271,9 @@ thead {
     align-content: center;
     flex-wrap: wrap;
 }
+
 .td {
+    
     display: flex;
     justify-content: center;
     max-width: 980px;
@@ -382,6 +450,52 @@ details > summary {
     color: #c59b08;
 }
 
+@media (max-width:600px){
+
+    main {
+        flex-grow: 1;
+        background-color: rgb(255, 255, 255);
+        padding: 10px;
+    }
+
+    header,
+    main{
+
+        flex-shrink: 2;
+    }
+
+    .Boxtext_motivo{
+        font-size: 18px;
+        width: 80%;
+        border-radius: 5px;
+        border: 3px solid rgb(146, 146, 146);
+        background-color: rgb(245, 245, 245);
+        font-size: 22px;
+        padding: 15px;
+        text-align: justify;
+        font-family: unset;
+}
+    .aj {
+        padding: 1px;
+        font-size: 15px;
+    }
+
+    td{
+        font-size: 15px;
+    }
+    .botao{
+        width: 200px;
+    }
+
+    .criacao{
+        width: 80%;
+    }
+
+    .btn_{
+        width: 80%;
+    }
+    
+}
 
 
 

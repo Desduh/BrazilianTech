@@ -52,110 +52,122 @@
             <script src="..\static\script.js"></script>
         </header>
         <main id="ac">
-            <table>
-                <thead>
-                    <tr class="text_table">
-                        <td class="aj">Solicitação</td>
-                        <td class="aj">Cliente</td>
-                        <td class="aj">Data da solicitação</td>
-                        <td class="aj">Resposta</td>
-                        <td class="aj">Data da resposta</td>
-                    </tr>
-                </thead>
-                {% for user in Details %}
-                    {% if user[5] == 'Aceito' %}
-                        <tr>
-                            <td class="aj">{{user[1]}}</td>
-                            {% for w in usuarios %}
-                            {% if user[2] == w[0] %}
-                            <td class="aj">{{w[1]}}</td>
-                            {% endif %}
-                            {% endfor %}
-                            <td class="aj">{{user[3]}}</td>
-                            <td class="aj">{{user[6]}}</td>
-                            <td class="aj">{{user[7]}}</td>
+            {% if Details == '*Não há chamados' %}
+            <p class="aviso">{{Details}}</p>
+            {% else %}
+                <table>
+                    <thead>
+                        <tr class="text_table">
+                            <td class="aj">Solicitação</td>
+                            <td class="aj">Cliente</td>
+                            <td class="aj">Data da solicitação</td>
+                            <td class="aj">Resposta</td>
+                            <td class="aj">Data da resposta</td>
                         </tr>
-                    {% endif %}
-                {% endfor %}  
-            </table>
+                    </thead>
+                    {% for user in Details %}
+                        {% if user[5] == 'Aceito' %}
+                            <tr>
+                                <td class="aj">{{user[1]}}</td>
+                                {% for w in usuarios %}
+                                {% if user[2] == w[0] %}
+                                <td class="aj">{{w[1]}}</td>
+                                {% endif %}
+                                {% endfor %}
+                                <td class="aj">{{user[3]}}</td>
+                                <td class="aj">{{user[6]}}</td>
+                                <td class="aj">{{user[7]}}</td>
+                            </tr>
+                        {% endif %}
+                    {% endfor %}  
+                </table>
+            {% endif %}
         </main>
         <main id="ne">
-            <table>
-                <thead>
-                    <tr class="text_table">
-                        <td class="aj">Solicitação</td>
-                        <td class="aj">Cliente</td>
-                        <td class="aj">Data da solicitação</td>
-                        <td class="aj">Resposta</td>
-                        <td class="aj">Data da resposta</td>
-                    </tr>
-                </thead>
-                {% for user in Details %}
-                    {% if user[5] == 'Negado' %}
-                        <tr>
-                            <td class="aj">{{user[1]}}</td>
-                            {% for w in usuarios %}
-                            {% if user[2] == w[0] %}
-                            <td class="aj">{{w[1]}}</td>
-                            {% endif %}
-                            {% endfor %}
-                            <td class="aj">{{user[3]}}</td>
-                            <td class="aj">{{user[6]}}</td>
-                            <td class="aj">{{user[7]}}</td>
+            {% if Details == '*Não há chamados' %}
+            <p class="aviso">{{Details}}</p>
+            {% else %}
+                <table>
+                    <thead>
+                        <tr class="text_table">
+                            <td class="aj">Solicitação</td>
+                            <td class="aj">Cliente</td>
+                            <td class="aj">Data da solicitação</td>
+                            <td class="aj">Resposta</td>
+                            <td class="aj">Data da resposta</td>
                         </tr>
-                    {% endif %}
-                {% endfor %}  
+                    </thead>
+                    {% for user in Details %}
+                        {% if user[5] == 'Negado' %}
+                            <tr>
+                                <td class="aj">{{user[1]}}</td>
+                                {% for w in usuarios %}
+                                {% if user[2] == w[0] %}
+                                <td class="aj">{{w[1]}}</td>
+                                {% endif %}
+                                {% endfor %}
+                                <td class="aj">{{user[3]}}</td>
+                                <td class="aj">{{user[6]}}</td>
+                                <td class="aj">{{user[7]}}</td>
+                            </tr>
+                        {% endif %}
+                    {% endfor %}  
+                {% endif %}
             </table>
         </main>
         <main id="ab">
-            {% for user in Details %}
-            {% if user[5] == 'Aberto' %}
-            <details>
-                <summary>
+            {% if Details == '*Não há chamados' %}
+            <p class="aviso">{{Details}}</p>
+            {% else %}
+                {% for user in Details %}
+                {% if user[5] == 'Aberto' %}
+                <details>
+                    <summary>
+                        <table>
+                            <thead>
+                                <tr class="text_table">
+                                    {% for w in usuarios %}
+                                    {% if user[2] == w[0] %}
+                                    <td>Cliente: {{w[1]}}</td>
+                                    {% endif %}
+                                    {% endfor %}
+                                    <td>Data da solicitação: {{user[3]}}</td>
+                                </tr>
+                            </thead>
+                        </table>
+                    </summary>
                     <table>
                         <thead>
-                            <tr class="text_table">
-                                {% for w in usuarios %}
-                                {% if user[2] == w[0] %}
-                                <td>Cliente: {{w[1]}}</td>
-                                {% endif %}
-                                {% endfor %}
-                                <td>Data da solicitação: {{user[3]}}</td>
+                            <tr>
+                                <td>Tipo de problema:</td>
+                                <td>Descrição:</td>
+                                <td>Resposta:</td>
                             </tr>
                         </thead>
-                    </table>
-                </summary>
-                <table>
-                    <thead>
                         <tr>
-                            <td>Tipo de problema:</td>
-                            <td>Descrição:</td>
-                            <td>Resposta:</td>
-                        </tr>
-                    </thead>
-                      <tr>
-                        <td><p class="td">{{user[8]}}</p></td>
-                        <td><p class="td">{{user[1]}}</p></td>
-                        <td>
-                            <form class="formulario" method="POST" action="/resposta/{{user.0}}">
-                                <textarea type='text' name="resposta" class='Boxtext_motivo' placeholder="Motivo..."request></textarea>
-                                <br>
-                                <select name="status">
-                                    <option value="Aceito">Aceitar chamado</option>
-                                    <option value="Negado">Negar chamado</option>
-                                </select>
-                                <div class="btn">
-                                    <button class='btn_' type="submit">Enviar</button>
-                            </form>
-                            </div>
+                            <td><p class="td">{{user[8]}}</p></td>
+                            <td><p class="td">{{user[1]}}</p></td>
+                            <td>
+                                <form class="formulario" method="POST" action="/resposta/{{user.0}}">
+                                    <textarea type='text' name="resposta" class='Boxtext_motivo' placeholder="Motivo..."request></textarea>
+                                    <br>
+                                    <select name="status">
+                                        <option value="Aceito">Aceitar chamado</option>
+                                        <option value="Negado">Negar chamado</option>
+                                    </select>
+                                    <div class="btn">
+                                        <button class='btn_' type="submit">Enviar</button>
+                                </form>
+                                </div>
 
-                            </div>
-                        </td>
-                    </tr>
-                </table>
-            </details>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </details>
+                {% endif %}
+                {% endfor %}
             {% endif %}
-            {% endfor %}
         </main>
     </section>
 </body>

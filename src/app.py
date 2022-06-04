@@ -225,6 +225,9 @@ def solicitacaos():
     cur = mysql.connection.cursor()
     cur.execute("select * FROM solicitacao ORDER BY data_abertura DESC;") #pegar todas infos dos chamados 
     Details = cur.fetchall()
+    
+    if Details == ():
+        Details = '*Não há chamados'
 
     cur = mysql.connection.cursor()
     cur.execute("select * FROM usuarios;")
@@ -396,7 +399,7 @@ def get_pie_info(intervalo, dia_ref):
     if per_cham == [0, 0]:
         return 'Não houve soilictações durante esse periodo'
     return per_cham
-#----------------------------------------------------
+
 
 
 @app.route('/telatecnico')
@@ -408,6 +411,9 @@ def telatecnico():
     
     cur.execute("select * FROM solicitacao where codigo_usuario=%s ORDER BY data_abertura DESC;",[x])
     Details = cur.fetchall()
+    
+    if Details == ():
+        Details = '*Não há chamados'
 
     cur = mysql.connection.cursor()
     cur.execute("select * FROM usuarios;")
@@ -539,7 +545,7 @@ def usuarios(id):
     cur.execute(tec_cont, [qta_tec,id])
     feedback = cur.fetchall
     con.commit()
-    return redirect ("/telaadm#usuarios")
+    return redirect ("/usuarioss")
 
 
 @app.route('/tornaruser/<id>', methods= ['POST']) 

@@ -11,7 +11,12 @@
 
 <body>
     <section class="abas">
-        <header>
+        <header class="active">
+            <div class="toggle_btn">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
             <div class="logout1">
                 <img src="..\static\Imagens\logo.png" width="50%" alt="Logout">
             </div>
@@ -40,6 +45,7 @@
                 <a href="./login.html"><img src="..\static\Imagens\logout.png" alt="Logout"></a>
                 <p style="margin: 0;">Sair</p>
             </div>
+            <script src="..\static\script.js"></script>
         </header>
 
         {% if aviso == 1 %}
@@ -98,7 +104,6 @@
                             <td class="aj">Data da resposta</td>
                             {% if user[5] != 'Aberto' %}
                             {% if user[9] == None %}
-                            <td class="aj">Avaliação</td>
                             {% endif %}
                             {% endif %}
                         </tr>
@@ -107,31 +112,39 @@
                         <tr>
                             <td class="aj">{{user[1]}}</td>
                             <td class="aj">{{user[6]}}</td>
-                            <td class="aj">{{user[7]}}</td>
+                            <td class="aj">{{user[7]}}</td> 
                             {% if user[5] != 'Aberto' %}
                             {% if user[9] == None %}
+                        </tr>
+                </table>
+                <table>
+                        <thead>
+                            <td class="aj">Avaliação</td>
+                        </thead>
+                        <tr>
                             <td class="aj">
                                 <div class="estrela">
                                     <form class="rate" method="post" action="/avaliacao_solicitacao/{{user.0}}">
-                                        <input type="submit" id="star1" name="rate" value="10" />
-                                        <label for="star1" title="text"></label>
-    
-                                        <input type="submit" id="star2" name="rate" value="8" />
-                                        <label for="star2" title="text"></label>
-    
-                                        <input type="submit" id="star3" name="rate" value="6" />
-                                        <label for="star3" title="text"></label>
-    
-                                        <input type="submit" id="star4" name="rate" value="4" />
-                                        <label for="star4" title="text"></label>
-    
+                                        
                                         <input type="submit" id="star5" name="rate" value="2" />
                                         <label for="star5" title="text"></label>
 
-                                        <div>
+                                        <input type="submit" id="star4" name="rate" value="4" />
+                                        <label for="star4" title="text"></label>
+
+                                        <input type="submit" id="star3" name="rate" value="6" />
+                                        <label for="star3" title="text"></label>
+    
+                                        <input type="submit" id="star2" name="rate" value="8" />
+                                        <label for="star2" title="text"></label>
+
+                                        <input type="submit" id="star1" name="rate" value="10" />
+                                        <label for="star1" title="text"></label>
+
+                                        <div class="a">
                                             <button class="enviar"  name="rate" value="0" type="submit">Enviar</button>
                                         </div>
-                                    </form>
+                                </form>
                                 </div>
                             </td>
                             {% endif %}

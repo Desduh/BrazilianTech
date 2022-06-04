@@ -248,16 +248,21 @@ def get_media_tec():
         cur.execute('SELECT avaliacao FROM solicitacao WHERE avaliacao is not null and codigo_usuario=%s', [tec])
         notas = cur.fetchall()
         if not notas:
-            return ''
-        total = 0
-        for n in notas:
-            total = total + int(n[0])
-        media = total/len(notas)
-        media = format(media, '.2f')
-        
-        cur.execute('SELECT email FROM usuarios WHERE codigo_usuario=%s', [tec])
-        email = cur.fetchall()
-        email = email[0][0]
+            media = 'Null'
+            cur.execute('SELECT email FROM usuarios WHERE codigo_usuario=%s', [tec])
+            email = cur.fetchall()
+            email = email[0][0]
+
+        else:
+            total = 0
+            for n in notas:
+                total = total + int(n[0])
+            media = total/len(notas)
+            media = format(media, '.2f')
+            
+            cur.execute('SELECT email FROM usuarios WHERE codigo_usuario=%s', [tec])
+            email = cur.fetchall()
+            email = email[0][0]
 
         media_email =[]
         media_email.append(email)

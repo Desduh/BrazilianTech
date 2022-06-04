@@ -156,7 +156,6 @@ main{
 }
 table{
     background-color: rgb(204, 204, 204);
-
     border-radius: 2px;
     width: 100%;
     text-align: center;
@@ -164,7 +163,7 @@ table{
 }
 table td{
     
-    padding: 15px;
+    padding: 10px;
     color: black;
 }
 .desc_problema{
@@ -226,10 +225,7 @@ table td{
     max-width: 28px;
     word-wrap: break-word;
 }
-.estrela{
-    display: flex; 
-    justify-content: center;
-}
+
 .desc_solucao{
     padding: 10px;
 }
@@ -272,11 +268,14 @@ thead {
     flex-wrap: wrap;
 }
 
+td{
+    max-width: 400px;
+}
 .td {
     
     display: flex;
     justify-content: center;
-    max-width: 980px;
+
     word-break: break-word;
 }
 details {
@@ -412,10 +411,23 @@ details > summary {
     color: white;
     background-color: rgb(177, 10, 4);
     border-radius: 5px;
+    padding: 10px;
     border: 0;
     margin-bottom: 4px;
+    display: block;
+}
+
+.estrela{
+    display: flex; 
+    justify-content: center;
+}
+
+.a{
+   
 }
 .rate {
+    display: block;
+   
     float: left;
     height: 46px;
     padding: 0 10px;

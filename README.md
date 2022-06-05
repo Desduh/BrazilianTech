@@ -156,15 +156,15 @@ Templates administrador:
 | 2      |    RN.P.4     | Complemento da estilização dos templates                     | ✅      |
 | 2      |       -       | Criação do READ.ME - 2ºsprint                                | ✅      |
 | 2      |       -       | Vídeo - 2º sprint                                            | ✅      |
-| 3      |     RF.4      | Cliente ser capaz de avaliar o serviço                       | ❌      |
-| 3      |    RN.P.7     | Responsivo                                                   | ❌      |
+| 3      |     RF.4      | Cliente ser capaz de avaliar o serviço                       | ✅      |
+| 3      |    RN.P.7     | Responsivo                                                   | ✅      |
 | 3      |     RF.9      | Alteração do gráfico do percentual de solicitações abertas e fechadas, considerando agora um determinado intervalo de tempo | ✅      |
-| 3      |     RF.9      | Gráfico 2: evolução diária da quantidade de solicitações abertas e fechadas em intervalos de tempo especificados | ❌      |
+| 3      |     RF.9      | Gráfico 2: evolução diária da quantidade de solicitações abertas e fechadas em intervalos de tempo especificados | ✅      |
 | 3      |     RF.9      | Avaliação média de cada técnico.                             | ✅      |
 | 3      |     RF.9      | Avaliação média global do sistema.                           | ✅      |
-| 3      |    RN.P.4     | Estilização final do projeto                                 | ❌      |
-| 3      |       -       | Criação do READ.ME - 3ºsprint                                | ❌      |
-| 3      |       -       | Vídeo - 3º sprint                                            | ❌      |
+| 3      |    RN.P.4     | Estilização final do projeto                                 | ✅      |
+| 3      |       -       | Criação do READ.ME - 3ºsprint                                | ✅      |
+| 3      |       -       | Vídeo - 3º sprint                                            | ✅      |
 
 <br>
 
@@ -189,6 +189,8 @@ Templates administrador:
 <br>
 
 <img src="src\static\imagens\Burndown2.png">
+
+<img src="src\static\imagens\Burndown3.png">
 
 <br>
 

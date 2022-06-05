@@ -421,48 +421,73 @@ details > summary {
     display: flex; 
     justify-content: center;
 }
+.ava0,
+.ava1,
+.ava2,
+.ava3,
+.ava{
+    font-size: 1vw;
+}
+.ava0{
+    color: white;
+    background-color: rgb(177, 10, 4);
+    border-radius: 5px;
+    padding: 10px;
+    border: 0;
+    margin-bottom: 4px;
+}
+.ava1{
+    color: white;
+    background-color: rgb(233, 88, 4);
+    border-radius: 5px;
+    padding: 10px;
+    border: 0;
+    margin-bottom: 4px;
+}
+.ava2{
+    color: white;
+    background-color: rgb(172, 169, 2);
+    border-radius: 5px;
+    padding: 10px;
+    border: 0;
+    margin-bottom: 4px;
+}
+.ava3{
+    color: white;
+    background-color: rgb(124, 190, 1);
+    border-radius: 5px;
+    padding: 10px;
+    border: 0;
+    margin-bottom: 4px;
+}
+.ava{
+    color: white;
+    background-color: rgb(23, 190, 1);
+    border-radius: 5px;
+    padding: 10px;
+    border: 0;
+    margin-bottom: 4px;
+}
 
-.a{
-   
-}
-.rate {
-    display: block;
-    float: left;
-    height: 46px;
-    padding: 0 10px;
-}
-.rate:not(:checked) > input {
-    position:absolute;
-    top:-9999px;
-}
-.rate:not(:checked) > label {
-    float:right;
-    width:1em;
-    overflow:hidden;
-    white-space:nowrap;
-    cursor:pointer;
-    font-size:30px;
-    color:rgb(255, 255, 255);
-}
-.rate:not(:checked) > label:before {
-    content: '★';
-}
-.rate > input:checked ~ label {
-    color: #ffc700;    
-}
-.rate:not(:checked) > label:hover,
-.rate:not(:checked) > label:hover ~ label {
-    color: #deb217;  
-}
-.rate > input:checked + label:hover,
-.rate > input:checked + label:hover ~ label,
-.rate > input:checked ~ label:hover,
-.rate > input:checked ~ label:hover ~ label,
-.rate > label:hover ~ input:checked ~ label {
-    color: #c59b08;
+@media (max-width:900px){
+    .ava0,
+    .ava1,
+    .ava2,
+    .ava3,
+    .ava{
+        font-size: 2vw;
+    }
 }
 
 @media (max-width:600px){
+
+    .ava0,
+    .ava1,
+    .ava2,
+    .ava3,
+    .ava{
+        font-size: 2vw;
+    }
 
     main {
         flex-grow: 1;

@@ -556,4 +556,4 @@ def avaliacao_solicitacao(cod_soli):
     if check_func('3'):
         return redirect ('/historico')
     else:
-        return redirect ('/user_ini')
+        return redirect ('/user_historico')

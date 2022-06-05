@@ -281,7 +281,7 @@ td{
 details {
     background-color: rgb(219, 219, 219);
     width: 100%;
-    margin-bottom: 30px;
+    margin-bottom: 15px;
 }
 details > summary {
     list-style: none;

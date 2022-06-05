@@ -64,15 +64,16 @@
         {% endif %}
 
         <main>
+            <h1>Minhas solicitações</h1>
             {% for user in dados %}
             <details>
                 <summary>
                     <table>
                         <thead>
                             <tr class="text_table">
-                                <td>Tipo da solicitacao: {{user[8]}}</td>
-                                <td>Status: {{user[5]}}</td>
-                                <td>Data da solicitação: {{user[3]}}</td>
+                                <td>{{user[8]}}</td>
+                                <td>{{user[5]}}</td>
+                                <td>{{user[3]}}</td>
                             </tr>
                         </thead>
                     </table>

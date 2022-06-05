@@ -312,45 +312,53 @@ details > summary {
     justify-items: center;
     justify-content: center;
 } 
+.ava0,
+.ava1,
+.ava2,
+.ava3,
+.ava{
+    font-size: 1vw;
+    border-radius: 5px;
+    padding: 10px;
+    border: 0;
+    margin-bottom: 4px;
+    color: white;
+}
+.ava0{
+    background-color: rgb(177, 10, 4);
+}
+.ava1{
+    background-color: rgb(233, 88, 4);
+}
+.ava2{
+    background-color: rgb(172, 169, 2);
+}
+.ava3{
+    background-color: rgb(124, 190, 1);
+}
+.ava{
+    background-color: rgb(23, 190, 1);
+}
 
-.rate {
-    display: flex;
-    float: left;
-    height: 46px;
-    padding: 0 10px;
-}
-.rate:not(:checked) > input {
-    position:absolute;
-    top:-9999px;
-}
-.rate:not(:checked) > label {
-    float:right;
-    width:1em;
-    overflow:hidden;
-    white-space:nowrap;
-    cursor:pointer;
-    font-size:30px;
-    color:rgb(255, 255, 255);
-}
-.rate:not(:checked) > label:before {
-    content: '★';
-}
-.rate > input:checked ~ label {
-    color: #ffc700;    
-}
-.rate:not(:checked) > label:hover,
-.rate:not(:checked) > label:hover ~ label {
-    color: #deb217;  
-}
-.rate > input:checked + label:hover,
-.rate > input:checked + label:hover ~ label,
-.rate > input:checked ~ label:hover,
-.rate > input:checked ~ label:hover ~ label,
-.rate > label:hover ~ input:checked ~ label {
-    color: #c59b08;
+@media (max-width:900px){
+    .ava0,
+    .ava1,
+    .ava2,
+    .ava3,
+    .ava{
+        font-size: 2vw;
+    }
 }
 
 @media (max-width:600px){
+
+    .ava0,
+    .ava1,
+    .ava2,
+    .ava3,
+    .ava{
+        font-size: 2vw;
+    }
 
     main {
         flex-grow: 1;

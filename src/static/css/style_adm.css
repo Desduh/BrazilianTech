@@ -427,46 +427,26 @@ details > summary {
 .ava3,
 .ava{
     font-size: 1vw;
+    border-radius: 5px;
+    padding: 10px;
+    border: 0;
+    margin-bottom: 4px;
+    color: white;
 }
 .ava0{
-    color: white;
     background-color: rgb(177, 10, 4);
-    border-radius: 5px;
-    padding: 10px;
-    border: 0;
-    margin-bottom: 4px;
 }
 .ava1{
-    color: white;
     background-color: rgb(233, 88, 4);
-    border-radius: 5px;
-    padding: 10px;
-    border: 0;
-    margin-bottom: 4px;
 }
 .ava2{
-    color: white;
     background-color: rgb(172, 169, 2);
-    border-radius: 5px;
-    padding: 10px;
-    border: 0;
-    margin-bottom: 4px;
 }
 .ava3{
-    color: white;
     background-color: rgb(124, 190, 1);
-    border-radius: 5px;
-    padding: 10px;
-    border: 0;
-    margin-bottom: 4px;
 }
 .ava{
-    color: white;
     background-color: rgb(23, 190, 1);
-    border-radius: 5px;
-    padding: 10px;
-    border: 0;
-    margin-bottom: 4px;
 }
 
 @media (max-width:900px){

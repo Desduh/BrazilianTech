@@ -217,10 +217,14 @@
                     <h2 class="test_inter">Notas</h2>
                     <div class="nota-sistema">
                         <h4 class="media-sistema"> Avaliação média global do sistema
-                            {% if media_geral >= 6 %}
-                            <p class='media_azul'> {{media_geral}} </p>
+                            {% if media_geral == "Não existem avaliações no sistema" %}
+                            <p class="aviso">{{media_geral}}</p>
                             {% else %}
-                            <p class='media_vermelha'> {{media_geral}} </p>
+                                {% if media_geral >= 6 %}
+                                <p class='media_azul'> {{media_geral}} </p>
+                                {% else %}
+                                <p class='media_vermelha'> {{media_geral}} </p>
+                                {% endif %}
                             {% endif %}
                         </h4>
                     </div>
@@ -233,7 +237,7 @@
                                 <table class="tabela" border='1px'>
                                     <tr class="cabecalho-tabela">
                                         <th>Técnico</th><th>Nota</th>
-                                    </tr> 
+                                    </tr>
                                     {% for tecs in media_tecs %}
                                     <tr>
                                         <td>{{tecs[0]}}</td><td>{{tecs[1]}}</td>
